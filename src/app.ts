@@ -2,6 +2,10 @@ import compression from 'compression'
 import express from 'express'
 import helmet from 'helmet'
 import morgan from 'morgan'
+import webRouter from './routers/web'
+import apiRouter from './routers/api'
+
+import { create } from 'express-handlebars'
 import '~/dbs/init.mongodb'
 
 const app = express()
@@ -12,8 +16,15 @@ app.use(morgan('dev'))
 app.use(helmet())
 app.use(compression())
 
-// init routes
+// Configure the template engine to use Handlebars
+app.engine('hbs', create({ extname: '.hbs', defaultLayout: false, layoutsDir: 'views/' }).engine)
+// Set the default view engine to Handlebars
+app.set('view engine', 'hbs')
+// Set the directory where views are located
+app.set('views', 'src/views')
 
-// init database
+// init routes
+app.use('/', webRouter)
+app.use('/', apiRouter)
 
 export default app
