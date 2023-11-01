@@ -1,13 +1,12 @@
 import mongoose from 'mongoose'
-import DatabaseConfig from '~/configs/config.database'
+import config from '~/configs/config.database'
 import { checkDBOverload } from '~/helpers/check.mongodb'
 
 const uri =
-  `mongodb+srv://${DatabaseConfig.user}:${DatabaseConfig.password}` +
-  `@${DatabaseConfig.host}/${DatabaseConfig.dbname}?retryWrites=true&w=majority`
+  `mongodb+srv://${config.user}:${config.password}` + `@${config.host}/${config.dbname}?retryWrites=true&w=majority`
 
-class Database {
-  private static instance: Database
+class Mongoose {
+  private static instance: Mongoose
   private uri: string
 
   /**
@@ -30,15 +29,15 @@ class Database {
    */
   async connect() {
     try {
-      console.log(`[DB]:::Start connecting to MongoDB...`)
+      console.log(`[MONGOOSE]:::Start connecting to Mongoose...`)
       await mongoose.connect(this.uri, {
         maxPoolSize: 50
       })
 
-      console.log(`[DB]:::Connect to MongoDB successfully!`)
+      console.log(`[MONGOOSE]:::Connect to Mongoose successfully!`)
       checkDBOverload()
     } catch (err) {
-      console.error(`[DB]:::${err}`)
+      console.error(`[MONGOOSE]:::${err}`)
     }
   }
 
@@ -48,18 +47,16 @@ class Database {
    * @param {string} uri - The URI of the database.
    * @returns {Database} - An instance of the Database class.
    */
-  public static getInstance(uri: string): Database {
+  public static getInstance(uri: string): Mongoose {
     // Check if an instance already exists
-    if (!Database.instance) {
+    if (!Mongoose.instance) {
       // Create a new instance if it doesn't exist
-      Database.instance = new Database(uri)
+      Mongoose.instance = new Mongoose(uri)
     }
 
     // Return the instance
-    return Database.instance
+    return Mongoose.instance
   }
 }
 
-const databaseInstace = Database.getInstance(uri)
-
-export default databaseInstace
+export default Mongoose.getInstance(uri)

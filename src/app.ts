@@ -6,7 +6,9 @@ import webRouter from './routers/web'
 import apiRouter from './routers/api'
 
 import { create } from 'express-handlebars'
-import '~/dbs/init.mongodb'
+
+import '~/dbs/init.mongoose'
+import '~/dbs/init.prisma'
 
 const app = express()
 
