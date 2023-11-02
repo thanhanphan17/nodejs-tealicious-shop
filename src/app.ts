@@ -4,8 +4,10 @@ import helmet from 'helmet'
 import morgan from 'morgan'
 import webRouter from './routers/web'
 import apiRouter from './routers/api'
+import path from 'path'
 
 import { create } from 'express-handlebars'
+import { handle404Error, handleReturnError } from '~/middlewares/errorHandler'
 
 import '~/dbs/init.mongoose'
 import '~/dbs/init.prisma'
@@ -17,6 +19,7 @@ app.use(express.json())
 app.use(morgan('dev'))
 app.use(helmet())
 app.use(compression())
+app.use(express.static(path.join(__dirname, 'public')))
 
 // Configure the template engine to use Handlebars
 app.engine('hbs', create({ extname: '.hbs', defaultLayout: false, layoutsDir: 'views/' }).engine)
@@ -27,6 +30,8 @@ app.set('views', 'src/views')
 
 // init routes
 app.use('/', webRouter)
-app.use('/', apiRouter)
+app.use('/api', apiRouter)
 
+app.use(handle404Error)
+app.use(handleReturnError)
 export default app
