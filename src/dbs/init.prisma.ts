@@ -1,4 +1,3 @@
-import '~/configs/config.init'
 import { PrismaClient } from '@prisma/client'
 
 class Prisma {

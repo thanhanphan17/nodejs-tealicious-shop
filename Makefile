@@ -7,22 +7,26 @@ init_db:
 		-v ./.tealicious-volume:/var/lib/postgresql/data \
 		-p 5432:5432 -it \
 		-d postgres:latest
+
+install_cli_tool:
+	@sudo npm install -g dotenv-cli
+
 rm_db:
 	@sudo rm -rf .tealicious-volume
 	@docker rm -f postgres-db
 
 # make run env=local|prod
 run: 
-	@NODE_ENV=${env} npm run dev
+	@dotenv -e ./env/${env}.env -- npm run dev
 
 # make db_push env=local|prod
 db_push:
-	@dotenv -f ./env/${env}.env run npx prisma db push
+	@dotenv -e ./env/${env}.env -- npx prisma db push
 
 # make db_migrate env=local|prod
 db_migrate:
-	@dotenv -f ./env/${env}.env run npx prisma migrate dev --name init
+	@dotenv -e ./env/${env}.env -- npx prisma migrate dev --name init
 
 # make prisma_studio env=local|prod
 prisma_studio:
-	@dotenv -f ./env/${env}.env run npx prisma studio
+	@dotenv -e ./env/${env}.env -- npx prisma studio
