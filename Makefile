@@ -11,6 +11,7 @@ init_db:
 install_cli_tool:
 	@sudo npm install -g dotenv-cli
 
+# remove 
 rm_db:
 	@sudo rm -rf .tealicious-volume
 	@docker rm -f postgres-db
@@ -18,6 +19,9 @@ rm_db:
 # make run env=local|prod
 run: 
 	@dotenv -e ./env/${env}.env -- npm run dev
+
+start:
+	@dotenv -e ./env/${env}.env -- npm run start
 
 # make db_push env=local|prod
 db_push:
@@ -30,3 +34,11 @@ db_migrate:
 # make prisma_studio env=local|prod
 prisma_studio:
 	@dotenv -e ./env/${env}.env -- npx prisma studio
+
+# make up
+up:
+	@docker compose up -d
+
+down:
+	@docker compose down -v
+	@docker rmi -f tealicious-shop

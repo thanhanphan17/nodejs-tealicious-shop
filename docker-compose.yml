@@ -1,0 +1,16 @@
+version: '3.7'
+
+services:
+  app:
+    container_name: tealicious-shop
+    image: tealicious-shop
+    build: 
+      dockerfile: Dockerfile
+      context: .
+    ports:
+      - "8080:8080"
+    networks:
+      - local_net
+
+networks:
+  local_net:
