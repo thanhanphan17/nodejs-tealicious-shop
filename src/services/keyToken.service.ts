@@ -15,9 +15,10 @@ class KeyTokenService {
       // Convert the public key to a string
       const publicKeyString = publicKey.toString()
 
+      console.log('user id', userId)
       // Create a key token in the database
       const token = await keyTokenModel.create({
-        userid: userId,
+        user: userId,
         publicKey: publicKeyString
       })
 

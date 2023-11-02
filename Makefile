@@ -1,3 +1,16 @@
+init_db:
+	@docker run \
+		--name postgres-db \
+		--rm -e POSTGRES_USER=postgres \
+		-e POSTGRES_PASSWORD=0000 \
+		-e POSTGRES_DB=tealicious_db \
+		-v ./.tealicious-volume:/var/lib/postgresql/data \
+		-p 5432:5432 -it \
+		-d postgres:latest
+rm_db:
+	@sudo rm -rf .tealicious-volume
+	@docker rm -f postgres-db
+
 # make run env=local|prod
 run: 
 	@dotenv -f env/${env}.env run npm run dev
