@@ -13,7 +13,7 @@ rm_db:
 
 # make run env=local|prod
 run: 
-	@dotenv -f env/${env}.env run npm run dev
+	@NODE_ENV=${env} npm run dev
 
 # make db_push env=local|prod
 db_push:

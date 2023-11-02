@@ -1,3 +1,5 @@
+import '~/configs/config.init'
+
 const MongoConfig = {
   host: (process.env.MG_DB_HOST as string) || 'localhost',
   port: (process.env.MG_DB_PORT as string) || '27017',

@@ -48,7 +48,7 @@ class KeyTokenService {
    * @return {Promise<any>} A promise that resolves to the removed key.
    */
   static async removeKeyById(Id: any) {
-    return await keyTokenModel.findOneAndRemove(Id)
+    return await keyTokenModel.findByIdAndRemove(Id)
   }
 
   /**
