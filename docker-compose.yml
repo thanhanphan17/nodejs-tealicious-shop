@@ -4,13 +4,67 @@ services:
   app:
     container_name: tealicious-shop
     image: tealicious-shop
-    build: 
+    build:
       dockerfile: Dockerfile
       context: .
+    depends_on:
+      postgres:
+        condition: service_healthy
+      mongodb:
+        condition: service_healthy
+    links:
+      - postgres
+      - mongodb
     ports:
-      - "8080:8080"
+      - '8080:8080'
+    environment:
+      - 'MODE=prod'
+    entrypoint:
+      - '/bin/sh'
+      - '-c'
+      - 'make db_push env=$MODE && make start env=$MODE'
     networks:
-      - local_net
+      - local_network
+
+  postgres:
+    container_name: postgres-db
+    image: postgres:latest
+    volumes:
+      - './.tealicious-volume:/var/lib/postgresql/data'
+    environment:
+      POSTGRES_USER: 'postgres'
+      POSTGRES_PASSWORD: '0000'
+      POSTGRES_DB: 'tealicious_db'
+    ports:
+      - '5432:5432'
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U postgres -d tealicious_db']
+      interval: 10s
+      timeout: 10s
+      retries: 3
+    networks:
+      - local_network
+
+  mongodb:
+    image: mongo:latest
+    container_name: mongo-db
+    ports:
+      - 27017:27017
+    environment:
+      - MONGO_INITDB_DATABASE=tealicious_db
+      - MONGO_INITDB_ROOT_USERNAME=tealicious_shop
+      - MONGO_INITDB_ROOT_PASSWORD=tealicious_shop
+
+    volumes:
+      - ./mongodb/init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+      - './.tealicious-volume:/var/lib/postgresql/data'
+    healthcheck:
+      test: ['CMD-SHELL', 'mongosh', '--eval', "db.adminCommand('ping')"]
+      interval: 10s
+      timeout: 10s
+      retries: 3
+    networks:
+      - local_network
 
 networks:
-  local_net:
+  local_network:

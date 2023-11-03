@@ -3,7 +3,8 @@ import config from '~/configs/config.database'
 import { checkDBOverload } from '~/helpers/check.mongodb'
 
 const uri =
-  `mongodb+srv://${config.user}:${config.password}` + `@${config.host}/${config.dbname}?retryWrites=true&w=majority`
+  `mongodb://${config.user}:${config.password}@${config.host}:${config.port}/${config.dbname}` +
+  `?authSource=admin&readPreference=primary&ssl=false&directConnection=true`
 
 class Mongoose {
   private static instance: Mongoose

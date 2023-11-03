@@ -8,13 +8,21 @@ init_db:
 		-p 5432:5432 -it \
 		-d postgres:latest
 
-install_cli_tool:
-	@sudo npm install -g dotenv-cli
+	@docker run -d --name mongo-db -p 27017:27017 \
+  		-e MONGO_INITDB_DATABASE=tealicious_db \
+  		-e MONGO_INITDB_ROOT_USERNAME=tealicious_shop \
+  		-e MONGO_INITDB_ROOT_PASSWORD=tealicious_shop \
+  		-v ./mongodb/init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro \
+		-v ./.tealicious-volume:/var/lib/postgresql/data \
+  		mongo:latest
 
-# remove 
 rm_db:
 	@sudo rm -rf .tealicious-volume
 	@docker rm -f postgres-db
+	@docker rm -f mongo-db
+
+install_cli_tool:
+	@sudo npm install -g dotenv-cli
 
 # make run env=local|prod
 run: 

@@ -18,7 +18,7 @@ WORKDIR /project
 ### Copy node application dependency files
 COPY package.json .
 
-### Download Go application module dependencies
+### Download Node application module dependencies
 RUN npm install
 
 ### Copy actual source code for building the application
@@ -34,7 +34,7 @@ RUN GOOS=linux npm run build
 ##### Stage 2 #####
 
 ### Define the running image
-FROM node:20.8.0-alpine 
+FROM node:20.8.0-alpine as prod
 
 ### Set working directory
 WORKDIR /release
@@ -66,4 +66,6 @@ ENV TZ=Asia/Ho_Chi_Minh
 
 ### Run the binary application
 # CMD ["dotenv", "-e", "/env/prod.env", "--", "npm", "run", "start"]
-CMD [ "make", "start", "env=prod" ]
+# ENTRYPOINT [ "make", "start", "env=$MODE" ]
+
+EXPOSE 8080
