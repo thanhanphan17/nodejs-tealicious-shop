@@ -1,12 +1,5 @@
 init_db:
-	@docker run \
-		--name postgres-db \
-		--rm -e POSTGRES_USER=postgres \
-		-e POSTGRES_PASSWORD=0000 \
-		-e POSTGRES_DB=tealicious_db \
-		-v ./.tealicious-volume:/var/lib/postgresql/data \
-		-p 5432:5432 -it \
-		-d postgres:latest
+	@`
 
 	@docker run -d --name mongo-db -p 27017:27017 \
   		-e MONGO_INITDB_DATABASE=tealicious_db \
@@ -14,7 +7,7 @@ init_db:
   		-e MONGO_INITDB_ROOT_PASSWORD=tealicious_shop \
   		-v ./mongodb/init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro \
 		-v ./.tealicious-volume:/var/lib/postgresql/data \
-  		mongo:latest
+  		mongo:4.4.6
 
 rm_db:
 	@sudo rm -rf .tealicious-volume
@@ -30,7 +23,7 @@ run:
 
 start:
 	@dotenv -e ./env/${env}.env -- npm run start
-
+ 
 # make db_push env=local|prod
 db_push:
 	@dotenv -e ./env/${env}.env -- npx prisma db push
@@ -45,7 +38,7 @@ prisma_studio:
 
 # make up
 up:
-	@docker compose up -d
+	@MODE=${env} docker compose up -d
 
 down:
 	@docker compose down -v

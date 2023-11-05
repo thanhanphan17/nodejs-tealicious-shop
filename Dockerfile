@@ -28,7 +28,7 @@ COPY . .
 ### Otherwise the application won't be able to start
 ENV CGO_ENABLED=0
 
-### Build the Go app for a linux OS
+### Build the Node.js app for a linux OS
 RUN GOOS=linux npm run build
 
 ##### Stage 2 #####
