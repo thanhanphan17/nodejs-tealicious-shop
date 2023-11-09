@@ -31,7 +31,7 @@ class KeyTokenService {
      * @return {Promise<any>} A promise that resolves to the key token.
      */
     static async findByUserId(userId: any) {
-        return await keyTokenModel.findOne({ user: new Types.ObjectId(userId) })
+        return await keyTokenModel.findOne({ user: userId }).lean()
     }
 
     /**
@@ -40,8 +40,8 @@ class KeyTokenService {
      * @param {any} Id - The ID of the key to be removed.
      * @return {Promise<any>} A promise that resolves to the removed key.
      */
-    static async removeKeyById(Id: any) {
-        return await keyTokenModel.findByIdAndRemove(Id)
+    static async deleteKeyById(Id: any) {
+        return await keyTokenModel.findByIdAndDelete(Id)
     }
 
     /**
@@ -62,16 +62,6 @@ class KeyTokenService {
      */
     static async findByRefreshToken(refreshToken: any) {
         return await keyTokenModel.findOne({ refreshToken })
-    }
-
-    /**
-     * Deletes a key by its ID.
-     *
-     * @param {any} userId - The ID of the user.
-     * @return {Promise<any>} A promise that resolves to the deleted key.
-     */
-    static async deleteKeyById(userId: any) {
-        return await keyTokenModel.findByIdAndDelete({ userId: userId })
     }
 }
 

@@ -4,8 +4,12 @@ import { Request, Response, NextFunction } from 'express'
 import { CREATED, OK } from '~/core/success.response'
 
 class UserController {
-    login = catchAsync(async (req: Request, res: Response, next: NextFunction) => {
+    login = catchAsync(async (req: any, res: Response, next: NextFunction) => {
         OK(res, 'create user successfully', await userService.login(req.body))
+    })
+
+    logout = catchAsync(async (req: any, res: Response, next: NextFunction) => {
+        OK(res, 'logout successfully', await userService.logout(req.keyStore))
     })
 
     register = catchAsync(async (req: Request, res: Response, next: NextFunction) => {

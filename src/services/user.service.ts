@@ -1,7 +1,7 @@
 import bcrypt from 'bcryptjs'
 import crypto from 'crypto'
 import Prisma from '~/dbs/init.prisma'
-import createTokenPair from '~/auth/utils'
+import { createTokenPair } from '~/auth/utils'
 import KeyTokenService from './keyToken.service'
 
 import { getInfoData } from '~/utils/response.utils'
@@ -135,6 +135,11 @@ class UserService {
             }),
             tokens
         }
+    }
+
+    static async logout(keyStore: any) {
+        await KeyTokenService.deleteKeyById(keyStore._id)
+        return { success: true }
     }
 }
 
