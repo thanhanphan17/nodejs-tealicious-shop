@@ -8,22 +8,15 @@ class KeyTokenService {
      * @param payload - The payload containing userId, publicKey.
      * @returns The created public key string if successful, otherwise null.
      */
-    static async createKeyToken(payload: { userId: any; publicKey: any }) {
-        const { userId, publicKey } = payload
-
+    static async createKeyToken(payload: { userId: any; publicKey: any; refreshToken: any }) {
         try {
-            // Convert the public key to a string
-            const publicKeyString = publicKey.toString()
+            const filter = { user: payload.userId }
+            const update = { publicKey: payload.publicKey, refreshTokensUsed: [], refreshToken: payload.refreshToken }
+            const options = { upsert: true, new: true }
 
-            console.log('user id', userId)
-            // Create a key token in the database
-            const token = await keyTokenModel.create({
-                user: userId,
-                publicKey: publicKeyString
-            })
+            const token = await keyTokenModel.findOneAndUpdate(filter, update, options)
 
-            // Return the public key string if the token was created successfully
-            return token ? publicKeyString : null
+            return token ? token.publicKey : null
         } catch (error) {
             // Log any errors that occur during the process
             console.error(error)

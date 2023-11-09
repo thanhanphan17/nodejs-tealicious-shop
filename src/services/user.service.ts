@@ -8,19 +8,26 @@ import { getInfoData } from '~/utils/response.utils'
 import { API403Error, BusinessLogicError } from '~/core/error.response'
 
 class UserService {
-    // Register function
+    /**
+     * Registers a new user.
+     *
+     * @param payload - The user data including name, email, and password
+     * @returns An object containing the user info and tokens
+     * @throws API403Error if the email already exists
+     * @throws BusinessLogicError if there is an error creating the user or public key
+     */
     static async register(payload: { name: string; email: string; password: string }) {
-        // Check if user already exists
+        // Check if email already exists
         const oldUser = await Prisma.user.findFirst({ where: { email: payload.email } })
         if (oldUser) {
             throw new API403Error('email already exists')
         }
 
-        // Hash the password
+        // Hash password
         const passwordHash = await bcrypt.hash(payload.password, 10)
         payload.password = passwordHash
 
-        // Create new user
+        // Create user
         const newUser = await Prisma.user.create({ data: payload })
         if (!newUser) {
             throw new BusinessLogicError("can't create user")
@@ -42,7 +49,8 @@ class UserService {
         // Create a new key token
         const publicKeyString = await KeyTokenService.createKeyToken({
             userId: newUser.id,
-            publicKey
+            publicKey,
+            refreshToken: null
         })
 
         if (!publicKeyString) {
@@ -64,22 +72,33 @@ class UserService {
                 fields: ['id', 'name', 'email'],
                 object: newUser
             }),
+
             tokens
         }
     }
 
-    // Login function (currently empty)
+    /**
+     * Log in a user with the provided email and password.
+     *
+     * @param payload - The login payload containing email and password
+     * @returns An object containing user information and tokens
+     * @throws BusinessLogicError if the user is not found or if the email or password is incorrect
+     */
     static async login(payload: { email: string; password: string }) {
-        // Check if user exists
+        // Find the user by email
         const user = await Prisma.user.findFirst({ where: { email: payload.email } })
+
+        // Throw an error if the user is not found
         if (!user) {
             throw new BusinessLogicError('User not found')
         }
 
-        // Check if password is correct
-        const match = bcrypt.compare(payload.password, user.password)
-        if (!match) throw new BusinessLogicError('Email or password is incorrect')
+        // Compare the provided password with the user's password
+        if (!bcrypt.compare(payload.password, user.password)) {
+            throw new BusinessLogicError('Email or password is incorrect')
+        }
 
+        // Generate RSA key pair
         const { publicKey, privateKey } = crypto.generateKeyPairSync('rsa', {
             modulusLength: 4096,
             publicKeyEncoding: {
@@ -101,12 +120,14 @@ class UserService {
             privateKey
         )
 
+        // Create key token
         await KeyTokenService.createKeyToken({
+            refreshToken: tokens.refreshToken,
             userId: user.id.toString(),
             publicKey
         })
 
-        // Return user info and tokens
+        // Return user information and tokens
         return {
             user: getInfoData({
                 fields: ['id', 'name', 'email'],
