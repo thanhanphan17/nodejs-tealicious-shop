@@ -3,32 +3,32 @@ import { Response } from 'express'
 import StatusCodes from './statusCode'
 
 class SuccessResponse {
-  message: any
-  status: number
-  data: any
-  options: any
-  constructor({ message = '', status = StatusCodes.OK, data = {}, options = {} }) {
-    this.message = message
-    this.status = status
-    this.data = data
-    this.options = options
-  }
+    message: any
+    status: number
+    data: any
+    options: any
+    constructor({ message = '', status = StatusCodes.OK, data = {}, options = {} }) {
+        this.message = message
+        this.status = status
+        this.data = data
+        this.options = options
+    }
 
-  send(res: Response, headers = {}) {
-    return res.status(this.status).json(this)
-  }
+    send(res: Response, headers = {}) {
+        return res.status(this.status).json(this)
+    }
 }
 
 class Ok extends SuccessResponse {
-  constructor({ message = '', data = {}, options = {} }) {
-    super({ message, data, options })
-  }
+    constructor({ message = '', data = {}, options = {} }) {
+        super({ message, data, options })
+    }
 }
 
 class Create extends SuccessResponse {
-  constructor({ message = '', data = {}, options = {} }) {
-    super({ message, status: StatusCodes.CREATED, data, options })
-  }
+    constructor({ message = '', data = {}, options = {} }) {
+        super({ message, status: StatusCodes.CREATED, data, options })
+    }
 }
 
 /**
@@ -41,11 +41,11 @@ class Create extends SuccessResponse {
  * @return {void}
  */
 export const CREATED = (res: any, message: string, data: any, options = {}) => {
-  new Create({
-    message,
-    data,
-    options
-  }).send(res)
+    new Create({
+        message,
+        data,
+        options
+    }).send(res)
 }
 
 /**
@@ -58,9 +58,9 @@ export const CREATED = (res: any, message: string, data: any, options = {}) => {
  * @return {void}
  */
 export const OK = (res: Response, message: string, data = {}, options = {}) => {
-  new Ok({
-    message,
-    data,
-    options
-  }).send(res)
+    new Ok({
+        message,
+        data,
+        options
+    }).send(res)
 }
