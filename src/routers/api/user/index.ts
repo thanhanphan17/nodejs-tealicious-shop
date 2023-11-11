@@ -1,5 +1,5 @@
 import express from 'express'
-import { authentication } from '~/auth/utils'
+import { authentication } from '~/middlewares/authentication'
 import userController from '~/controllers/user.controller'
 
 const router = express.Router()
