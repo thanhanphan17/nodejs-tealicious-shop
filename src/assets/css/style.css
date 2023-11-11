@@ -345,6 +345,12 @@ ol {
     position: relative;
 }
 
+.top-nav .tn-right .language-option:hover .flag-dropdown {
+    top: 40px;
+    opacity: 1;
+    visibility: visible;
+}
+
 .top-nav .tn-right .language-option img {
     height: 26px;
     width: 26px;
@@ -357,6 +363,43 @@ ol {
     color: #19191a;
     text-transform: uppercase;
     font-weight: 500;
+}
+
+.top-nav .tn-right .language-option .flag-dropdown {
+    position: absolute;
+    left: 0;
+    top: 60px;
+    width: 100px;
+    background: #ffffff;
+    display: block;
+    padding: 10px 15px;
+    -webkit-box-shadow: 0px 9px 10px rgba(25, 25, 26, 0.2);
+    box-shadow: 0px 9px 10px rgba(25, 25, 26, 0.2);
+    opacity: 0;
+    visibility: hidden;
+    -webkit-transition: all 0.3s;
+    -o-transition: all 0.3s;
+    transition: all 0.3s;
+    z-index: 99;
+}
+
+.top-nav .tn-right .language-option .flag-dropdown ul li {
+    list-style: none;
+    text-align: left;
+}
+
+.top-nav .tn-right .language-option .flag-dropdown ul li a {
+    font-size: 14px;
+    text-transform: uppercase;
+    font-weight: 500;
+    color: #19191a;
+    -webkit-transition: all 0.3s;
+    -o-transition: all 0.3s;
+    transition: all 0.3s;
+}
+
+.top-nav .tn-right .language-option .flag-dropdown ul li a:hover {
+    color: #dfa974;
 }
 
 .menu-item {
@@ -432,7 +475,7 @@ ol {
     position: absolute;
     left: 0;
     top: 97px;
-    width: 230px;
+    width: 210px;
     background: #fdeee6;
     z-index: 9;
     opacity: 0;
