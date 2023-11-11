@@ -1,5 +1,4 @@
 import keyTokenModel from '~/models/keyToken.model'
-import { Types } from 'mongoose'
 
 class KeyTokenService {
     /**
