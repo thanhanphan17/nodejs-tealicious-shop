@@ -4,11 +4,13 @@ import AppConfig from '~/configs/config.app'
 
 const router = express.Router()
 
-router.get('/health-check', (req, res) => {
-    axios.get(`${AppConfig.apiURL}/api/health-check`).then((response) => {
-        console.log(response.data)
-        res.render('health-check', { data: response.data })
-    })
+router.get('/', (req, res) => {
+        res.render('shop/index', {})
+})
+
+
+router.get('/', (req, res) => {
+    res.render('shop/index', {})
 })
 
 export default router
