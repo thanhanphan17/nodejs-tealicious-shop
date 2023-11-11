@@ -10,23 +10,55 @@ const HEADER = {
     CLIENT_ID: 'x-client-id'
 }
 
-export const authentication = catchAsync(async (req: any, res, next: NextFunction) => {
-    const userId = req.headers[HEADER.CLIENT_ID]
-    if (!userId) throw new API401Error('Invalid request')
+const parseJWT = (token: any) => {
+    return JSON.parse(Buffer.from(token.split('.')[1], 'base64').toString())
+}
 
+const getTokens = (req: any) => {
+    const accessToken = req.headers[HEADER.AUTHORIZATION]
+    const refreshToken = req.headers[HEADER.REFRESH_TOKEN]
+    return { accessToken, refreshToken }
+}
+
+const getUserIdFromToken = (accessToken: string, refreshToken: string) => {
+    const obj = parseJWT(accessToken || refreshToken)
+    if (!obj.userId) throw new API403Error('Invalid request')
+    return obj.userId
+}
+
+const getKeyStore = async (userId: string) => {
     const keyStore = await KeyTokenService.findByUserId(userId)
     if (!keyStore) throw new API404Error('Resource not found')
+    return keyStore
+}
 
-    const accessToken = req.headers[HEADER.AUTHORIZATION]
-    if (!accessToken) throw new API401Error('Invalid request')
-
-    JWT.verify(accessToken, keyStore.publicKey || '', (err: any, decode: any) => {
+const verifyToken = (token: string, keyStore: any, userId: string, req: any) => {
+    JWT.verify(token, keyStore.publicKey || '', (err: any, decode: any) => {
         if (err) {
-            throw err
+            throw new API403Error('Invalid token provided')
         }
 
         if (userId !== decode.userId) throw new BusinessLogicError('Invalid request')
         req.keyStore = keyStore
+        req.user = decode
     })
-    next()
+}
+
+export const authentication = catchAsync(async (req: any, res, next: NextFunction) => {
+    const { accessToken, refreshToken } = getTokens(req)
+
+    const userId = getUserIdFromToken(accessToken, refreshToken)
+
+    const keyStore = await getKeyStore(userId)
+
+    if (refreshToken) {
+        verifyToken(refreshToken, keyStore, userId, req)
+        req.refreshToken = refreshToken
+        return next()
+    }
+
+    if (!accessToken) throw new API401Error('Invalid request')
+    verifyToken(accessToken, keyStore, userId, req)
+
+    return next()
 })
