@@ -30,7 +30,7 @@ class KeyTokenService {
      * @return {Promise<any>} A promise that resolves to the key token.
      */
     static async findByUserId(userId: any) {
-        return await keyTokenModel.findOne({ user: userId }).lean()
+        return await keyTokenModel.findOne({ user: userId })
     }
 
     /**
@@ -41,6 +41,10 @@ class KeyTokenService {
      */
     static async deleteKeyById(Id: any) {
         return await keyTokenModel.findByIdAndDelete(Id)
+    }
+
+    static async deleteKeyByUserId(userId: any) {
+        return await keyTokenModel.deleteOne({ user: userId })
     }
 
     /**

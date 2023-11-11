@@ -5,7 +5,8 @@ import { createTokenPair } from '~/auth/utils'
 import KeyTokenService from './keyToken.service'
 
 import { getInfoData } from '~/utils/response.utils'
-import { API403Error, BusinessLogicError } from '~/core/error.response'
+import { API401Error, API403Error, BusinessLogicError } from '~/core/error.response'
+import keyTokenModel from '~/models/keyToken.model'
 
 class UserService {
     /**
@@ -137,9 +138,81 @@ class UserService {
         }
     }
 
+    /**
+     * Logout the user by deleting the key from the key store.
+     *
+     * @param {any} keyStore - The key store object.
+     * @return {Promise<object>} - A promise that resolves to an object with a success property.
+     */
     static async logout(keyStore: any) {
         await KeyTokenService.deleteKeyById(keyStore._id)
         return { success: true }
+    }
+
+    /**
+     * Refreshes the user's tokens using a refresh token.
+     * @param payload - Object containing user, keyStore, and refreshToken
+     * @returns Object containing the user and the new tokens
+     */
+    static async refreshToken(payload: { user: any; keyStore: any; refreshToken: string }) {
+        const { user, keyStore, refreshToken } = payload
+        const { userId, email } = user
+
+        // Check if the refresh token has been used before
+        if (keyStore.refreshTokensUsed.includes(refreshToken)) {
+            await KeyTokenService.deleteKeyByUserId(userId)
+            throw new BusinessLogicError('Invalid refresh token')
+        }
+
+        // Check if the refresh token matches the one stored in the key store
+        if (refreshToken !== keyStore.refreshToken) {
+            throw new API401Error('User not registered')
+        }
+
+        // Find the user in the database
+        const foundUser = await Prisma.user.findFirst({ where: { id: userId } })
+        if (!foundUser) {
+            throw new API401Error('User not registered')
+        }
+
+        // Generate RSA key pair
+        const { publicKey, privateKey } = crypto.generateKeyPairSync('rsa', {
+            modulusLength: 4096,
+            publicKeyEncoding: {
+                type: 'pkcs1',
+                format: 'pem'
+            },
+            privateKeyEncoding: {
+                type: 'pkcs1',
+                format: 'pem'
+            }
+        })
+
+        // Create new tokens using the private key
+        const tokens = await createTokenPair(
+            {
+                userId: userId,
+                email: email
+            },
+            privateKey
+        )
+
+        // Update the key store with the new public key and refresh token
+        await keyTokenModel.findOneAndUpdate({
+            filter: { _id: keyStore._id },
+            $set: {
+                publicKey: publicKey,
+                refreshToken: tokens.refreshToken
+            },
+            $addToSet: {
+                refreshTokensUsed: refreshToken
+            }
+        })
+
+        return {
+            user: user,
+            tokens
+        }
     }
 }
 

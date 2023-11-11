@@ -8,6 +8,18 @@ class UserController {
         OK(res, 'create user successfully', await userService.login(req.body))
     })
 
+    refreshToken = catchAsync(async (req: any, res: Response, next: NextFunction) => {
+        OK(
+            res,
+            'get token successfully',
+            await userService.refreshToken({
+                refreshToken: req.refreshToken,
+                user: req.user,
+                keyStore: req.keyStore
+            })
+        )
+    })
+
     logout = catchAsync(async (req: any, res: Response, next: NextFunction) => {
         OK(res, 'logout successfully', await userService.logout(req.keyStore))
     })
