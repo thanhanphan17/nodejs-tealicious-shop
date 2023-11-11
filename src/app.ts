@@ -19,7 +19,7 @@ app.use(express.json())
 app.use(morgan('dev'))
 app.use(helmet())
 app.use(compression())
-app.use(express.static(path.join(__dirname, 'public')))
+app.use(express.static(path.join(__dirname, 'assets')))
 
 // Configure the template engine to use Handlebars
 app.engine('hbs', create({ extname: '.hbs', defaultLayout: false, layoutsDir: 'views/' }).engine)
