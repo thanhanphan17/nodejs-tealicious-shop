@@ -68,7 +68,7 @@ API_URL=http://localhost:8080
 
 -   Ensure no Docker containers are running on ports `8080`, `80`, `5432` and `27017`.
 -   Ensure no Docker containers named `postgres`, `mongo-db` and `tealicious-shop` are running.
--   With just a single command, everything will be ready to use. Note that during the initial run, it may take some time `(up to 500 second if no images were downloaded before)` to download all the dependencies and images.
+-   With just a single command, everything will be ready to use. Note that during the initial run, it may take some time to download all the dependencies and images.
 
 ```
     make up env=uat
