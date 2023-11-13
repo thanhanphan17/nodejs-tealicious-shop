@@ -26,16 +26,12 @@ router.get('/login-admin', function (req, res, next) {
     res.render('admin/login')
 })
 
-
 router.get('/add-product', function (req, res, next) {
     res.render('admin/add-product')
 })
 
-
 router.get('/add-order', function (req, res, next) {
     res.render('admin/add-order')
 })
-
-
 
 export default router
