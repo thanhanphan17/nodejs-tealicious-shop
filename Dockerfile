@@ -47,6 +47,8 @@ RUN apk add --no-cache make
 
 ### Copy built binary application from 'builder' image
 COPY --from=builder /project/dist dist/
+COPY --from=builder /project/src/views src/views/
+COPY --from=builder /project/src/assets dist/assets/
 COPY --from=builder /project/env env/
 COPY --from=builder /project/prisma prisma/
 COPY --from=builder /project/package.json .
