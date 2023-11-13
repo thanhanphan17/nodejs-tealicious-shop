@@ -22,7 +22,7 @@ router.get('/contact', function (req, res, next) {
     res.render('shop/contact')
 })
 
-router.get('/forgotpassword', function (req, res, next) {
+router.get('/forgot-password', function (req, res, next) {
     res.render('shop/forgotpassword')
 })
 
