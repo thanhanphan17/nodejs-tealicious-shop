@@ -37,19 +37,19 @@ start:
  
 # make db_push env=local|prod
 db_push:
-	@dotenv -e ./env/${env}.env -- npx prisma db push
+	@dotenv -e ./env/${env}.env -- npx --yes prisma db push
 
 # make db_migrate env=local|prod
 db_migrate:
-	@dotenv -e ./env/${env}.env -- npx prisma migrate dev --name init
+	@dotenv -e ./env/${env}.env -- npx --yes prisma migrate dev --name init 
 
 # make db_migrate env=local|prod
 db_seed:
-	@dotenv -e ./env/${env}.env -- npx prisma db seed
+	@dotenv -e ./env/${env}.env -- npx --yes prisma db seed
 
 # make prisma_studio env=local|prod
 prisma_studio:
-	@dotenv -e ./env/${env}.env -- npx prisma studio
+	@dotenv -e ./env/${env}.env -- npx --yes prisma studio
 
 # make up
 up:
