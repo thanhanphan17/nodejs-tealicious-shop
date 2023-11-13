@@ -26,6 +26,10 @@ router.get('/login-admin', function (req, res, next) {
     res.render('admin/login')
 })
 
+router.get('/add-user', function (req, res, next) {
+    res.render('admin/add-user')
+})
+
 router.get('/add-product', function (req, res, next) {
     res.render('admin/add-product')
 })
