@@ -3,6 +3,7 @@ version: '3.7'
 services:
     app:
         container_name: tealicious-shop
+        restart: always
         image: tealicious-shop
         build:
             dockerfile: Dockerfile
@@ -20,7 +21,7 @@ services:
         entrypoint:
             - '/bin/sh'
             - '-c'
-            - 'make db_push env=$MODE && make start env=$MODE'
+            - 'make db_push env=$MODE && make db_seed env=$MODE && make start env=$MODE'
         ports:
             - '80:8080'
         networks:
@@ -28,6 +29,7 @@ services:
 
     postgres:
         container_name: postgres-db
+        restart: always
         image: postgres:latest
         volumes:
             - './.tealicious-volume:/var/lib/postgresql/data'
@@ -48,6 +50,7 @@ services:
     mongodb:
         image: mongo:latest
         container_name: mongo-db
+        restart: always
         ports:
             - 27017:27017
         environment:
@@ -57,7 +60,7 @@ services:
 
         volumes:
             - ./mongodb/init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
-            - './.tealicious-volume:/var/lib/postgresql/data'
+            - './.tealicious-volume:/var/lib/mongodb/data'
         healthcheck:
             test: ['CMD-SHELL', 'mongosh', '--eval', "db.adminCommand('ping')"]
             interval: 10s

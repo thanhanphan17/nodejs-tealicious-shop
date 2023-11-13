@@ -28,6 +28,10 @@ install_cli_tool:
 run: 
 	@dotenv -e ./env/${env}.env -- npm run dev
 
+# make build
+build:
+	@npm run build
+
 start:
 	@dotenv -e ./env/${env}.env -- npm run start
  
