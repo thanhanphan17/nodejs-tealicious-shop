@@ -28,7 +28,6 @@ model User {
   deleted       Boolean         @default(false)
   createdAt     DateTime?       @default(now())
   updatedAt     DateTime?       @updatedAt
-  Product       Product[]
   ProductRating ProductRating[]
   Order         Order[]
   Payment       Payment?
@@ -45,39 +44,22 @@ enum ProductStatus {
 
 model Product {
   id            String          @id @default(uuid())
-  categoryId    String
-  category      Category        @relation(fields: [categoryId], references: [id])
+  categoryId    String?
+  category      Category?       @relation(fields: [categoryId], references: [id])
   name          String
   price         Int
   description   String
   image         Image[]
-  condition     String
   quantity      Int
   status        ProductStatus   @default(instock)
   deleted       Boolean         @default(false)
   createdAt     DateTime?       @default(now())
   updatedAt     DateTime?       @updatedAt
   ProductRating ProductRating[]
-  User          User?           @relation(fields: [userId], references: [id])
-  userId        String?
   Cart          Cart[]
 
   @@index([id, name])
   @@map("products")
-}
-
-model Cart {
-  id        String    @id @default(uuid())
-  userId    String
-  user      User      @relation(fields: [userId], references: [id])
-  productId String
-  product   Product   @relation(fields: [productId], references: [id])
-  quantity  Int
-  createdAt DateTime? @default(now())
-  updatedAt DateTime? @updatedAt
-
-  @@index([id, userId, productId])
-  @@map("carts")
 }
 
 model ProductRating {
@@ -94,6 +76,20 @@ model ProductRating {
 
   @@index([id, productId, userId])
   @@map("product_ratings")
+}
+
+model Cart {
+  id        String    @id @default(uuid())
+  userId    String
+  user      User      @relation(fields: [userId], references: [id])
+  productId String
+  product   Product   @relation(fields: [productId], references: [id])
+  quantity  Int
+  createdAt DateTime? @default(now())
+  updatedAt DateTime? @updatedAt
+
+  @@index([id, userId, productId])
+  @@map("carts")
 }
 
 model Category {

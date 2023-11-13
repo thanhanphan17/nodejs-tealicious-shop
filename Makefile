@@ -39,6 +39,10 @@ db_push:
 db_migrate:
 	@dotenv -e ./env/${env}.env -- npx prisma migrate dev --name init
 
+# make db_migrate env=local|prod
+db_seed:
+	@dotenv -e ./env/${env}.env -- npx prisma db seed
+
 # make prisma_studio env=local|prod
 prisma_studio:
 	@dotenv -e ./env/${env}.env -- npx prisma studio
