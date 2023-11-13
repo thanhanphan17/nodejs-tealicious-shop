@@ -22,16 +22,16 @@ model User {
   password      String
   role          UserRole        @default(user)
   address       String?
-  imageId       String?
-  avatar        Image?          @relation(fields: [imageId], references: [id])
+  avartarId     String?
+  avatar        Image?          @relation(fields: [avartarId], references: [id])
   status        String          @default("active")
   deleted       Boolean         @default(false)
   createdAt     DateTime?       @default(now())
   updatedAt     DateTime?       @updatedAt
   ProductRating ProductRating[]
   Order         Order[]
-  Payment       Payment?
   Cart          Cart[]
+  Payment       Payment[]
 
   @@index([id, email])
   @@map("users")
@@ -113,17 +113,19 @@ enum OrderStatus {
 }
 
 model Order {
-  id          String        @id @default(uuid())
-  userId      String
-  user        User          @relation(fields: [userId], references: [id])
-  status      OrderStatus   @default(pending)
-  deleted     Boolean       @default(false)
-  createdAt   DateTime?     @default(now())
-  updatedAt   DateTime?     @updatedAt
-  OrderDetail OrderDetail[]
-  Payment     Payment?
-  Discount    Discount?     @relation(fields: [discountId], references: [id])
-  discountId  String?
+  id              String        @id @default(uuid())
+  userId          String
+  shippingAddress String
+  status          OrderStatus   @default(pending)
+  deleted         Boolean       @default(false)
+  createdAt       DateTime?     @default(now())
+  updatedAt       DateTime?     @updatedAt
+  paymentId       String?       @unique
+  discountId      String?
+  user            User          @relation(fields: [userId], references: [id])
+  payment         Payment?      @relation(fields: [paymentId], references: [id])
+  discount        Discount?     @relation(fields: [discountId], references: [id])
+  OrderDetail     OrderDetail[]
 
   @@index([id, userId])
   @@map("orders")
@@ -131,12 +133,12 @@ model Order {
 
 model OrderDetail {
   id            String    @id @default(uuid())
-  orderId       String
-  order         Order     @relation(fields: [orderId], references: [id])
+  orderId       String    @unique
   productOrigin Json      @map("product_origin")
   deleted       Boolean   @default(false)
   createdAt     DateTime? @default(now())
   updatedAt     DateTime? @updatedAt
+  Order         Order?    @relation(fields: [orderId], references: [id])
 
   @@index([id, orderId])
   @@map("order_details")
@@ -159,10 +161,10 @@ model Payment {
   id            String        @id @default(uuid())
   paymentMethod PaymentMethod @default(cod)
   amount        Int
-  userId        String        @unique
-  user          User          @relation(fields: [userId], references: [id])
-  orderId       String        @unique
-  order         Order         @relation(fields: [orderId], references: [id])
+  userId        String?
+  user          User?         @relation(fields: [userId], references: [id])
+  orderId       String?       @unique
+  Order         Order?
   status        PaymentStatus @default(pending)
   deleted       Boolean       @default(false)
   createdAt     DateTime?     @default(now())
@@ -177,7 +179,7 @@ model Image {
   url       String
   width     Int
   height    Int
-  status    String
+  status    String?
   deleted   Boolean   @default(false)
   createdAt DateTime? @default(now())
   updatedAt DateTime? @updatedAt
