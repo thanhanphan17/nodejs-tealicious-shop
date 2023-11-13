@@ -1,3 +1,11 @@
+install_pgadmin:
+	@docker run -p 8000:80 \
+		--name pg_admin \
+        -e 'PGADMIN_DEFAULT_EMAIL=thanhphan17@gmail.com' \
+        -e 'PGADMIN_DEFAULT_PASSWORD=000000' \
+        -v 	./.pg_admin:/var/lib/pgadmin/data \
+        -d dpage/pgadmin4
+
 init_db:
 	@docker run \
 		--name postgres-db \
@@ -58,3 +66,4 @@ up:
 down:
 	@docker compose down -v
 	@docker rmi -f tealicious-shop
+	@sudo rm -rf .tealicious-volume

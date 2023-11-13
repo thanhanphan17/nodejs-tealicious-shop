@@ -2,4 +2,4 @@ env/prod.env
 node_modules
 dist
 .tealicious-volume
-mongo-init.js
+.pg_admin
