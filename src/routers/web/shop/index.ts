@@ -34,6 +34,10 @@ router.get('/pages', function (req, res, next) {
     res.render('shop/pages')
 })
 
+router.get('/detail-product', function (req, res, next) {
+    res.render('shop/detail-product')
+})
+
 router.get('/sign-up', function (req, res, next) {
     res.render('shop/signup')
 })
