@@ -16,16 +16,14 @@ services:
         links:
             - postgres
             - mongodb
-        environment:
-            - 'MODE=prod'
         entrypoint:
             - '/bin/sh'
             - '-c'
-            - 'make db_push env=$MODE && make db_seed env=$MODE && make start env=$MODE'
+            - 'make db_push env=uat && make db_seed env=uat && make start env=uat'
         ports:
             - '80:8080'
         networks:
-            - local_network
+            - uat_network
 
     postgres:
         container_name: postgres-db
@@ -43,9 +41,9 @@ services:
             test: ['CMD-SHELL', 'pg_isready -U postgres -d tealicious_db']
             interval: 10s
             timeout: 10s
-            retries: 3
+            retries: 5
         networks:
-            - local_network
+            - uat_network
 
     mongodb:
         image: mongo:latest
@@ -65,9 +63,9 @@ services:
             test: ['CMD-SHELL', 'mongosh', '--eval', "db.adminCommand('ping')"]
             interval: 10s
             timeout: 10s
-            retries: 3
+            retries: 5
         networks:
-            - local_network
+            - uat_network
 
 networks:
-    local_network:
+    uat_network:

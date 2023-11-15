@@ -2,9 +2,13 @@ import mongoose from 'mongoose'
 import config from '~/configs/config.database'
 import { checkDBOverload } from '~/helpers/check.mongodb'
 
-const uri =
+const localUri =
     `mongodb://${config.user}:${config.password}@${config.host}:${config.port}/${config.dbname}` +
     `?authSource=admin&readPreference=primary&ssl=false&directConnection=true`
+
+const cloudURI = `mongodb+srv://${config.user}:${config.password}@${config.host}/${config.dbname}?retryWrites=true`
+
+const uri = config.port === null ? cloudURI : localUri
 
 class Mongoose {
     private static instance: Mongoose

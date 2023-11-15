@@ -1,0 +1,23 @@
+version: '3.7'
+
+### Postgres and MongoDB are deploy separately
+
+services:
+    app:
+        container_name: tealicious-shop
+        restart: always
+        image: tealicious-shop
+        build:
+            dockerfile: Dockerfile
+            context: .
+        entrypoint:
+            - '/bin/sh'
+            - '-c'
+            - 'make start env=prod'
+        ports:
+            - '80:8080'
+        networks:
+            - prod_network
+
+networks:
+    prod_network:

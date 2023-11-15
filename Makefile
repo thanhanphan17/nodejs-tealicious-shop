@@ -16,6 +16,8 @@ init_db:
 		-p 5432:5432 -it \
 		-d postgres:latest
 
+	@docker start postgres-db
+
 	@docker run -d --name mongo-db -p 27017:27017 \
   		-e MONGO_INITDB_DATABASE=tealicious_db \
   		-e MONGO_INITDB_ROOT_USERNAME=tealicious_shop \
@@ -24,6 +26,8 @@ init_db:
 		-v ./.tealicious-volume:/var/lib/postgresql/data \
   		mongo:latest
 
+	@docker start mongo-db
+	
 rm_db:
 	@sudo rm -rf .tealicious-volume
 	@docker rm -f postgres-db
@@ -31,6 +35,8 @@ rm_db:
 
 install_cli_tool:
 	@sudo npm install -g dotenv-cli
+
+### APPLICATION COMMANDS
 
 # make run env=local|prod
 run: 
@@ -42,7 +48,9 @@ build:
 
 start:
 	@dotenv -e ./env/${env}.env -- npm run start
- 
+
+### DATABASE COMMANDS
+
 # make db_push env=local|prod
 db_push:
 	@dotenv -e ./env/${env}.env -- npx --yes prisma db push
@@ -59,11 +67,23 @@ db_seed:
 prisma_studio:
 	@dotenv -e ./env/${env}.env -- npx --yes prisma studio
 
-# make up
-up:
-	@MODE=${env} docker compose up -d
+### DOCKER COMPOSE COMMANDS
 
-down:
-	@docker compose down -v
+# User Acceptance Testing
+uat_up:
+	@docker compose -f docker-compose-uat.yml up -d
+
+uat_down:
+	@docker compose -f docker-compose-uat.yml down -v
+	@docker rm -f tealicious-shop
 	@docker rmi -f tealicious-shop
 	@sudo rm -rf .tealicious-volume
+
+# Production
+prod_up:
+	@docker compose -f docker-compose-prod.yml up -d
+
+prod_down:
+	@docker compose -f docker-compose-prod.yml down -v
+	@docker rm -f tealicious-shop
+	@docker rmi -f tealicious-shop
