@@ -55,8 +55,10 @@
         "dotenv-cli": "^7.2.1",
         "express-handlebars": "^7.1.2",
         "install": "^0.13.0",
+        "jade": "^1.11.0",
         "jsonwebtoken": "^9.0.2",
         "lodash": "^4.17.21",
+        "moment": "^2.29.4",
         "mongodb": "^6.1.0",
         "morgan": "^1.10.0"
     }
