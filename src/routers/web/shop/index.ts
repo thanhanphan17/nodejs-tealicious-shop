@@ -11,7 +11,7 @@ router.get('/about-us', function (req, res, next) {
 })
 
 router.get('/cart', function (req, res, next) {
-    res.render('shop/cart.hsb')
+    res.render('shop/cart.hbs')
 })
 
 router.get('/checkout', function (req, res, next) {
