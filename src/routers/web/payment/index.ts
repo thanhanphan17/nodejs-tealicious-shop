@@ -1,11 +1,12 @@
 import express from 'express'
+import moment from 'moment'
 
 const router = express.Router()
 
 router.get('/', function (req, res, next) {
     // Amount and OrderId will be got from req
     const amount = 1234562
-    const orderId = '123456789'
+    const orderId = moment(new Date()).format('DDHHmmss')
     res.redirect(`/payment/pay?amount=${amount}&order_Id=${orderId}`)
 })
 
