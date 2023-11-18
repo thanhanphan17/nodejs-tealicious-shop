@@ -9,12 +9,12 @@ install_pgadmin:
 init_db:
 	@docker run \
 		--name postgres-db \
-		--rm -e POSTGRES_USER=postgres \
+		-e POSTGRES_USER=postgres \
 		-e POSTGRES_PASSWORD=0000 \
 		-e POSTGRES_DB=tealicious_db \
 		-v ./.tealicious-volume:/var/lib/postgresql/data \
 		-p 5432:5432 -it \
-		-d postgres:latest
+		-d --restart unless-stopped postgres:latest
 
 	@docker start postgres-db
 
@@ -24,6 +24,7 @@ init_db:
   		-e MONGO_INITDB_ROOT_PASSWORD=tealicious_shop \
   		-v ./mongodb/init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro \
 		-v ./.tealicious-volume:/var/lib/postgresql/data \
+		-d --restart unless-stopped\
   		mongo:latest
 
 	@docker start mongo-db

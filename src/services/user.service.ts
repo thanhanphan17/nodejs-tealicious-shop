@@ -36,7 +36,7 @@ class UserService {
 
         // Generate RSA key pair
         const { publicKey, privateKey } = crypto.generateKeyPairSync('rsa', {
-            modulusLength: 4096,
+            modulusLength: 2048,
             publicKeyEncoding: {
                 type: 'pkcs1',
                 format: 'pem'
@@ -101,7 +101,7 @@ class UserService {
 
         // Generate RSA key pair
         const { publicKey, privateKey } = crypto.generateKeyPairSync('rsa', {
-            modulusLength: 4096,
+            modulusLength: 2048,
             publicKeyEncoding: {
                 type: 'pkcs1',
                 format: 'pem'
@@ -177,7 +177,7 @@ class UserService {
 
         // Generate RSA key pair
         const { publicKey, privateKey } = crypto.generateKeyPairSync('rsa', {
-            modulusLength: 4096,
+            modulusLength: 2048,
             publicKeyEncoding: {
                 type: 'pkcs1',
                 format: 'pem'
