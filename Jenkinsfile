@@ -11,7 +11,7 @@ pipeline {
                 environment name: 'ACTION', value: 'Build'
             }
             steps {
-                sh 'docker compose up -d'
+                sh 'docker compose -f docker-compose-prod.yml up --detach'
             }
         }
     }

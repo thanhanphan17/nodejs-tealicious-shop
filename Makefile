@@ -82,7 +82,7 @@ uat_down:
 
 # Production
 prod_up:
-	@docker compose -f docker-compose-prod.yml up -d
+	@docker compose -f docker-compose-prod.yml up --detach
 
 prod_down:
 	@docker compose -f docker-compose-prod.yml down -v
