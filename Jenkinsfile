@@ -11,7 +11,9 @@ pipeline {
                 environment name: 'ACTION', value: 'Build'
             }
             steps {
-                sh 'docker compose -f docker-compose-prod.yml up -d'
+                withDockerRegistry(credentialsId: 'dockerhub', url: 'https://index.docker.io/v2/') {
+                    sh 'docker compose up -d'
+                }
             }
         }
     }
