@@ -3,19 +3,38 @@ pipeline {
     agent any
 
     parameters {
-        choice(name: 'ACTION', choices: ['Build', 'Deploy', 'Remove all'], description: 'Pick something')
+        choice(name: 'ACTION', choices: ['Build and Push', 'Deploy', 'Remove all'], description: 'Pick something')
     }
     stages {
-        stage('Build') {
+        stage('Build and Push') {
             steps {
-                sh 'docker build -f _dockerfile -t tealicious-shop .'
+                withDockerRegistry(credentialsId: 'dockerhub', url: 'https://index.docker.io/v1/') {
+                    sh 'docker build -f _dockerfile -t thanhanphan17/tealicious-shop .'
+                    sh 'docker push thanhanphan17/tealicious-shop'
+                }
             }
         }
         stage('Deploying') {
             steps {
-                sh 'docker rm -f tealicious-shop || echo "No container to remove"'
-                sh 'docker rmi -f tealicious-shop || echo "No image to remove"'
-                sh 'docker run --name tealicious-shop --network nodejs-tealicious-shop_prod_network -p 81:8080 -d tealicious-shop'
+                withDockerRegistry(credentialsId: 'dockerhub', url: 'https://index.docker.io/v1/') {
+                    sh 'docker rm -f tealicious-shop || echo "No container to remove"'
+                    sh 'docker rmi -f tealicious-shop || echo "No image to remove"'
+                    sh 'docker container run \
+                        --restart unless-stopped \
+                        --name tealicious-shop \
+                        --network nodejs-tealicious-shop_prod_network \
+                        -dp 81:8080 \
+                        thanhanphan17/tealicious-shop'
+                }
+            }
+        }
+        stage('Remove all') {
+             when{
+                environment name: 'ACTION', value: 'Remove all'
+            }
+            steps {
+                sh 'docker rm -f thanhanphan17/tealicious-shop'
+                sh 'docker rmi -f thanhanphan17/tealicious-shop'
             }
         }
     }
