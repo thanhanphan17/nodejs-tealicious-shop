@@ -15,7 +15,8 @@ services:
         ports:
             - '80:8080'
         networks:
-            - prod_network
+            - tealicious_network
 
 networks:
     prod_network:
+        name: tealicious_network
