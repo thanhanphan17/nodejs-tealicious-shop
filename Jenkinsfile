@@ -4,7 +4,7 @@ pipeline {
     parameters {
         choice(
             name: 'ACTION',
-            choices: ['Build and Push', 'Deploy', 'Remove all'],
+            choices: ['Package and Push', 'Deploy', 'Remove all'],
             description: 'Pick something'
         )
     }
@@ -16,7 +16,7 @@ pipeline {
                     credentialsId: 'dockerhub',
                     url: 'https://index.docker.io/v1/'
                 ) {
-                    sh 'docker build -f _dockerfile -t thanhanphan17/tealicious-shop .'
+                    sh 'docker build -t thanhanphan17/tealicious-shop .'
                     sh 'docker push thanhanphan17/tealicious-shop'
                 }
             }
@@ -31,8 +31,9 @@ pipeline {
                     sh 'docker rm -f tealicious-shop || echo "No container to remove"'
                     sh 'docker rmi -f tealicious-shop || echo "No image to remove"'
                     sh '''
-                        docker container run \
+                        docker  run \
                             --restart unless-stopped \
+                            --env RUNTIME_ENV=prod \
                             --name tealicious-shop \
                             --network nodejs-tealicious-shop_prod_network \
                             -dp 81:8080 \

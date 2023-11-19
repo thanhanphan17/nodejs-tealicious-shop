@@ -16,10 +16,12 @@ services:
         links:
             - postgres
             - mongodb
-        entrypoint:
+        environment:
+            - RUNTIME_ENV=uat
+        command:
             - '/bin/sh'
             - '-c'
-            - 'make db_push env=uat && make db_seed env=uat && make start env=uat'
+            - 'make db_push env=uat && make db_seed env=uat'
         ports:
             - '80:8080'
         networks:

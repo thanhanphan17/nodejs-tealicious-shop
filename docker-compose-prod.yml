@@ -10,10 +10,8 @@ services:
         build:
             dockerfile: Dockerfile
             context: .
-        entrypoint:
-            - '/bin/sh'
-            - '-c'
-            - 'make start env=prod'
+        environment:
+            - RUNTIME_ENV=prod
         ports:
             - '80:8080'
         networks:

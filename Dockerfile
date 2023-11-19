@@ -59,9 +59,11 @@ COPY --from=builder /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
 # Set the timezone
 ENV TZ=Asia/Ho_Chi_Minh
 
-# Expose the port
-EXPOSE 8080
+ENV RUNTIME_ENV=local
 
 # Run the binary application
-# CMD ["dotenv", "-e", "/env/prod.env", "--", "npm", "run", "start"]
-# ENTRYPOINT [ "make", "start", "env=$MODE" ]
+CMD ["dotenv", "-e", "/env/prod.env", "--", "npm", "run", "start"]
+ENTRYPOINT  make start env=${RUNTIME_ENV}
+
+# Expose the port
+EXPOSE 8080
