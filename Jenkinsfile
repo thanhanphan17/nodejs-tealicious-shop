@@ -10,6 +10,9 @@ pipeline {
 
     stages {
         stage('Packaging/Pushing Image') {
+            when {
+                branch 'master'
+            }
             steps {
                 withDockerRegistry(
                     credentialsId: 'dockerhub',
@@ -22,6 +25,9 @@ pipeline {
         }
 
         stage('Deploying PostgreSQL') {
+            when {
+                branch 'master'
+            }
             steps {
                 sh 'docker rm -f postgres-db || echo "No container to remove"'
                 sh '''
@@ -39,6 +45,9 @@ pipeline {
         }
 
         stage('Deploying application') {
+            when {
+                branch 'master'
+            }
             steps {
                 withDockerRegistry(
                     credentialsId: 'dockerhub',
