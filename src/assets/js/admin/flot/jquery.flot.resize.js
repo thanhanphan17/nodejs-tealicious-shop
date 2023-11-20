@@ -145,7 +145,6 @@ can just fix the size of their placeholders.
         })()
     }
 })(jQuery, this)
-
 ;(function ($) {
     var options = {} // no options
 
