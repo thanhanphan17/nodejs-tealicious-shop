@@ -4,7 +4,9 @@ import helmet from 'helmet'
 import morgan from 'morgan'
 import webRouter from './routers/web'
 import apiRouter from './routers/api'
+import bodyParser from 'body-parser'
 import path from 'path'
+import cookieParser from 'cookie-parser'
 
 import { create } from 'express-handlebars'
 import { handle404Error, handleReturnError } from '~/middlewares/errorHandler'
@@ -19,7 +21,9 @@ app.use(express.json())
 app.use(morgan('dev'))
 app.use(helmet())
 app.use(compression())
+app.use(cookieParser())
 app.use(express.static(path.join(__dirname, 'assets')))
+app.use(bodyParser.urlencoded({ extended: true }))
 
 // Configure the template engine to use Handlebars
 app.engine('hbs', create({ extname: '.hbs', defaultLayout: false, layoutsDir: 'views/' }).engine)

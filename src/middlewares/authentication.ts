@@ -62,3 +62,24 @@ export const authentication = catchAsync(async (req: any, res, next: NextFunctio
 
     return next()
 })
+
+export const adminRequired = catchAsync(async (req: any, res, next: NextFunction) => {
+    const { accessToken, refreshToken } = getTokens(req)
+
+    const userId = getUserIdFromToken(accessToken, refreshToken)
+
+    const keyStore = await getKeyStore(userId)
+
+    if (refreshToken) {
+        verifyToken(refreshToken, keyStore, userId, req)
+        req.refreshToken = refreshToken
+        return next()
+    }
+
+    if (!accessToken) throw new API401Error('Invalid request')
+    verifyToken(accessToken, keyStore, userId, req)
+
+    console.log(req.user)
+
+    return next()
+})

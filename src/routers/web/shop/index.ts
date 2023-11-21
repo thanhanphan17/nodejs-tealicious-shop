@@ -1,9 +1,11 @@
 import express from 'express'
+import userController from '~/controllers/web/user.controller'
 
 const router = express.Router()
 
 router.get('/', function (req, res, next) {
-    res.render('shop/index.hbs')
+    const customerName = req.cookies.customerName
+    res.render('shop/index.hbs', { customerName })
 })
 
 router.get('/about-us', function (req, res, next) {
@@ -29,6 +31,8 @@ router.get('/forgot-password', function (req, res, next) {
 router.get('/login', function (req, res, next) {
     res.render('shop/login.hbs')
 })
+
+router.post('/login', userController.login)
 
 router.get('/pages', function (req, res, next) {
     res.render('shop/pages.hbs')
