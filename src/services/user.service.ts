@@ -62,7 +62,8 @@ class UserService {
         const tokens = await createTokenPair(
             {
                 userId: newUser.id,
-                email: payload.email
+                email: payload.email,
+                role: newUser.role
             },
             privateKey
         )
@@ -116,7 +117,8 @@ class UserService {
         const tokens = await createTokenPair(
             {
                 userId: user.id,
-                email: payload.email
+                email: payload.email,
+                role: user.role
             },
             privateKey
         )
@@ -192,7 +194,8 @@ class UserService {
         const tokens = await createTokenPair(
             {
                 userId: userId,
-                email: email
+                email: email,
+                role: foundUser.role
             },
             privateKey
         )
