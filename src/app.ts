@@ -4,6 +4,7 @@ import helmet from 'helmet'
 import morgan from 'morgan'
 import webRouter from './routers/web'
 import apiRouter from './routers/api'
+import bodyParser from 'body-parser'
 import path from 'path'
 
 import { create } from 'express-handlebars'
@@ -20,6 +21,7 @@ app.use(morgan('dev'))
 app.use(helmet())
 app.use(compression())
 app.use(express.static(path.join(__dirname, 'assets')))
+app.use(bodyParser.urlencoded({ extended: true }))
 
 // Configure the template engine to use Handlebars
 app.engine('hbs', create({ extname: '.hbs', defaultLayout: false, layoutsDir: 'views/' }).engine)
