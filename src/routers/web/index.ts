@@ -5,6 +5,10 @@ import payment from '~/routers/web/payment/index'
 
 const router = express.Router()
 
+router.get('/docs', function (req, res, next) {
+    res.render('README.hbs')
+})
+
 router.use('/', shop)
 router.use('/admin', admin)
 router.use('/payment', payment)

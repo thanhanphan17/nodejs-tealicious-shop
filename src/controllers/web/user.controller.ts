@@ -1,8 +1,7 @@
-import userService from '~/services/user.service'
 import catchAsync from '~/helpers/catch.async'
-import { Request, Response, NextFunction } from 'express'
-import { CREATED, OK } from '~/core/success.response'
+import { Response, NextFunction } from 'express'
 import axios from 'axios'
+import appConfig from '~/configs/config.app'
 
 class UserController {
     login = catchAsync(async (req: any, res: Response, next: NextFunction) => {
@@ -10,16 +9,19 @@ class UserController {
         // Assuming req.body contains the login credentials
         const { email, password } = req.body
         // Make a POST request to the login API endpoint
-        const response = await axios.post('https://yentraquan.shop/api/user/login', {
+        const response = await axios.post(`${appConfig.apiURL}/api/user/login`, {
             email,
             password
         })
         if (response.data.status == 200) {
-            res.cookie('accessToken', response.data.data.tokens.accessToken)
-            res.cookie('refreshToken', response.data.data.tokens.refreshToken)
-            res.cookie('customerName', response.data.data.user.name)
+            const result = response.data.data
+            res.cookie('accessToken', result.tokens.accessToken)
+            res.cookie('refreshToken', result.tokens.refreshToken)
+            res.cookie('customerName', result.user.name)
             res.redirect('/')
-        } else res.render('shop/login.hbs', { data: { loginFail: true } })
+        } else {
+            res.render('shop/login.hbs', { data: { loginFail: true } })
+        }
         //console.log(response.data)
     })
 }
