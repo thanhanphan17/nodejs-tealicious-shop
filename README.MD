@@ -61,7 +61,14 @@ PG_DB_USER="postgres"
 PG_DB_PASSWORD="0000"
 PG_DATABASE_URL="postgresql://${PG_DB_USER}:${PG_DB_PASSWORD}@${PG_DB_HOST}:${PG_DB_PORT}/${PG_DB_NAME}?schema=public"
 
-API_URL=http://localhost:8080
+
+API_URL=https://yentraquan.shop
+
+VNP_TMN_CODE=
+VNP_HASH_SECRET=
+VNP_URL=https://sandbox.vnpayment.vn/paymentv2/vpcpay.html
+VNP_API=https://sandbox.vnpayment.vn/merchant_webapi/api/transaction
+VNP_RETURN_URL=http://localhost:8080/api/payment/vnpay_return
 ```
 
 #### Step 2: Run Docker Compose with one command
@@ -71,13 +78,13 @@ API_URL=http://localhost:8080
 -   With just a single command, everything will be ready to use. Note that during the initial run, it may take some time to download all the dependencies and images.
 
 ```
-    make up env=uat
+    make uat_up
 ```
 
 I discovered that <a style="color:red">Windows users</a> (only Windows) can pass environment variables through the command line as Linux and MacOS. Therefore, you can execute the following command in `PowerShell` in case you use <a style="color:red">Windows</a> to run the application:
 
 ```
-    $env:MODE='uat'; docker compose up -d
+    $env:MODE='uat'; docker compose -f docker-compose-uat.yml up -d
 ```
 
 After the application is running, you can access it at: <a style="color:red">http://localhost</a> (run in port 80)
@@ -85,7 +92,7 @@ After the application is running, you can access it at: <a style="color:red">htt
 To remove the application and images, run:
 
 ```
-    make down
+    make uat_down
 ```
 
 ### III. Run without Docker (not suggested)
@@ -125,22 +132,28 @@ If you want to remove it just run
 The `local.env` file, located in the `env` folder, has already been created. This file contains all the necessary environment variables required to run the application.
 
 ```js
-    APP_PORT=8080
+APP_PORT=8080
 
-    MG_DB_HOST=localhost
-    MG_DB_PORT=27017
-    MG_DB_NAME=tealicious_db
-    MG_DB_USER=tealicious_shop
-    MG_DB_PASSWORD=tealicious_shop
+MG_DB_HOST=localhost
+MG_DB_PORT=27017
+MG_DB_NAME=tealicious_db
+MG_DB_USER=tealicious_shop
+MG_DB_PASSWORD=tealicious_shop
 
-    PG_DB_HOST=localhost
-    PG_DB_PORT="5432"
-    PG_DB_NAME="tealicious_db"
-    PG_DB_USER="postgres"
-    PG_DB_PASSWORD="0000"
-    PG_DATABASE_URL="postgresql://${PG_DB_USER}:${PG_DB_PASSWORD}@${PG_DB_HOST}:${PG_DB_PORT}/${PG_DB_NAME}?schema=public"
+PG_DB_HOST=localhost
+PG_DB_PORT="5432"
+PG_DB_NAME="tealicious_db"
+PG_DB_USER="postgres"
+PG_DB_PASSWORD="0000"
+PG_DATABASE_URL="postgresql://${PG_DB_USER}:${PG_DB_PASSWORD}@${PG_DB_HOST}:${PG_DB_PORT}/${PG_DB_NAME}?schema=public"
 
-    API_URL=http://localhost:8080
+API_URL=https://yentraquan.shop
+
+VNP_TMN_CODE=
+VNP_HASH_SECRET=
+VNP_URL=https://sandbox.vnpayment.vn/paymentv2/vpcpay.html
+VNP_API=https://sandbox.vnpayment.vn/merchant_webapi/api/transaction
+VNP_RETURN_URL=http://localhost:8080/api/payment/vnpay_return
 ```
 
 **<b style="color:red">I also have a file named `prod.env` containing the same structure, but it is connected to my server informaton, so I have already removed it already.</b>**
