@@ -46,6 +46,8 @@ router.get('/sign-up', function (req, res, next) {
     res.render('shop/signup.hbs')
 })
 
+router.post('/sign-up', userController.register)
+
 router.get('/about-us', function (req, res, next) {
     res.render('shop/about-us.hbs')
 })
