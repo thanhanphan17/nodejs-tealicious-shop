@@ -59,7 +59,7 @@
                                     <li>
                                         <a href='/pages'>Sản phẩm</a>
                                         <ul class='dropdown'>
-                                            <li><a href='/phong-vi-yen-tra'>Phong Vị Yên Trà</a></li>
+                                            <li><a href='/phong-vi-yen-tra'>-Phong Vị Yên Trà</a></li>
                                             <li><a href='/hoa-co-duong-tam'>Hoa Cỏ Dưỡng Tâm</a></li>
                                             <li><a href='/thao-moc-nhiet-doi'>Thảo Mộc Nhiệt Đới</a></li>
                                             <li><a href='/yen-an-ngu-tra'>Yên An Ngự Trà</a></li>
@@ -67,8 +67,10 @@
                                     </li>
                                     <li><a href='/contact'>Liên hệ</a></li>
 
+                                    {{#if isUser==true}}
                                     <li><a href='/login' style='color: #0650c2'>Đăng nhập</a></li>
                                     <li><a href='/sign-up' style='color: #0650c2'>Tạo tài khoản</a></li>
+                                    {{/if}}
                                 </ul>
                             </nav>
                         </div>
