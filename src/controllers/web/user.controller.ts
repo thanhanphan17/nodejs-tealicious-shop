@@ -26,7 +26,8 @@ class UserController {
 
     register = catchAsync(async (req: any, res: Response, next: NextFunction) => {
         // Assuming req.body contains the login credentials
-        console.log(req.body)
+        console.log('register')
+
         const { email, name, password } = req.body
         // Make a POST request to the login API endpoint
         const response = await axios.post(`${appConfig.apiURL}/api/user/register`, {
@@ -34,16 +35,19 @@ class UserController {
             name,
             password
         })
-        if (response.data.status == 200) {
+        if (response.data.status == 201) {
             const result = response.data.data
             res.cookie('accessToken', result.tokens.accessToken)
             res.cookie('refreshToken', result.tokens.refreshToken)
             res.cookie('customerName', result.user.name)
+            res.cookie('customerEmail', result.user.email)
+            res.cookie('customerID', result.user.id)
             res.redirect('/')
+            console.log(req.body)
         } else {
-            res.render('shop/sign-up.hbs', { data: { registerFail: true } })
+            res.render('shop/signup.hbs', { data: { registerFail: true } })
         }
-        //console.log(response.data)
+        console.log(response.data)
     })
 }
 export default new UserController()
