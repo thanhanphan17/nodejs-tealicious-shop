@@ -17,7 +17,7 @@ class UserController {
             res.cookie('accessToken', result.tokens.accessToken)
             res.cookie('refreshToken', result.tokens.refreshToken)
             res.cookie('customerName', result.user.name)
-            res.cookie('isUser', true)
+            //res.cookie('isUser', true)
             res.redirect('/')
         } else {
             res.render('shop/login.hbs', { data: { loginFail: true } })
