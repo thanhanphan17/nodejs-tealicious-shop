@@ -26,6 +26,7 @@
     <link rel='stylesheet' href='css/style.css' type='text/css' />
     <script src='https://kit.fontawesome.com/3372d384eb.js' crossorigin='anonymous'></script>
 
+
 </head>
 
 <body>
@@ -69,8 +70,8 @@
                                         </ul>
                                     </li>
                                     <li><a href='/contact'>Liên hệ</a></li>
-                                    <li><a href='/login' style='color: #0650c2'>Đăng nhập</a></li>
-                                    <li><a href='/sign-up' style='color: #0650c2'>Tạo tài khoản</a></li>
+                                    <li id="isLoggedIn"><a href='/login' style='color: #0650c2'>Đăng nhập</a></li>
+                                    <li id="isLoggedIn"><a href='/sign-up' style='color: #0650c2'>Tạo tài khoản</a></li>
                                     {{!-- {{#if isUser==true}}
                                     <li><a href='/login' style='color: #0650c2'>Đăng nhập</a></li>
                                     <li><a href='/sign-up' style='color: #0650c2'>Tạo tài khoản</a></li>
@@ -93,7 +94,7 @@
                                     <li>
                                         <img style='color: #333333; width: 20px; ' src='./img/user-profile.svg'
                                             alt='' />
-                                        {{customerName}}
+                                        {{customerEmail}}
                                         <ul class='dropdown'>
                                             <li><a href='/profile'><img style='width: 20px' src='/img/user.png'
                                                         alt='' />
@@ -330,6 +331,17 @@
     <script src='js/jquery.slicknav.js'></script>
     <script src='js/owl.carousel.min.js'></script>
     <script src='js/main.js'></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+
+            const loginLink = document.getElementById('isLoggedIn');
+
+            if (isLogged != null) {
+                loginLink.style.display = 'none';
+            }
+        });
+    </script>
 </body>
 
 </html>
