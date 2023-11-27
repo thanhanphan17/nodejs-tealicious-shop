@@ -3449,26 +3449,6 @@ html {
     }
 }
 
-// Center & dribbble
-body {
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-family: 'Roboto', Arial;
-    background: #cdd9ed;
-    .dribbble {
-        position: fixed;
-        display: block;
-        right: 20px;
-        bottom: 20px;
-        img {
-            display: block;
-            height: 28px;
-        }
-    }
-}
-
 .img-logo {
     width: 50%;
 }
