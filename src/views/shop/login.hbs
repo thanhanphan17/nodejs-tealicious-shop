@@ -108,13 +108,9 @@
     <!-- Login Start -->
     <div class='container'>
         <div class='row'>
-            <div class='col-6 booking-form'>
-                <div class='hotel-booking-img center-submit'>
-                    <img style='width: 80%' src='img/wanderstay-login.gif' alt='' />
-                </div>
-            </div>
 
-            <div class='col-6'>
+
+            {{!-- <div class='col-6'>
                 <div class='login-box'>
                     <div style='padding: 10px;' class='intro-page-text'>
                         <h3 style='color: #e0b776'>Đăng nhập</h3>
@@ -150,6 +146,41 @@
                             <div class='col'></div>
                             <div class='col'>
                                 <a href='./sign-up'>Tạo tài khoản</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> --}}
+
+            <div class='col'>
+                <div class="form-container">
+                    <div class="form-body">
+                        <h2 class="title">Đăng nhập bằng</h2>
+                        <div class="social-login">
+                            <ul>
+                                <li class="google"><a href="#">Google</a></li>
+                                <li class="fb"><a href="#">Facebook</a></li>
+                            </ul>
+                        </div>
+                        <!-- SOCIAL LOGIN -->
+
+                        <div class="_or">hoặc</div>
+
+                        <form action='/login' method='post' class="the-form">
+                            <label for="email">Địa chỉ email</label>
+                            <input type="email" name="email" id="email" placeholder="Nhập email ở đây ..." />
+
+                            <label for="password">Mật khẩu</label>
+                            <input type="password" name="password" id="password"
+                                placeholder="Nhập mật khẩu ở đây ..." />
+                            <div class="center-submit">
+
+                                <input class="center-submit" type="submit" value="Đăng nhập" />
+                            </div>
+                        </form>
+
+                        <div class="form-footer">
+                            <div><span>Chưa có tài khoản?</span><strong><a href="/sign-up">Tạo tài khoản</a></strong>
                             </div>
                         </div>
                     </div>

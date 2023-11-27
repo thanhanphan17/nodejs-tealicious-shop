@@ -107,7 +107,7 @@
     <!-- Login Start -->
     <div class='container'>
         <div class='row'>
-            <div class='col-6 booking-form'>
+            {{!-- <div class='col-6 booking-form'>
                 <div class='hotel-booking-img'>
                     <img src='img/wanderstay-login.gif' alt='' />
                 </div>
@@ -164,7 +164,45 @@
                         </div>
                     </div>
                 </div>
+            </div> --}}
+
+            <div class='col'>
+                <div class="form-container">
+                    <div class="form-body">
+                        <h2 class="title">Đăng ký bằng</h2>
+                        <div class="social-login">
+                            <ul>
+                                <li class="google"><a href="#">Google</a></li>
+                                <li class="fb"><a href="#">Facebook</a></li>
+                            </ul>
+                        </div>
+                        <!-- SOCIAL LOGIN -->
+
+                        <div class="_or">hoặc</div>
+
+                        <form action='/sign-up' method='post' class="the-form">
+                            <label for="email">Họ và tên</label>
+                            <input type="email" name="name" id="name" placeholder="Nhập ở đây ..." />
+
+                            <label for="email">Địa chỉ email</label>
+                            <input type="email" name="email" id="email" placeholder="Nhập ở đây ..." />
+
+                            <label for="password">Mật khẩu</label>
+                            <input type="password" name="password" id="password" placeholder="Nhập ở đây ..." />
+                            <div class="center-submit">
+
+                                <input class="center-submit" type="submit" value="Đăng ký" />
+                            </div>
+                        </form>
+
+                        <div class="form-footer">
+                            <div><span>Bạn đã có tài khoản?</span><strong><a href="/login"> Đăng nhập</a></strong>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
+
         </div>
     </div>
     <!-- Login End -->
