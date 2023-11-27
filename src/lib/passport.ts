@@ -5,7 +5,6 @@ import AuthService from '~/services/auth.service'
 
 passport.use(
     new LocalStrategy({ usernameField: 'email' }, async (email, password, done) => {
-        console.log(`email:::${email}, pass::::${password}`)
         try {
             const user = await AuthService.login({ email, password })
             if (!user) {
@@ -30,6 +29,7 @@ passport.deserializeUser(async (user: any, done) => {
         if (foundUser) {
             done(null, user)
         }
+        done(null, false)
     } catch (error) {
         done(null, false)
     }
