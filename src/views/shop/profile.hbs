@@ -1,0 +1,259 @@
+<html lang='zxx'>
+
+<head>
+    <meta charset='UTF-8' />
+    <meta name='description' content='Sona Template' />
+    <meta name='keywords' content='Sona, unica, creative, html' />
+    <meta name='viewport' content='width=device-width, initial-scale=1.0' />
+    <meta http-equiv='X-UA-Compatible' content='ie=edge' />
+    <title>Yên Trà Quán</title>
+    <link rel='icon' type='image/x-icon' href='img/favicon.png' />
+
+    <!-- Google Font -->
+    <link href='https://fonts.googleapis.com/css?family=Lora:400,700&display=swap' rel='stylesheet' />
+    <link href='https://fonts.googleapis.com/css?family=Cabin:400,500,600,700&display=swap' rel='stylesheet' />
+
+    <!-- Css Styles -->
+    <link rel='stylesheet' href='css/bootstrap.min.css' type='text/css' />
+    <link rel='stylesheet' href='css/font-awesome.min.css' type='text/css' />
+    <link rel='stylesheet' href='css/elegant-icons.css' type='text/css' />
+    <link rel='stylesheet' href='css/flaticon.css' type='text/css' />
+    <link rel='stylesheet' href='css/owl.carousel.min.css' type='text/css' />
+    <link rel='stylesheet' href='css/nice-select.css' type='text/css' />
+    <link rel='stylesheet' href='css/jquery-ui.min.css' type='text/css' />
+    <link rel='stylesheet' href='css/magnific-popup.css' type='text/css' />
+    <link rel='stylesheet' href='css/slicknav.min.css' type='text/css' />
+    <link rel='stylesheet' href='css/style.css' type='text/css' />
+    <script src='https://kit.fontawesome.com/3372d384eb.js' crossorigin='anonymous'></script>
+
+
+</head>
+
+<body>
+    <!-- Page Preloder -->
+    <div id='preloder'>
+        <div class='loader'></div>-
+    </div>
+
+    <!-- Header Section Begin -->
+    <header class='header-section header-normal'>
+        <div class='top-nav'>
+            <div class='container'>
+                <div class='row'>
+                    <div class='col-lg-6'></div>
+                </div>
+            </div>
+        </div>
+        <div class='menu-item'>
+            <div class='container'>
+                <div class='row'>
+                    <div class='col-lg-2'>
+                        <div class='logo'>
+                            <a href='/'>
+                                <img src='img/logo.png' alt='' />
+                            </a>
+                        </div>
+                    </div>
+                    <div class='col-lg-8'>
+                        <div class='nav-menu'>
+                            <nav class='mainmenu'>
+                                <ul>
+                                    <li class='active'><a href='/'>Trang chủ</a></li>
+                                    <li><a href='/about-us'>Về chúng tôi</a></li>
+                                    <li>
+                                        <a href='/pages'>Sản phẩm</a>
+                                        <ul class='dropdown'>
+                                            <li><a href='/phong-vi-yen-tra'>Phong Vị Yên Trà</a></li>
+                                            <li><a href='/hoa-co-duong-tam'>Hoa Cỏ Dưỡng Tâm</a></li>
+                                            <li><a href='/thao-moc-nhiet-doi'>Thảo Mộc Nhiệt Đới</a></li>
+                                            <li><a href='/yen-an-ngu-tra'>Yên An Ngự Trà</a></li>
+                                        </ul>
+                                    </li>
+                                    <li><a href='/contact'>Liên hệ</a></li>
+                                    {{#if isLoggedIn}}
+                                    <li><a href='/login' style='color: #0650c2'>Đăng xuất</a></li>
+                                    {{else}}
+                                    <li><a href='/login' style='color: #0650c2'>Đăng nhập</a></li>
+                                    <li><a href='/sign-up' style='color: #0650c2'>Tạo tài khoản</a></li>
+                                    {{/if}}
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+
+                    <div class='col-lg-2'>
+                        <div class='nav-menu'>
+                            <nav class='mainmenu'>
+                                <ul>
+                                    <li>
+                                        <a href='/cart' style='color: #0650c2'><img href='/cart'
+                                                style='color: #333333; width: 20px; ' src='./img/cart-shopping.svg'
+                                                alt='' /></a>
+                                    </li>
+                                    <li class='active'>
+                                        <img style='color: #333333; width: 20px; ' src='./img/user-profile.svg'
+                                            alt='' />
+                                        {{customerName}}
+                                        <ul class='dropdown'>
+                                            <li><a href='/profile'><img style='width: 20px' src='/img/user.png'
+                                                        alt='' />
+                                                    Trang cá nhân</a></li>
+                                            <li><a href='/logout'>Đăng xuất</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- Header End -->
+
+
+    <section class='product-section spad'>
+
+        <div class="container">
+            <div class="main-body">
+                <div class="row gutters-sm">
+                    <div class="col-md-4 mb-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="d-flex flex-column align-items-center text-center">
+                                    <img src="/img/profile.jpg" alt="user" class="rounded-circle" width="150">
+                                    <div class="mt-3">
+                                        <h4>{{customerName}}</h4>
+                                        <p class="text-muted font-size-sm">Bay Area, San Francisco, CA</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">Họ và tên</h6>
+                                    </div>
+                                    <div class="col-sm-9 text-secondary">
+                                        {{customerName}}
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">Địa chỉ email</h6>
+                                    </div>
+                                    <div class="col-sm-9 text-secondary">
+                                        {{customerEmail}}
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">Số điện thoại</h6>
+                                    </div>
+                                    <div class="col-sm-9 text-secondary">
+                                        (239) 816-9029
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">Địa chỉ</h6>
+                                    </div>
+                                    <div class="col-sm-9 text-secondary">
+                                        Bay Area, San Francisco, CA
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Section Begin -->
+    <footer class='footer-section'>
+        <div class='container'>
+            <div class='footer-text'>
+                <div class='row'>
+                    <div class='col-lg-4'>
+                        <div class='ft-about'>
+                            <div class='logo'>
+                                <a href='#'>
+                                    <img class='img-logo' src='img/logo.png' alt='' />
+                                </a>
+                            </div>
+                            <p>
+                                Yên Trà Quán với những tâm hồn tự tại đã trót yêu mẹ thiên nhiên say đắm, mong muốn
+                                được dùng các loại thảo mộc chữa lành cho tất cả mọi người.
+                            </p>
+                        </div>
+                    </div>
+                    <div class='col-lg-3 offset-lg-1'>
+                        <div class='ft-contact'>
+                            <h6>Liên hệ</h6>
+                            <ul>
+                                <li>0123456789</li>
+                                <li>yentraquan@gmail.com</li>
+                                <li>227 Nguyen Van Cuu, Ward 4, <br />District 5, HCMc</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class='col-lg-3 offset-lg-1'>
+                        <div class='ft-newslatter'>
+                            <h6>Thông tin mới nhất</h6>
+                            <p>Cập nhật những ưu đãi và thông tin mới.</p>
+                            <form action='#' class='fn-form'>
+                                <input type='text' placeholder='Email' />
+                                <button type='submit'><i class='fa fa-send'></i></button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class='copyright-option'>
+            <div class='container'>
+                <div class='row'>
+                    <div class='col-lg-12'>
+                        <ul>
+                            <li><a href='#'>Chính sách bán hàng</a></li>
+                            <li><a href='#'>Chính sách thanh toán</a></li>
+                            <li><a href='#'>Chính sách bảo hành</a></li>
+                            <li><a href='#'>Điều khoản dịch vụ</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- Footer Section End -->
+
+    <!-- Js Plugins -->
+    <script src='js/jquery-3.3.1.min.js'></script>
+    <script src='js/bootstrap.min.js'></script>
+    <script src='js/jquery.magnific-popup.min.js'></script>
+    <script src='js/jquery.nice-select.min.js'></script>
+    <script src='js/jquery-ui.min.js'></script>
+    <script src='js/jquery.slicknav.js'></script>
+    <script src='js/owl.carousel.min.js'></script>
+    <script src='js/main.js'></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+
+            const loginLink = document.getElementById('isLoggedIn');
+
+            if (isLogged != null) {
+                loginLink.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+
+</html>

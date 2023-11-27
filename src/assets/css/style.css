@@ -853,6 +853,11 @@ form .txt-field {
     align-items: center;
 }
 
+.center-text {
+    display: flex;
+    align-items: center;
+}
+
 input[type='submit'] {
     width: 20%;
     height: 80%;
