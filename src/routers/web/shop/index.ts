@@ -5,23 +5,33 @@ const router = express.Router()
 
 router.get('/', function (req, res, next) {
     const customerName = req.cookies.customerName
-    res.render('shop/index.hbs', { customerName })
+    const isLoggedIn = req.cookies.isUser
+    console.log(isLoggedIn)
+    res.render('shop/index.hbs', { customerName, isLoggedIn })
 })
 
 router.get('/about-us', function (req, res, next) {
-    res.render('shop/about-us.hbs')
+    const customerName = req.cookies.customerName
+    const isLoggedIn = req.cookies.isUser
+    res.render('shop/about-us.hbs', { customerName, isLoggedIn })
 })
 
 router.get('/cart', function (req, res, next) {
-    res.render('shop/cart.hbs')
+    const customerName = req.cookies.customerName
+    const isLoggedIn = req.cookies.isUser
+    res.render('shop/cart.hbs', { customerName, isLoggedIn })
 })
 
 router.get('/checkout', function (req, res, next) {
-    res.render('shop/checkout.hbs')
+    const customerName = req.cookies.customerName
+    const isLoggedIn = req.cookies.isUser
+    res.render('shop/checkout.hbs', { customerName, isLoggedIn })
 })
 
 router.get('/contact', function (req, res, next) {
-    res.render('shop/contact.hbs')
+    const customerName = req.cookies.customerName
+    const isLoggedIn = req.cookies.isUser
+    res.render('shop/contact.hbs', { customerName, isLoggedIn })
 })
 
 router.get('/forgot-password', function (req, res, next) {
@@ -35,11 +45,15 @@ router.get('/login', function (req, res, next) {
 router.post('/login', userController.login)
 
 router.get('/pages', function (req, res, next) {
-    res.render('shop/pages.hbs')
+    const customerName = req.cookies.customerName
+    const isLoggedIn = req.cookies.isUser
+    res.render('shop/pages.hbs', { customerName, isLoggedIn })
 })
 
 router.get('/detail-product', function (req, res, next) {
-    res.render('shop/detail-product.hbs')
+    const customerName = req.cookies.customerName
+    const isLoggedIn = req.cookies.isUser
+    res.render('shop/detail-product.hbs', { customerName, isLoggedIn })
 })
 
 router.get('/sign-up', function (req, res, next) {
@@ -49,11 +63,15 @@ router.get('/sign-up', function (req, res, next) {
 router.post('/sign-up', userController.register)
 
 router.get('/about-us', function (req, res, next) {
-    res.render('shop/about-us.hbs')
+    const customerName = req.cookies.customerName
+    const isLoggedIn = req.cookies.isUser
+    res.render('shop/about-us.hbs', { customerName, isLoggedIn })
 })
 
 router.get('/thankyou', function (req, res, next) {
-    res.render('shop/thankyou.hbs')
+    const customerName = req.cookies.customerName
+    const isLoggedIn = req.cookies.isUser
+    res.render('shop/thankyou.hbs', { customerName, isLoggedIn })
 })
 
 export default router
