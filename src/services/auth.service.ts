@@ -8,7 +8,7 @@ import { getInfoData } from '~/utils/response.utils'
 import { API401Error, API403Error, BusinessLogicError } from '~/core/error.response'
 import keyTokenModel from '~/models/keyToken.model'
 
-class UserService {
+class AuthService {
     /**
      * Registers a new user.
      *
@@ -96,7 +96,7 @@ class UserService {
         }
 
         // Compare the provided password with the user's password
-        if (!bcrypt.compare(payload.password, user.password)) {
+        if (!(await bcrypt.compare(payload.password, user.password))) {
             throw new BusinessLogicError('Email or password is incorrect')
         }
 
@@ -219,4 +219,4 @@ class UserService {
     }
 }
 
-export default UserService
+export default AuthService

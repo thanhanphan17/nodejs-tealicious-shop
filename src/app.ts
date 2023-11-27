@@ -13,17 +13,12 @@ import { handle404Error, handleReturnError } from '~/middlewares/errorHandler'
 
 import '~/dbs/init.mongoose'
 import '~/dbs/init.prisma'
+import '~/lib/passport'
+
+import session from 'express-session'
+import passport from 'passport'
 
 const app = express()
-
-// init middlewares
-app.use(express.json())
-app.use(morgan('dev'))
-app.use(helmet())
-app.use(compression())
-app.use(cookieParser())
-app.use(express.static(path.join(__dirname, 'assets')))
-app.use(bodyParser.urlencoded({ extended: true }))
 
 // Configure the template engine to use Handlebars
 app.engine('hbs', create({ extname: '.hbs', defaultLayout: false, layoutsDir: 'views/' }).engine)
@@ -33,6 +28,27 @@ app.set('view engine', 'jade')
 
 // Set the directory where views are located
 app.set('views', 'src/views')
+
+// Init middlewares
+app.use(
+    session({
+        saveUninitialized: true,
+        secret: process.env.SESSION_SECRET || 'secret',
+        cookie: {
+            maxAge: 1000 * 20 // 10s
+        },
+        store: new session.MemoryStore()
+    })
+)
+app.use(express.json())
+app.use(morgan('dev'))
+app.use(helmet())
+app.use(compression())
+app.use(cookieParser())
+app.use(express.static(path.join(__dirname, 'assets')))
+app.use(bodyParser.urlencoded({ extended: true }))
+app.use(passport.initialize())
+app.use(passport.session())
 
 // init routes
 app.use('/', webRouter)

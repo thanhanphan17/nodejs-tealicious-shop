@@ -7,7 +7,7 @@ class UserController {
         // Assuming req.body contains the login credentials
         const { email, password } = req.body
         // Make a POST request to the login API endpoint
-        const response = await axios.post(`${appConfig.apiURL}/api/user/login`, {
+        const response = await axios.post(`${appConfig.apiURL}/api/auth/login`, {
             withCredentials: true,
             email,
             password
@@ -33,7 +33,7 @@ class UserController {
 
         const { email, name, password } = req.body
         // Make a POST request to the login API endpoint
-        const response = await axios.post(`${appConfig.apiURL}/api/user/register`, {
+        const response = await axios.post(`${appConfig.apiURL}/api/auth/register`, {
             email,
             name,
             password

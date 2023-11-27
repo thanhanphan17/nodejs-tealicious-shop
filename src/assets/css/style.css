@@ -853,6 +853,11 @@ form .txt-field {
     align-items: center;
 }
 
+.center-text {
+    display: flex;
+    align-items: center;
+}
+
 input[type='submit'] {
     width: 20%;
     height: 80%;
@@ -3441,26 +3446,6 @@ html {
     &:before,
     &:after {
         box-sizing: inherit;
-    }
-}
-
-// Center & dribbble
-body {
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-family: 'Roboto', Arial;
-    background: #cdd9ed;
-    .dribbble {
-        position: fixed;
-        display: block;
-        right: 20px;
-        bottom: 20px;
-        img {
-            display: block;
-            height: 28px;
-        }
     }
 }
 

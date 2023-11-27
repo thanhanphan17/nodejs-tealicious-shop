@@ -2,11 +2,12 @@
 
 <head>
     <meta charset='UTF-8' />
-    <meta name='description' content='WanderStay' />
-    <meta name='keywords' content='unica, creative' />
+    <meta name='description' content='Sona Template' />
+    <meta name='keywords' content='Sona, unica, creative, html' />
     <meta name='viewport' content='width=device-width, initial-scale=1.0' />
     <meta http-equiv='X-UA-Compatible' content='ie=edge' />
     <title>Yên Trà Quán</title>
+    <link rel='icon' type='image/x-icon' href='img/favicon.png' />
 
     <!-- Google Font -->
     <link href='https://fonts.googleapis.com/css?family=Lora:400,700&display=swap' rel='stylesheet' />
@@ -23,12 +24,15 @@
     <link rel='stylesheet' href='css/magnific-popup.css' type='text/css' />
     <link rel='stylesheet' href='css/slicknav.min.css' type='text/css' />
     <link rel='stylesheet' href='css/style.css' type='text/css' />
+    <script src='https://kit.fontawesome.com/3372d384eb.js' crossorigin='anonymous'></script>
+
+
 </head>
 
 <body>
     <!-- Page Preloder -->
     <div id='preloder'>
-        <div class='loader'></div>
+        <div class='loader'></div>-
     </div>
 
     <!-- Header Section Begin -->
@@ -54,8 +58,8 @@
                         <div class='nav-menu'>
                             <nav class='mainmenu'>
                                 <ul>
-                                    <li><a href='/'>Trang chủ</a></li>
-                                    <li class='active'><a href='/about-us'>Về chúng tôi</a></li>
+                                    <li class='active'><a href='/'>Trang chủ</a></li>
+                                    <li><a href='/about-us'>Về chúng tôi</a></li>
                                     <li>
                                         <a href='/pages'>Sản phẩm</a>
                                         <ul class='dropdown'>
@@ -86,7 +90,7 @@
                                                 style='color: #333333; width: 20px; ' src='./img/cart-shopping.svg'
                                                 alt='' /></a>
                                     </li>
-                                    <li>
+                                    <li class='active'>
                                         <img style='color: #333333; width: 20px; ' src='./img/user-profile.svg'
                                             alt='' />
                                         {{customerName}}
@@ -109,186 +113,70 @@
     </header>
     <!-- Header End -->
 
-    <!-- intro-page Section Begin -->
-    <div class=''>
-        <div class='container'>
-            <div class='row'>
-                <div class='col-lg-12'>
-                    <div class='intro-page-text'>
-                        <img style='width: 20%' src='./img/wanderstay-login.gif' alt='' />
-                        <div class='intro-page-text'>
-                            <h2 style='color: #fac26b'>VỀ CHÚNG TÔI!</h2>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- intro-page Section End -->
 
-    <!-- About Us Page Section Begin -->
-    <section class='aboutus-page-section spad'>
-        <div class='container'>
-            <div class='about-page-text'>
-                <div class='row'>
-                    <div class='col-lg-6'>
-                        <div class='ap-title'>
-                            <h2>Câu chuyện của Yên Trà!</h2>
-                            <p>
-                                Yên Trà Quán được thành lập từ tháng 3 năm 2021, tiệm được lập nên chỉ với mục đích
-                                duy nhất là thoả mãn đam mê bán trà, cũng như giúp cho mọi người được tiếp cận với
-                                các loại trà dễ hơn.
-                            </p>
-                        </div>
-                    </div>
-                    <div class='col-lg-5 offset-lg-1'>
-                        <ul class='ap-services'>
-                            <li><i class='icon_check'></i> Chất lượng là tiêu chí đi đầu.</li>
-                            <li><i class='icon_check'></i> Cam kết 100% nguồn gốc xuất xứ.</li>
-                            <li><i class='icon_check'></i> Thân thiện hướng tới cộng đồng.</li>
-                            <li><i class='icon_check'></i> Khách hàng nói Yên Trà lắng nghe.</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- About Us Page Section End -->
+    <section class='product-section spad'>
 
-    <!-- Gallery Section Begin -->
-    <section class='gallery-section spad'>
-        <div class='container'>
-            <div class='row'>
-                <div class='col-lg-12'>
-                    <div class='section-title'>
-                        <span>Triễn lãm trà</span>
-                        <h2>"Tách trà An Yên"</h2>
-                    </div>
-                </div>
-            </div>
-            <div class='row'>
-                <div class='col-lg-6'>
-                    <div class='gallery-item set-bg' data-setbg='img/gallery/gallery-1.jpg'>
-                        <div class='gi-text'>
-                            <h3>Đóng gói</h3>
-                        </div>
-                    </div>
-                    <div class='row'>
-                        <div class='col-sm-6'>
-                            <div class='gallery-item set-bg' data-setbg='img/gallery/gallery-3.jpg'>
-                                <div class='gi-text'>
-                                    <h3>Hibiscus Cam Quế</h3>
+        <div class="container">
+            <div class="main-body">
+                <div class="row gutters-sm">
+                    <div class="col-md-4 mb-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="d-flex flex-column align-items-center text-center">
+                                    <img src="/img/profile.jpg" alt="user" class="rounded-circle" width="150">
+                                    <div class="mt-3">
+                                        <h4>{{customerName}}</h4>
+                                        <p class="text-muted font-size-sm">Bay Area, San Francisco, CA</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <div class='col-sm-6'>
-                            <div class='gallery-item set-bg' data-setbg='img/gallery/gallery-4.jpg'>
-                                <div class='gi-text'>
-                                    <h3>Vân Nam Phổ Nhĩ</h3>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">Họ và tên</h6>
+                                    </div>
+                                    <div class="col-sm-9 text-secondary">
+                                        {{customerName}}
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">Địa chỉ email</h6>
+                                    </div>
+                                    <div class="col-sm-9 text-secondary">
+                                        {{customerEmail}}
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">Số điện thoại</h6>
+                                    </div>
+                                    <div class="col-sm-9 text-secondary">
+                                        (239) 816-9029
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">Địa chỉ</h6>
+                                    </div>
+                                    <div class="col-sm-9 text-secondary">
+                                        Bay Area, San Francisco, CA
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class='col-lg-6'>
-                    <div class='gallery-item large-item set-bg' data-setbg='img/gallery/gallery-2.png'>
-                        <div class='gi-text'>
-                            <h3>Liên Hoa Ngự Trà</h3>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </section>
-    <!-- Gallery Section End -->
-
-
-    <section class='gallery-section spad'>
-        <div class='container'>
-            <div class='row'>
-                <div class='col-lg-12'>
-                    <div class='section-title'>
-                        <span>Chúng tôi làm gì?</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class='row center-submit'>
-                <h2 class='section-title'>Mục tiêu của Quán</h2>
-                <p>
-                    Một trong những “đứa con cưng” mà
-                    <strong>Yên Trà Quán</strong>
-                    tự hào giới thiệu là
-                    <strong>LIÊN HOA NGỰ TRÀ</strong>. Từ những búp sen tươi, lá trà thơm,.. được chọn lọc, sơ
-                    chế, chế biến kỹ lưỡng và biến tấu từ món trà truyền thống thành những thức uống hảo hạng,
-                    hương vị tươi ngon, mới lạ mang đậm chất riêng của
-                    <strong>Yên Trà Quán</strong>.
-
-                    <br />Không đơn thuần chỉ là cung cấp sản phẩm mà
-                    <strong>Yên Trà Quán</strong>
-                    còn gửi gắm vào đó sự thoải mái, thư giãn, lưu giữ trong trái tim mỗi người những ký ức đẹp
-                    trong những concept hiện đại, trẻ trung và thoáng đãng
-                </p>
-                <p>
-                    Bằng một trái tim tâm huyết,
-                    <strong>Yên Trà Quán</strong>
-                    thấu hiểu được rằng, sau những bộn bề cuộc sống, những không gian kín bưng, người ta chỉ muốn đi
-                    ra ngoài để được hít thở, thư giãn.
-                    <br />
-
-                    Vì muốn giữ gìn từng chút dinh dưỡng quý giá của mẹ thiên nhiên, nên
-                    <strong>Yên Trà</strong>
-                    luôn ưu tiên lựa chọn áp dụng công nghệ sấy lạnh vào các sản phẩm của mình. Với chúng tôi, sản
-                    phẩm đúng chất lượng đến được tay khách hàng chính là một sự thành công!
-                    <br />
-
-                    Vì lẽ đó, trà của chúng tôi luôn được đảm bảo về 3 tiêu chí,
-                    <strong>sạch – đẹp – an yên</strong>.
-                </p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Team Start -->
-    <div class='container-xxl py-5'>
-        <div class='container'>
-            <div class='text-center wow fadeInUp' data-wow-delay='0.1s'>
-                <div class='row'>
-                    <div class='col-lg-12'>
-                        <div class='section-title'>
-                            <span>Đội ngũ</span>
-                            <h2>Khám phá thành viên</h2>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class='row g-4'>
-                <div class='col-6 wow fadeInUp' data-wow-delay='0.1s'>
-                    <div class='rounded shadow overflow-hidden'>
-                        <div class='center-submit'>
-                            <img class='img-fluid' src='img/21127003.png' alt='' />
-                        </div>
-                        <div class='text-center p-4 mt-3'>
-                            <h5 class='fw-bold mb-0'>Phan Thanh An</h5>
-                            <small>Founder</small>
-                        </div>
-                    </div>
-                </div>
-                <div class='col-6 wow fadeInUp' data-wow-delay='0.3s'>
-                    <div class='rounded shadow overflow-hidden'>
-                        <div class='center-submit'>
-                            <img class='img-fluid' src='./img/21127014.png' alt='' />
-                        </div>
-                        <div class='text-center p-4 mt-3'>
-                            <h5 class='fw-bold mb-0'>Phạm Hồng Gia Bảo</h5>
-                            <small>Founder</small>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Team End -->
 
     <!-- Footer Section Begin -->
     <footer class='footer-section'>
@@ -357,6 +245,17 @@
     <script src='js/jquery.slicknav.js'></script>
     <script src='js/owl.carousel.min.js'></script>
     <script src='js/main.js'></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+
+            const loginLink = document.getElementById('isLoggedIn');
+
+            if (isLogged != null) {
+                loginLink.style.display = 'none';
+            }
+        });
+    </script>
 </body>
 
 </html>

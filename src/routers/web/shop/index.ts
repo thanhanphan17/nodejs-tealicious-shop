@@ -74,4 +74,18 @@ router.get('/thankyou', function (req, res, next) {
     res.render('shop/thankyou.hbs', { customerName, isLoggedIn })
 })
 
+router.get('/profile', function (req, res, next) {
+    const customerName = req.cookies.customerName
+    const isLoggedIn = req.cookies.isUser
+    const customerEmail = req.cookies.customerEmail
+    const customerAddress = req.cookies.customerAddress
+    res.render('shop/profile.hbs', { customerName, isLoggedIn, customerEmail })
+})
+
+router.get('/change-password', function (req, res, next) {
+    const customerName = req.cookies.customerName
+    const isLoggedIn = req.cookies.isUser
+    res.render('shop/change-password.hbs', { customerName, isLoggedIn })
+})
+
 export default router

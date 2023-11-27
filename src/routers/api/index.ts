@@ -1,5 +1,5 @@
 import express from 'express'
-import userRouter from './user'
+import authRouter from './auth'
 import paymentRouter from './payment'
 import productRouter from './product'
 
@@ -12,7 +12,7 @@ router.get('/health-check', (req, res) => {
     })
 })
 
-router.use('/user', userRouter)
+router.use('/auth', authRouter)
 router.use('/payment', paymentRouter)
 router.use('/product', productRouter)
 
