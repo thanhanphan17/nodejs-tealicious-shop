@@ -4266,6 +4266,7 @@ li.fb a::before {
     font-weight: bold;
 }
 
+.the-form [type='name'],
 .the-form [type='email'],
 .the-form [type='password'] {
     padding: 15px;
@@ -4277,6 +4278,7 @@ li.fb a::before {
     color: #333333;
 }
 
+.the-form [type='name']::placeholder,
 .the-form [type='email']::placeholder,
 .the-form [type='password']::placeholder {
     color: rgba(38, 36, 36, 0.3);
@@ -4287,6 +4289,7 @@ li.fb a::before {
     background: rgba(0, 0, 0, 0.1);
 }
 
+.the-form [type='name']:focus,
 .the-form [type='email']:focus,
 .the-form [type='password']:focus {
     background: #ffffff;
@@ -4295,6 +4298,7 @@ li.fb a::before {
     color: #222222;
 }
 
+.the-form [type='name']:focus::placeholder,
 .the-form [type='email']:focus::placeholder,
 .the-form [type='password']:focus::placeholder {
     color: #666666;
