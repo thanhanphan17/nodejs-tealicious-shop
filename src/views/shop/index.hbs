@@ -26,6 +26,7 @@
     <link rel='stylesheet' href='css/style.css' type='text/css' />
     <script src='https://kit.fontawesome.com/3372d384eb.js' crossorigin='anonymous'></script>
 
+
 </head>
 
 <body>
@@ -69,13 +70,12 @@
                                         </ul>
                                     </li>
                                     <li><a href='/contact'>Liên hệ</a></li>
+                                    {{#if isLoggedIn}}
+                                    <li><a href='/login' style='color: #0650c2'>Đăng xuất</a></li>
+                                    {{else}}
                                     <li><a href='/login' style='color: #0650c2'>Đăng nhập</a></li>
                                     <li><a href='/sign-up' style='color: #0650c2'>Tạo tài khoản</a></li>
-                                    {{!-- {{#if isUser==true}}
-                                    <li><a href='/login' style='color: #0650c2'>Đăng nhập</a></li>
-                                    <li><a href='/sign-up' style='color: #0650c2'>Tạo tài khoản</a></li>
-                                    {{/if}} --}}
-
+                                    {{/if}}
                                 </ul>
                             </nav>
                         </div>
@@ -138,8 +138,8 @@
     <!-- About Us Section Begin -->
     <section class='aboutus-section spad'>
         <div class='container'>
-            <div class='row'>
-                <div class='section-title'>
+            <div class='row center-submit'>
+                <div class='section-title center-submit'>
                     <span>Về chúng tôi</span>
                 </div>
             </div>
@@ -187,7 +187,7 @@
 
     <section class='product-section spad'>
         <div class='container'>
-            <div class='row'>
+            <div class='row center-submit'>
                 <div class='section-title'>
                     <span>Sản phẩm</span>
                 </div>
@@ -330,6 +330,17 @@
     <script src='js/jquery.slicknav.js'></script>
     <script src='js/owl.carousel.min.js'></script>
     <script src='js/main.js'></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+
+            const loginLink = document.getElementById('isLoggedIn');
+
+            if (isLogged != null) {
+                loginLink.style.display = 'none';
+            }
+        });
+    </script>
 </body>
 
 </html>

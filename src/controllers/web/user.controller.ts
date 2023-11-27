@@ -2,13 +2,13 @@ import catchAsync from '~/helpers/catch.async'
 import { Response, NextFunction } from 'express'
 import axios from 'axios'
 import appConfig from '~/configs/config.app'
-
 class UserController {
     login = catchAsync(async (req: any, res: Response, next: NextFunction) => {
         // Assuming req.body contains the login credentials
         const { email, password } = req.body
         // Make a POST request to the login API endpoint
         const response = await axios.post(`${appConfig.apiURL}/api/user/login`, {
+            withCredentials: true,
             email,
             password
         })
@@ -17,7 +17,9 @@ class UserController {
             res.cookie('accessToken', result.tokens.accessToken)
             res.cookie('refreshToken', result.tokens.refreshToken)
             res.cookie('customerName', result.user.name)
-            //res.cookie('isUser', true)
+            res.cookie('customerEmail', result.user.email)
+            res.cookie('isUser', false)
+            console.log(response.data)
             res.redirect('/')
         } else {
             res.render('shop/login.hbs', { data: { loginFail: true } })
@@ -43,7 +45,7 @@ class UserController {
             res.cookie('customerName', result.user.name)
             res.cookie('customerEmail', result.user.email)
             res.cookie('customerID', result.user.id)
-            res.cookie('isUser', true)
+            res.cookie('isUser', false)
             res.redirect('/')
             console.log(req.body)
         } else {
