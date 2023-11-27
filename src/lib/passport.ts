@@ -23,7 +23,6 @@ passport.use(
 passport.serializeUser((user: any, done) => done(null, user.user))
 
 passport.deserializeUser(async (user: any, done) => {
-    console.log(`deserializeUser:::`, user.user.email)
     try {
         const foundUser = await Prisma.user.findUnique({ where: { email: user.user.email } })
         if (foundUser) {

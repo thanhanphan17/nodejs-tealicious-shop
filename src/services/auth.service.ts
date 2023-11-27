@@ -146,8 +146,12 @@ class AuthService {
      * @param {any} keyStore - The key store object.
      * @return {Promise<object>} - A promise that resolves to an object with a success property.
      */
-    static async logout(keyStore: any) {
-        await KeyTokenService.deleteKeyById(keyStore._id)
+    static async logout(res: any, req: any) {
+        await KeyTokenService.deleteKeyById(req.keyStore._id)
+        // Clear cookies
+        Object.keys(req.cookies).forEach((cookieName) => {
+            res.clearCookie(cookieName)
+        })
         return { success: true }
     }
 

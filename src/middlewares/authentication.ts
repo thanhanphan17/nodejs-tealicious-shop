@@ -17,6 +17,8 @@ const parseJWT = (token: any) => {
 const getTokens = (req: any) => {
     const accessToken = req.headers[HEADER.AUTHORIZATION]
     const refreshToken = req.headers[HEADER.REFRESH_TOKEN]
+
+    if (!accessToken || !refreshToken) throw new API401Error('Token not provided')
     return { accessToken, refreshToken }
 }
 
@@ -44,7 +46,7 @@ const verifyToken = (token: string, keyStore: any, userId: string, req: any) => 
     })
 }
 
-export const authentication = catchAsync(async (req: any, res, next: NextFunction) => {
+export const loginRequired = catchAsync(async (req: any, res, next: NextFunction) => {
     const { accessToken, refreshToken } = getTokens(req)
 
     const userId = getUserIdFromToken(accessToken, refreshToken)
@@ -79,7 +81,9 @@ export const adminRequired = catchAsync(async (req: any, res, next: NextFunction
     if (!accessToken) throw new API401Error('Invalid request')
     verifyToken(accessToken, keyStore, userId, req)
 
-    console.log(req.user)
+    if (req.user.role !== 'admin') {
+        throw new API403Error('Access denied')
+    }
 
     return next()
 })

@@ -53,5 +53,31 @@ class UserController {
         }
         console.log(response.data)
     })
+
+    logout = catchAsync(async (req: any, res: Response, next: NextFunction) => {
+        const accessToken = req.cookies.accessToken
+        console.log(accessToken)
+        const url = `${appConfig.apiURL}/api/auth/logout`
+        const headers = {
+            accessToken: accessToken
+        }
+
+        axios
+            .get(url, { headers })
+            .then((response) => {
+                console.log(response.data)
+            })
+            .catch((error) => {
+                // Handle errors here
+                console.error('Error:', error)
+            })
+
+        // Clear all cookies
+        Object.keys(req.cookies).forEach((cookie) => {
+            res.clearCookie(cookie)
+        })
+
+        res.redirect('/')
+    })
 }
 export default new UserController()

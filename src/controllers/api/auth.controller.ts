@@ -1,4 +1,3 @@
-import { authentication } from './../../middlewares/authentication'
 import authService from '~/services/auth.service'
 import catchAsync from '~/helpers/catch.async'
 import { Request, Response, NextFunction } from 'express'
@@ -19,7 +18,10 @@ class AuthController {
                     errors: []
                 })
             }
-            OK(res, 'login successfully', user.user)
+            const result = user.user
+            res.cookie('accessToken', result.tokens.accessToken)
+            res.cookie('refreshToken', result.tokens.refreshToken)
+            OK(res, 'login successfully', result)
         })(req, res)
     })
 
@@ -36,7 +38,7 @@ class AuthController {
     })
 
     logout = catchAsync(async (req: any, res: Response, next: NextFunction) => {
-        OK(res, 'logout successfully', await authService.logout(req.keyStore))
+        OK(res, 'logout successfully', await authService.logout(res, req))
     })
 
     register = catchAsync(async (req: Request, res: Response, next: NextFunction) => {

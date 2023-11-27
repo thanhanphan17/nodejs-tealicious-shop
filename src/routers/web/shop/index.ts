@@ -43,6 +43,7 @@ router.get('/login', function (req, res, next) {
 })
 
 router.post('/login', userController.login)
+router.get('/logout', userController.logout)
 
 router.get('/pages', function (req, res, next) {
     const customerName = req.cookies.customerName
