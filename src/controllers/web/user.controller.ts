@@ -46,6 +46,7 @@ class UserController {
             res.cookie('customerEmail', result.user.email)
             res.cookie('customerID', result.user.id)
             res.cookie('isUser', false)
+            res.cookie('isLogined', true)
             res.redirect('/')
             console.log(req.body)
         } else {

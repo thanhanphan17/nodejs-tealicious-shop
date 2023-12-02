@@ -18,5 +18,6 @@ services:
             - tealicious_network
 
 networks:
-    prod_network:
+    tealicious_network:
         name: tealicious_network
+        external: true

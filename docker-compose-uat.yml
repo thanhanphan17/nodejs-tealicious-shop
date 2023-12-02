@@ -72,3 +72,4 @@ services:
 networks:
     uat_network:
         name: uat_network
+        external: true
