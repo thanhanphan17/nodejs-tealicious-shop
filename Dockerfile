@@ -5,6 +5,9 @@ FROM node:20.8.0-alpine3.18 as builder
 RUN apk --no-cache add tzdata \
     && apk add --no-cache ca-certificates
 
+# Install dotenv-cli and make
+RUN npm install -g dotenv-cli
+
 # Create a new directory and set it as the working directory
 WORKDIR /project
 
@@ -17,15 +20,10 @@ RUN npm ci --quiet --silent --no-optional --max-sockets=4
 # Copy actual source code for building the application
 COPY . .
 
-# Disable CGO for cross-platform builds
-ENV CGO_ENABLED=0
-
-# Build the Node.js app for a Linux OS
+# Build the Node.js app
 RUN npm run build
 
-# Install dotenv-cli and make
-RUN npm install -g dotenv-cli \
-    && apk add --no-cache make
+COPY /src/assets dist/assets/
 
 # Generate SSL for Prisma Connection
 RUN npx prisma generate
@@ -36,8 +34,7 @@ ENV TZ=Asia/Ho_Chi_Minh
 ENV RUNTIME_ENV=local
 
 # Run the binary application
-CMD ["dotenv", "-e", "/env/prod.env", "--", "npm", "run", "start"]
-ENTRYPOINT  make start env=${RUNTIME_ENV}
+ENTRYPOINT dotenv -e ./env/${RUNTIME_ENV}.env -- npm run start
 
 # Expose the port
 EXPOSE 8080
