@@ -32,6 +32,7 @@ app.set('views', 'src/views')
 // Init middlewares
 app.use(
     session({
+        resave: true,
         saveUninitialized: true,
         secret: process.env.SESSION_SECRET || 'secret',
         cookie: {
