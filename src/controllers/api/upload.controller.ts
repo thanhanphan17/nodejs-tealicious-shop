@@ -17,6 +17,19 @@ class UploadController {
         }
         CREATED(res, 'upload image successfully', await uploadService.uploadImageS3(file))
     })
+
+    uploadImagesS3 = catchAsync(async (req: Request, res: Response, next: NextFunction) => {
+        const files = req.files
+        if (!files || !files.length) {
+            res.status(400).json({
+                status: 400,
+                message: 'File not found',
+                errors: []
+            })
+            return
+        }
+        CREATED(res, 'upload image successfully', await uploadService.uploadImagesS3(files))
+    })
 }
 
 export default new UploadController()
