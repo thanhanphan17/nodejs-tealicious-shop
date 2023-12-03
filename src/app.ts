@@ -18,8 +18,9 @@ import '~/lib/passport'
 import session from 'express-session'
 import passport from 'passport'
 
-const app = express()
+process.setMaxListeners(Infinity)
 
+const app = express()
 // Configure the template engine to use Handlebars
 app.engine('hbs', create({ extname: '.hbs', defaultLayout: false, layoutsDir: 'views/' }).engine)
 // Set the default view engine to Handlebars

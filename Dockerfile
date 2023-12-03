@@ -25,9 +25,6 @@ RUN npm run build
 
 COPY /src/assets dist/assets/
 
-# Generate SSL for Prisma Connection
-RUN npx prisma generate
-
 # Set the timezone
 ENV TZ=Asia/Ho_Chi_Minh
 

@@ -91,6 +91,9 @@ async function main() {
                 id: 'c6dddee3-5b56-48d8-8648-a6770e02dd83',
                 name: 'Liên Hoa Ngự Trà',
                 price: 120000,
+                image: {
+                    url: ['https://i.imgur.com/7f6s1n4.png', 'https://i.imgur.com/7f6s1n4.png']
+                },
                 description: 'Liên Hoa Ngự Trà',
                 categoryId: '729e55ec-cdd5-40ba-8cbf-2452d5c8a5c4',
                 quantity: 10
@@ -99,6 +102,9 @@ async function main() {
                 id: '75a47b13-3c3f-446e-910f-0f2de15a1f53',
                 name: 'Gạo Lức Thất Tinh Hoa',
                 price: 150000,
+                image: {
+                    url: ['https://i.imgur.com/7f6s1n4.png', 'https://i.imgur.com/7f6s1n4.png']
+                },
                 description: 'Gạo Lức Thất Tinh Hoa',
                 categoryId: '8f6a8b9d-7b8c-4d7b-8b7b-7b7b7b7b7bdb',
                 quantity: 10
@@ -108,6 +114,9 @@ async function main() {
                 name: 'Hibiscus Cam Quế',
                 price: 90000,
                 description: 'Hibiscus Cam Quế',
+                image: {
+                    url: ['https://i.imgur.com/7f6s1n4.png', 'https://i.imgur.com/7f6s1n4.png']
+                },
                 categoryId: '8f6a8b9d-7b8c-4d7b-8b7b-7b7b7b7b7bcb',
                 quantity: 10
             },
@@ -115,6 +124,9 @@ async function main() {
                 id: '83af4e16-ab06-4a77-9bd2-f63f78f6316e',
                 name: 'Trà An Yên Ngủ Ngon',
                 price: 200000,
+                image: {
+                    url: ['https://i.imgur.com/7f6s1n4.png', 'https://i.imgur.com/7f6s1n4.png']
+                },
                 description: 'Trà An Yên Ngủ Ngon',
                 categoryId: '8f6a8b9d-7b8c-4d7b-8b7b-7b7b7b7b7b7a',
                 quantity: 10
