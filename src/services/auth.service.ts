@@ -71,7 +71,7 @@ class AuthService {
         // Return user info and tokens
         return {
             user: getInfoData({
-                fields: ['id', 'name', 'email'],
+                fields: ['id', 'name', 'email', 'role'],
                 object: newUser
             }),
 
@@ -133,7 +133,7 @@ class AuthService {
         // Return user information and tokens
         return {
             user: getInfoData({
-                fields: ['id', 'name', 'email'],
+                fields: ['id', 'name', 'email', 'role'],
                 object: user
             }),
             tokens
