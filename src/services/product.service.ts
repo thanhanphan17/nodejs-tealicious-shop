@@ -65,8 +65,23 @@ class ProductService {
                 category: true
             }
         })
+
+        const relatedProducts = await Prisma.product.findMany({
+            take: 4,
+            where: {
+                categoryId: product?.categoryId,
+                id: {
+                    not: id
+                }
+            },
+            include: {
+                category: true
+            }
+        })
+
         return {
-            product
+            product,
+            relatedProducts
         }
     }
 }
