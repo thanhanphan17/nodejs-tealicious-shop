@@ -55,6 +55,20 @@ class ProductService {
             products
         }
     }
+
+    static async getProductById(id: string) {
+        const product = await Prisma.product.findUnique({
+            where: {
+                id
+            },
+            include: {
+                category: true
+            }
+        })
+        return {
+            product
+        }
+    }
 }
 
 export default ProductService

@@ -22,6 +22,10 @@ class ProductController {
         const limit = req.query.limit as number
         OK(res, 'list products successfully', await productService.listProducts(filter, page, limit))
     })
+
+    getProductById = catchAsync(async (req: any, res: Response, next: NextFunction) => {
+        OK(res, 'get product successfully', await productService.getProductById(req.params.id))
+    })
 }
 
 export default new ProductController()
