@@ -2,7 +2,7 @@ import express from 'express'
 import authRouter from './auth'
 import paymentRouter from './payment'
 import productRouter from './product'
-
+import uploadRouter from './upload'
 const router = express.Router()
 
 router.get('/health-check', (req, res) => {
@@ -15,5 +15,6 @@ router.get('/health-check', (req, res) => {
 router.use('/auth', authRouter)
 router.use('/payment', paymentRouter)
 router.use('/product', productRouter)
+router.use('/upload', uploadRouter)
 
 export default router
