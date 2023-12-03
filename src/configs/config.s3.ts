@@ -1,4 +1,4 @@
-import { S3Client, PutObjectCommand } from '@aws-sdk/client-s3'
+import { S3Client, PutObjectCommand, GetObjectCommand } from '@aws-sdk/client-s3'
 
 export const client = new S3Client({
     region: process.env.S3_REGION,
@@ -8,4 +8,4 @@ export const client = new S3Client({
     }
 })
 
-export { PutObjectCommand }
+export { PutObjectCommand, GetObjectCommand }
