@@ -1,6 +1,5 @@
 import compression from 'compression'
 import express from 'express'
-import helmet from 'helmet'
 import morgan from 'morgan'
 import webRouter from './routers/web'
 import apiRouter from './routers/api'
@@ -18,12 +17,11 @@ import '~/lib/passport'
 import session from 'express-session'
 import passport from 'passport'
 
-process.setMaxListeners(Infinity)
-
 const app = express()
+
 // Configure the template engine to use Handlebars
 app.engine('hbs', create({ extname: '.hbs', defaultLayout: false, layoutsDir: 'views/' }).engine)
-// Set the default view engine to Handlebars
+// Set the default view engine to Handlebars and Jade
 app.set('view engine', 'hbs')
 app.set('view engine', 'jade')
 
@@ -42,15 +40,15 @@ app.use(
         store: new session.MemoryStore()
     })
 )
-app.use(express.json())
+
 app.use(morgan('dev'))
-app.use(helmet())
 app.use(compression())
 app.use(cookieParser())
-app.use(express.static(path.join(__dirname, 'assets')))
-app.use(bodyParser.urlencoded({ extended: true }))
-app.use(passport.initialize())
+app.use(express.json())
 app.use(passport.session())
+app.use(passport.initialize())
+app.use(bodyParser.urlencoded({ extended: true }))
+app.use(express.static(path.join(__dirname, 'assets')))
 
 // init routes
 app.use('/', webRouter)
@@ -58,4 +56,5 @@ app.use('/api', apiRouter)
 
 app.use(handle404Error)
 app.use(handleReturnError)
+
 export default app

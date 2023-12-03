@@ -1,6 +1,7 @@
 import app from './app'
 import AppConfig from '~/configs/config.app'
 
+process.setMaxListeners(Infinity)
 const server = app.listen(AppConfig.port, () => {
     console.log(`[SERVER]:::listening on port: ${AppConfig.port}`)
 })

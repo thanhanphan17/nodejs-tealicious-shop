@@ -1,4 +1,5 @@
 <html lang='en'>
+
     <head>
         <meta charset='utf-8' />
         <meta http-equiv='X-UA-Compatible' content='IE=edge' />
@@ -120,125 +121,46 @@
                                             </thead>
                                             <tbody>
 
-                                                <tr class='odd gradeX'>
-                                                    <td class='img-col'>
-                                                        <img
-                                                            class='img-product'
-                                                            src='../img/product/product_1.jpg'
-                                                            alt=''
-                                                        />
-                                                    </td>
-                                                    <td class='name-col'>Liên Hoa Ngự Trà</td>
-                                                    <td class='description-col'>Trà thảo mộc cung đình</td>
-                                                    <td class='qty-col'>1245</td>
-                                                    <td class='price-col'>30000</td>
-                                                    <td>
-                                                        <div class='space-between-element'>
-                                                            <button
-                                                                type='button'
-                                                                class='btn btn-success btn-circle center-element'
-                                                            >
-                                                                <img style='width: 20px' src='/img/edit.png' alt='' />
-                                                            </button>
-                                                            <button
-                                                                type='button'
-                                                                class='btn btn-danger btn-circle center-element'
-                                                            >
-                                                                <img style='width: 20px' src='/img/remove.png' alt='' />
-                                                            </button>
-                                                        </div>
-                                                    </td>
-                                                </tr>
+                                                {{#each productList.products}}
+                                                    <tr class='odd gradeX'>
+                                                        <td class='img-col'>
+                                                            <img
+                                                                class='img-product'
+                                                                src='https://inkythuatso.com/uploads/thumbnails/800/2022/03/anh-trai-dep-che-mat-31-31-13-32-41.jpg'
+                                                                alt=''
+                                                            />
+                                                        </td>
+                                                        <td class='name-col'>{{this.name}}</td>
+                                                        <td class='description-col'>{{this.description}}</td>
+                                                        <td class='qty-col'>{{this.quantity}}</td>
+                                                        <td class='price-col'>{{this.price}}</td>
+                                                        <td>
+                                                            <div class='space-between-element'>
+                                                                <button
+                                                                    type='button'
+                                                                    class='btn btn-success btn-circle center-element'
+                                                                >
+                                                                    <img
+                                                                        style='width: 20px'
+                                                                        src='/img/edit.png'
+                                                                        alt=''
+                                                                    />
+                                                                </button>
+                                                                <button
+                                                                    type='button'
+                                                                    class='btn btn-danger btn-circle center-element'
+                                                                >
+                                                                    <img
+                                                                        style='width: 20px'
+                                                                        src='/img/remove.png'
+                                                                        alt=''
+                                                                    />
+                                                                </button>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                {{/each}}
 
-                                                <tr class='odd gradeX'>
-                                                    <td class='img-col'>
-                                                        <img
-                                                            class='img-product'
-                                                            src='../img/product/product_2.jpg'
-                                                            alt=''
-                                                        />
-                                                    </td>
-                                                    <td class='name-col'>Gạo Lứt Thất Tinh Hoa</td>
-                                                    <td class='description-col'>Trà hoa cỏ dưỡng tâm</td>
-                                                    <td class='qty-col'>1245</td>
-                                                    <td class='price-col'>30000</td>
-                                                    <td>
-                                                        <div class='space-between-element'>
-                                                            <button
-                                                                type='button'
-                                                                class='btn btn-success btn-circle center-element'
-                                                            >
-                                                                <img style='width: 20px' src='/img/edit.png' alt='' />
-                                                            </button>
-                                                            <button
-                                                                type='button'
-                                                                class='btn btn-danger btn-circle center-element'
-                                                            >
-                                                                <img style='width: 20px' src='/img/remove.png' alt='' />
-                                                            </button>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-
-                                                <tr class='odd gradeX'>
-                                                    <td class='img-col'>
-                                                        <img
-                                                            class='img-product'
-                                                            src='../img/product/product_3.jpg'
-                                                            alt=''
-                                                        />
-                                                    </td>
-                                                    <td class='name-col'>Liên Hoa Ngự Trà</td>
-                                                    <td class='description-col'>Trà thảo mộc cung đình</td>
-                                                    <td class='qty-col'>1245</td>
-                                                    <td class='price-col'>30000</td>
-                                                    <td>
-                                                        <div class='space-between-element'>
-                                                            <button
-                                                                type='button'
-                                                                class='btn btn-success btn-circle center-element'
-                                                            >
-                                                                <img style='width: 20px' src='/img/edit.png' alt='' />
-                                                            </button>
-                                                            <button
-                                                                type='button'
-                                                                class='btn btn-danger btn-circle center-element'
-                                                            >
-                                                                <img style='width: 20px' src='/img/remove.png' alt='' />
-                                                            </button>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-
-                                                <tr class='odd gradeX'>
-                                                    <td class='img-col'>
-                                                        <img
-                                                            class='img-product'
-                                                            src='/img/product/product_4.jpg'
-                                                            alt=''
-                                                        />
-                                                    </td>
-                                                    <td class='name-col'>Liên Hoa Ngự Trà</td>
-                                                    <td class='description-col'>Trà thảo mộc cung đình</td>
-                                                    <td class='qty-col'>1245</td>
-                                                    <td class='price-col'>30000</td>
-                                                    <td>
-                                                        <div class='space-between-element'>
-                                                            <button
-                                                                type='button'
-                                                                class='btn btn-success btn-circle center-element'
-                                                            >
-                                                                <img style='width: 20px' src='/img/edit.png' alt='' />
-                                                            </button>
-                                                            <button
-                                                                type='button'
-                                                                class='btn btn-danger btn-circle center-element'
-                                                            >
-                                                                <img style='width: 20px' src='/img/remove.png' alt='' />
-                                                            </button>
-                                                        </div>
-                                                    </td>
-                                                </tr>
                                             </tbody>
                                         </table>
                                     </div>
@@ -261,4 +183,5 @@
             $(document).ready(function () { $('#dataTables-example').DataTable({ responsive: true }) })
         </script>
     </body>
+
 </html>
