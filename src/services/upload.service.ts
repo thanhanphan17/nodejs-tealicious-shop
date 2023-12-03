@@ -34,6 +34,39 @@ class UploadService {
             console.log(error)
         }
     }
+
+    static async uploadImagesS3(fileDatas?: any) {
+        try {
+            const urls = []
+            for (const fileData of fileDatas) {
+                const imageName = crypto.randomBytes(16).toString('hex') + path.extname(fileData!.originalname)
+                const fileContent = fs.readFileSync(fileData!.path)
+
+                const command = new PutObjectCommand({
+                    Bucket: process.env.S3_BUCKET_NAME || '',
+                    Key: imageName,
+                    Body: fileContent,
+                    ContentType: 'images/jpeg'
+                })
+
+                const result = await client.send(command)
+                if (!result) {
+                    throw new BusinessLogicError('upload image failed')
+                }
+
+                const signedUrl = await new GetObjectCommand({
+                    Bucket: process.env.S3_BUCKET_NAME || '',
+                    Key: imageName
+                })
+                const url = await getSignedUrl(client, signedUrl, { expiresIn: 3600 })
+
+                urls.push(url)
+            }
+            return urls
+        } catch (error) {
+            console.log(error)
+        }
+    }
 }
 
 export default UploadService
