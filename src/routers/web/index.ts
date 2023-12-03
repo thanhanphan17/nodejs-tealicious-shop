@@ -9,6 +9,10 @@ router.get('/docs', function (req, res, next) {
     res.render('README.hbs')
 })
 
+router.get('/health-check', function (req, res, next) {
+    res.render('health-check.hbs')
+})
+
 router.use('/', shop)
 router.use('/admin', admin)
 router.use('/payment', payment)
