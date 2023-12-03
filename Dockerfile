@@ -7,6 +7,7 @@ RUN apk --no-cache add tzdata \
 
 # Install dotenv-cli and make
 RUN npm install -g dotenv-cli
+RUN npm install -g npm@next
 
 # Create a new directory and set it as the working directory
 WORKDIR /project
