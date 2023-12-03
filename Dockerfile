@@ -20,6 +20,8 @@ RUN npm ci --quiet --silent --no-optional --max-sockets=4
 # Copy actual source code for building the application
 COPY . .
 
+RUN npx prisma generate
+
 # Build the Node.js app
 RUN npm run build
 
