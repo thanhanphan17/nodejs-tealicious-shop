@@ -1,7 +1,8 @@
-import catchAsync from '~/helpers/catch.async'
 import { Response, NextFunction } from 'express'
+import catchAsync from '~/helpers/catch.async'
 import axios from 'axios'
 import appConfig from '~/configs/config.app'
+
 class UserController {
     login = catchAsync(async (req: any, res: Response, next: NextFunction) => {
         // Assuming req.body contains the login credentials
@@ -57,10 +58,12 @@ class UserController {
 
     logout = catchAsync(async (req: any, res: Response, next: NextFunction) => {
         const accessToken = req.cookies.accessToken
-        console.log(accessToken)
+        const refreshToken = req.cookies.refreshToken
+
         const url = `${appConfig.apiURL}/api/auth/logout`
         const headers = {
-            accessToken: accessToken
+            authorization: accessToken,
+            'refresh-token': refreshToken
         }
 
         axios

@@ -62,10 +62,12 @@ class AdminController {
 
     logout = catchAsync(async (req: any, res: Response, next: NextFunction) => {
         const accessToken = req.cookies.accessToken
-        console.log(accessToken)
+        const refreshToken = req.cookies.refreshToken
+
         const url = `${appConfig.apiURL}/api/auth/logout`
         const headers = {
-            accessToken: accessToken
+            authorization: accessToken,
+            'refresh-token': refreshToken
         }
 
         axios

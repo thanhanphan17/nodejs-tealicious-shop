@@ -1,23 +1,19 @@
+import { Message } from './../../../node_modules/@smithy/eventstream-codec/dist-types/Message.d'
 import catchAsync from '~/helpers/catch.async'
 import { Response, NextFunction } from 'express'
 import axios from 'axios'
 import appConfig from '~/configs/config.app'
 import uploadController from './upload.controller'
-import uploadService from '~/services/upload.service'
 
 class ProductController {
     createProduct = catchAsync(async (req: any, res: Response, next: NextFunction) => {
-        console.log('here')
-        const files = req.files
-        console.log(files[0])
-        const result = await uploadService.uploadImagesS3(files)
-        console.log(result)
-        if (result) {
+        const result = await uploadController.uploadImagesS3(req, res, next)
+
+        if (result.code == 200) {
             const { name, quantity, description, price, categoryId } = req.body
-            console.log(req.body)
             const accessToken = req.cookies.accessToken
             const refreshToken = req.cookies.refreshToken
-            console.log(accessToken)
+
             const url = `${appConfig.apiURL}/api/product/create`
             const headers = {
                 authorization: accessToken,
@@ -30,7 +26,7 @@ class ProductController {
                 description: description,
                 price: price * 1,
                 image: {
-                    url: result
+                    url: result.data
                 }
             }
 
@@ -38,13 +34,13 @@ class ProductController {
                 .post(url, data, { headers })
                 .then((response) => {
                     console.log(response.data)
+
+                    res.redirect('/')
                 })
                 .catch((error) => {
                     // Handle errors here
                     console.error('Error:', error)
                 })
-
-            res.redirect('/')
         }
     })
 
@@ -55,4 +51,5 @@ class ProductController {
         return result.data.data
     })
 }
+
 export default new ProductController()
