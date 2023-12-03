@@ -1,3 +1,4 @@
+import { filter } from 'lodash'
 import { BusinessLogicError } from '~/core/error.response'
 import Prisma from '~/dbs/init.prisma'
 import { getInfoData } from '~/utils/response.utils'
@@ -17,6 +18,70 @@ class ProductService {
                 fields: ['id', 'name', 'quantity'],
                 object: product
             })
+        }
+    }
+
+    static async listProducts(filter: any, page: number, limit: number) {
+        const products = await Prisma.product.findMany({
+            skip: page * limit,
+            take: limit * 1,
+            where: {
+                name: {
+                    contains: filter.name || undefined
+                },
+                categoryId: filter.categoryId
+                    ? {
+                          equals: filter.categoryId
+                      }
+                    : undefined,
+                price: {
+                    ...(filter.minPrice !== undefined && { gte: filter.minPrice * 1 }),
+                    ...(filter.maxPrice !== undefined && { lte: filter.maxPrice * 1 })
+                }
+            },
+            include: {
+                category: true
+            },
+            orderBy: [
+                {
+                    price: filter.priceOrder || 'asc'
+                },
+                {
+                    createdAt: filter.createdAtOrder || 'desc'
+                }
+            ]
+        })
+        return {
+            products
+        }
+    }
+
+    static async getProductById(id: string) {
+        const product = await Prisma.product.findUnique({
+            where: {
+                id
+            },
+            include: {
+                category: true
+            }
+        })
+
+        const relatedProducts = await Prisma.product.findMany({
+            take: 4,
+            where: {
+                categoryId: product?.categoryId,
+                id: {
+                    not: id
+                }
+            },
+            include: {
+                category: true
+            }
+        })
+
+        return {
+            product,
+            relatedProducts
         }
     }
 }
