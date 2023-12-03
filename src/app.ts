@@ -25,7 +25,7 @@ const app = express()
 app.engine('hbs', create({ extname: '.hbs', defaultLayout: false, layoutsDir: 'views/' }).engine)
 // Set the default view engine to Handlebars
 app.set('view engine', 'hbs')
-app.set('view engine', 'jade')
+//app.set('view engine', 'jade')
 
 // Set the directory where views are located
 app.set('views', 'src/views')

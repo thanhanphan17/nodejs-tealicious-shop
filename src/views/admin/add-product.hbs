@@ -89,41 +89,23 @@
                             <div class='panel-heading'>Thêm sản phẩm mới</div>
                             <div class='panel-body'>
                                 <div class='row'>
-                                    <div class='col-lg-6'>
-                                        <form role='form'>
-                                            <div class='form-group'>
-                                                <label>Tên sản phẩm</label>
-                                                <input class='form-control' name="name" />
+                                    <form role='form' action="/admin/add-product" method="post">
+                                        <div style='margin: 10px' class="row">
+                                            <div class='col-lg-6'>
+
+
+                                                <div class="form-group">
+                                                    <label for="files">Select files</label>
+                                                    <input id="file" type="file" name="files" multiple />
+                                                </div>
                                             </div>
-                                            <div class='form-group'>
-                                                <label>Số lượng sản phẩm </label>
-                                                <input class='form-control' name="quantity" />
-                                            </div>
-                                            <div class='form-group'>
-                                                <label>Đơn giá</label>
-                                                <input class='form-control' name="price" />
-                                            </div>
-                                            <div class='form-group'>
-                                                <label>Loại sản phẩm</label>
-                                                <select class='form-control'>
-                                                    <option>Phong Vị Yên Trà</option>
-                                                    <option>Hoa Cỏ Dưỡng Tâm</option>
-                                                    <option>Thảo Mộc Nhiệt Đới</option>
-                                                    <option>Yên An Ngự Trà</option>
-                                                </select>
-                                            </div>
-                                            <div class='form-group'>
-                                                <label>Mô tả sản phẩm</label>
-                                                <textarea class='form-control' name="description" rows='3'></textarea>
-                                            </div>
-                                            <div class='form-group'>
-                                                <label for="files">Thêm hình ảnh</label>
-                                                <input type="file" id="files" name="img" multiple>
-                                            </div>
+                                        </div>
+
+                                        <div style="margin: 20px" class="row center-submit">
                                             <button type='submit' class='btn btn-default'>Xác nhận</button>
                                             <button type='reset' class='btn btn-default'>Hủy bỏ</button>
-                                        </form>
-                                    </div>
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
                         </div>
@@ -131,12 +113,66 @@
                 </div>
             </div>
         </div>
+
+    </div>
+
+    <div class="container">
+        <h1>Multipart File Upload</h1>
+        <form id="form-img" action="/admin/add-product" method="post" enctype="multipart/form-data">
+            <div class='form-group'>
+                <label>Tên sản phẩm</label>
+                <input class='form-control' name="name" />
+            </div>
+            <div class='form-group'>
+                <label>Số lượng sản phẩm </label>
+                <input class='form-control' name="quantity" />
+            </div>
+            <div class='form-group'>
+                <label>Đơn giá</label>
+                <input class='form-control' name="price" />
+            </div>
+            <div class='form-group'>
+                <label>Loại sản phẩm</label>
+                <input class='form-control' name="category" />
+            </div>
+            <div class='form-group'>
+                <label>Mô tả sản phẩm</label>
+                <textarea class='form-control' name="description" rows='3'></textarea>
+            </div>
+            <div class="input-group">
+                <label for="files">Select files</label>
+                <input id="file" type="file" name="files" multiple />
+            </div>
+            <button class="submit-btn" type="submit">Upload</button>
+        </form>
     </div>
 
     <script src='/js/admin/jquery.min.js'></script>
     <script src='/js/admin/bootstrap.min.js'></script>
     <script src='/js/admin/metisMenu.min.js'></script>
     <script src='/js/admin/startmin.js'></script>
+    {{!--
+    <script>
+        const form = document.getElementById("form-img");
+        const inputFile = document.getElementById("file");
+
+        const formData = new FormData();
+
+        const handleSubmit = (event) => {
+            event.preventDefault();
+
+            for (const file of inputFile.files) {
+                formData.append("files", file);
+            }
+
+            fetch("https://yentraquan.shop/api/upload/product", {
+                method: "post",
+                body: formData,
+            }).catch((error) => ("Unsuccessfully!", error));
+        };
+
+        form.addEventListener("submit", handleSubmit);
+    </script> --}}
 </body>
 
 </html>

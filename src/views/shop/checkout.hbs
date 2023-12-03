@@ -50,7 +50,7 @@
                             </a>
                         </div>
                     </div>
-                    <div class='col-lg-8'>
+                    <div class='col-lg-10'>
                         <div class='nav-menu'>
                             <nav class='mainmenu'>
                                 <ul>
@@ -66,26 +66,12 @@
                                         </ul>
                                     </li>
                                     <li><a href='/contact'>Liên hệ</a></li>
-                                    {{#if isLoggedIn}}
-                                    <li><a href='/login' style='color: #0650c2'>Đăng xuất</a></li>
-                                    {{else}}
-                                    <li><a href='/login' style='color: #0650c2'>Đăng nhập</a></li>
-                                    <li><a href='/sign-up' style='color: #0650c2'>Tạo tài khoản</a></li>
-                                    {{/if}}
-                                </ul>
-                            </nav>
-                        </div>
-                    </div>
-
-                    <div class='col-lg-2'>
-                        <div class='nav-menu'>
-                            <nav class='mainmenu'>
-                                <ul>
                                     <li class='active'>
                                         <a href='/cart' style='color: #0650c2'><img href='/cart'
                                                 style='color: #333333; width: 20px; ' src='./img/cart-shopping.svg'
                                                 alt='' /></a>
                                     </li>
+                                    {{#if isLoggedIn}}
                                     <li>
                                         <img style='color: #333333; width: 20px; ' src='./img/user-profile.svg'
                                             alt='' />
@@ -99,6 +85,10 @@
                                                     Đăng xuất</a></li>
                                         </ul>
                                     </li>
+                                    {{else}}
+                                    <li><a href='/login' style='color: #0650c2'>Đăng nhập</a></li>
+                                    <li><a href='/sign-up' style='color: #0650c2'>Tạo tài khoản</a></li>
+                                    {{/if}}
                                 </ul>
                             </nav>
                         </div>
