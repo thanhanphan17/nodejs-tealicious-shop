@@ -38,7 +38,18 @@ class ProductService {
                     ...(filter.minPrice !== undefined && { gte: filter.minPrice * 1 }),
                     ...(filter.maxPrice !== undefined && { lte: filter.maxPrice * 1 })
                 }
-            }
+            },
+            include: {
+                category: true
+            },
+            orderBy: [
+                {
+                    price: filter.priceOrder || 'asc'
+                },
+                {
+                    createdAt: filter.createdAtOrder || 'desc'
+                }
+            ]
         })
         return {
             products
