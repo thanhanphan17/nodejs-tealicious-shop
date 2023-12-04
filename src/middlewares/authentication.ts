@@ -18,7 +18,7 @@ const getTokens = (req: any) => {
     const accessToken = req.headers[HEADER.AUTHORIZATION]
     const refreshToken = req.headers[HEADER.REFRESH_TOKEN]
 
-    if (!accessToken || !refreshToken) throw new API401Error('Token not provided')
+    if (!accessToken && !refreshToken) throw new API401Error('Token not provided')
     return { accessToken, refreshToken }
 }
 
