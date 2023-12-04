@@ -4,6 +4,8 @@ import fs from 'fs'
 import { BusinessLogicError } from '~/core/error.response'
 import { getSignedUrl } from '@aws-sdk/s3-request-presigner'
 import path from 'path'
+import Prisma from '~/dbs/init.prisma'
+import sharp from 'sharp'
 
 class UploadService {
     static async uploadImageS3(fileData?: Express.Multer.File) {
@@ -54,11 +56,19 @@ class UploadService {
                     throw new BusinessLogicError('upload image failed')
                 }
 
-                const signedUrl = await new GetObjectCommand({
-                    Bucket: process.env.S3_BUCKET_NAME || '',
-                    Key: imageName
-                })
-                const url = await getSignedUrl(client, signedUrl, { expiresIn: 3600 })
+                const url = process.env.S3_CLOUDFRONT_DOMAIN + '/' + imageName
+
+                // create image on db
+                const { width, height } = await sharp(fileContent).metadata()
+                if (width && height) {
+                    await Prisma.image.create({
+                        data: {
+                            url: url,
+                            width: width * 1,
+                            height: height * 1
+                        }
+                    })
+                }
 
                 urls.push(url)
             }

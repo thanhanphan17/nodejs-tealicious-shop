@@ -1,6 +1,7 @@
 import express from 'express'
-import { uploadDisk } from '~/configs/config.multer'
 import uploadController from '~/controllers/api/upload.controller'
+import { uploadDisk } from '~/configs/config.multer'
+import { adminRequired } from '~/middlewares/authentication'
 
 const router = express.Router()
 
