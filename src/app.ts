@@ -1,21 +1,20 @@
-import compression from 'compression'
-import express from 'express'
-import morgan from 'morgan'
-import webRouter from './routers/web'
-import apiRouter from './routers/api'
-import bodyParser from 'body-parser'
 import path from 'path'
+import morgan from 'morgan'
+import express from 'express'
+import passport from 'passport'
+import bodyParser from 'body-parser'
+import session from 'express-session'
+import compression from 'compression'
 import cookieParser from 'cookie-parser'
+import webRouter from './routers/web/__index__'
+import apiRouter from './routers/api/__index__'
 
 import { create } from 'express-handlebars'
 import { handle404Error, handleReturnError } from '~/middlewares/errorHandler'
 
-import '~/dbs/init.mongoose'
-import '~/dbs/init.prisma'
 import '~/lib/passport'
-
-import session from 'express-session'
-import passport from 'passport'
+import '~/dbs/init.prisma'
+import '~/dbs/init.mongoose'
 
 const app = express()
 
@@ -35,7 +34,7 @@ app.use(
         saveUninitialized: true,
         secret: process.env.SESSION_SECRET || 'secret',
         cookie: {
-            maxAge: 1000 * 20 // 10s
+            maxAge: 1000 * 20
         },
         store: new session.MemoryStore()
     })
@@ -50,10 +49,11 @@ app.use(passport.initialize())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(express.static(path.join(__dirname, 'assets')))
 
-// init routes
+// Init routes
 app.use('/', webRouter)
 app.use('/api', apiRouter)
 
+// Middlewares handle errors
 app.use(handle404Error)
 app.use(handleReturnError)
 

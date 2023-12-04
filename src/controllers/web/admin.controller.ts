@@ -19,7 +19,7 @@ class AdminController {
                 res.cookie('refreshToken', result.tokens.refreshToken)
                 res.cookie('adminName', result.user.name)
                 res.cookie('adminEmail', result.user.email)
-                res.cookie('isLoggedIn', true)
+                res.cookie('isAdminLoggedIn', true)
                 res.redirect('/admin/dashboard')
             }
             console.log(response.data)

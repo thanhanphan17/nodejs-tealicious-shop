@@ -43,7 +43,6 @@ router.get('/login', function (req, res, next) {
     res.render('shop/login.hbs')
 })
 
-router.post('/login', userController.login)
 router.get('/logout', userController.logout)
 
 router.get('/pages', async (req, res, next) => {
@@ -61,8 +60,6 @@ router.get('/detail-product', async (req, res, next) => {
 router.get('/sign-up', function (req, res, next) {
     res.render('shop/signup.hbs')
 })
-
-router.post('/sign-up', userController.register)
 
 router.get('/about-us', function (req, res, next) {
     const customerName = req.cookies.customerName
