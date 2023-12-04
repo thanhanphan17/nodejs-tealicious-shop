@@ -26,7 +26,7 @@ class ProductService {
             take: limit * 1,
             where: {
                 name: {
-                    contains: filter.name || undefined
+                    contains: filter.name || ''
                 },
                 categoryId: filter.categoryId
                     ? {
@@ -50,8 +50,27 @@ class ProductService {
                 }
             ]
         })
+
+        const totalProduct = await Prisma.product.count({
+            where: {
+                name: {
+                    contains: filter.name || ''
+                },
+                categoryId: filter.categoryId
+                    ? {
+                          equals: filter.categoryId
+                      }
+                    : undefined,
+                price: {
+                    ...(filter.minPrice !== undefined && { gte: filter.minPrice * 1 }),
+                    ...(filter.maxPrice !== undefined && { lte: filter.maxPrice * 1 })
+                }
+            }
+        })
+
         return {
-            products
+            products,
+            totalPage: Math.ceil(totalProduct / limit)
         }
     }
 
