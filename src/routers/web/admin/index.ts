@@ -1,3 +1,4 @@
+import { isLoggedIn } from './../../../middlewares/isLoggedIn'
 import express from 'express'
 import { uploadDisk } from '~/configs/config.multer'
 import productController from '~/controllers/web/product.controller'
@@ -28,8 +29,22 @@ router.get('/order', function (req, res, next) {
     res.render('admin/order.hbs')
 })
 
+router.get('/', function (req, res, next) {
+    const isLoggedIn = req.cookies.isLoggedIn
+    if (isLoggedIn) {
+        res.redirect('/admin/dashboard')
+    } else {
+        res.render('admin/login.hbs')
+    }
+})
+
 router.get('/login-admin', function (req, res, next) {
-    res.render('admin/login.hbs')
+    const isLoggedIn = req.cookies.isLoggedIn
+    if (isLoggedIn) {
+        res.redirect('/admin/dashboard')
+    } else {
+        res.render('admin/login.hbs')
+    }
 })
 
 router.post('/login-admin', adminController.login)
