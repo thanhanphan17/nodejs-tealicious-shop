@@ -42,7 +42,7 @@ const verifyToken = (token: string, keyStore: any, userId: string, req: any) => 
 
         if (userId !== decode.userId) throw new BusinessLogicError('Invalid request')
         req.keyStore = keyStore
-        req.user = decode
+        req.userId = decode.userId
     })
 }
 
