@@ -1,4 +1,3 @@
-import { filter } from 'lodash'
 import { BusinessLogicError } from '~/core/error.response'
 import Prisma from '~/dbs/init.prisma'
 import { getInfoData } from '~/utils/response.utils'

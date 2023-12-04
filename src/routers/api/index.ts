@@ -3,6 +3,8 @@ import authRouter from './auth'
 import paymentRouter from './payment'
 import productRouter from './product'
 import uploadRouter from './upload'
+import categoryRouter from './category'
+
 const router = express.Router()
 
 router.get('/health-check', (req, res) => {
@@ -16,5 +18,6 @@ router.use('/auth', authRouter)
 router.use('/payment', paymentRouter)
 router.use('/product', productRouter)
 router.use('/upload', uploadRouter)
+router.use('/category', categoryRouter)
 
 export default router
