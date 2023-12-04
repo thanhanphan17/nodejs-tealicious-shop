@@ -1,6 +1,6 @@
 import express from 'express'
 import productController from '~/controllers/api/product.controller'
-import { adminRequired } from '~/middlewares/authentication'
+import { adminRequired } from '~/middlewares/api/authentication'
 
 const router = express.Router()
 

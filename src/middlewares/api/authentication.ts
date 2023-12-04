@@ -55,7 +55,6 @@ export const loginRequired = catchAsync(async (req: any, res, next: NextFunction
 
     if (refreshToken) {
         verifyToken(refreshToken, keyStore, userId, req)
-        req.refreshToken = refreshToken
         return next()
     }
 
@@ -74,7 +73,6 @@ export const adminRequired = catchAsync(async (req: any, res, next: NextFunction
 
     if (refreshToken) {
         verifyToken(refreshToken, keyStore, userId, req)
-        req.refreshToken = refreshToken
         return next()
     }
 
