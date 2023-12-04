@@ -54,11 +54,7 @@ class UploadService {
                     throw new BusinessLogicError('upload image failed')
                 }
 
-                const signedUrl = await new GetObjectCommand({
-                    Bucket: process.env.S3_BUCKET_NAME || '',
-                    Key: imageName
-                })
-                const url = await getSignedUrl(client, signedUrl, { expiresIn: 3600 })
+                const url = process.env.S3_CLOUDFRONT_DOMAIN + '/' + imageName
 
                 urls.push(url)
             }
