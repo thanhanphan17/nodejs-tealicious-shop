@@ -103,110 +103,163 @@
     <section class='product-section spad'>
         <div class='container'>
             <div class='row'>
+
                 <div class='col-3'>
+                    <div class="border-bottom mb-5 pb-4">
+                        <h5 class="font-weight-semi-bold mb-4">Lọc theo tên</h5>
+                        <div class='search-product'>
+                            <form>
+                                <input type='search' placeholder='Tìm kiếm sản phẩm' name='name' required=''
+                                    id="searchInput" />
+                            </form>
+                        </div>
+                    </div>
                     <div class="border-bottom mb-4 pb-4">
                         <h5 class="font-weight-semi-bold mb-4">Lọc theo giá</h5>
                         <form>
                             <div
-                                class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                                <input type="checkbox" class="custom-control-input" checked id="price-all">
+                                class="custom-control custom-radio d-flex align-items-center justify-content-between mb-3">
+                                <input type="radio" class="custom-control-input" checked id="price-all" name="price"
+                                    value="0">
                                 <label class="custom-control-label" for="price-all">Tất cả giá</label>
-                                {{!-- <span class="badge border font-weight-normal">1000</span> --}}
                             </div>
                             <div
-                                class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                                <input type="checkbox" class="custom-control-input" id="price-1">
+                                class="custom-control custom-radio d-flex align-items-center justify-content-between mb-3">
+                                <input type="radio" class="custom-control-input" id="price-1" name="price" value="1">
                                 <label class="custom-control-label" for="price-1">0 - 100.000 VNĐ</label>
                                 <span class="badge border font-weight-normal">150</span>
                             </div>
                             <div
-                                class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                                <input type="checkbox" class="custom-control-input" id="price-2">
+                                class="custom-control custom-radio d-flex align-items-center justify-content-between mb-3">
+                                <input type="radio" class="custom-control-input" id="price-2" name="price" value="2">
                                 <label class="custom-control-label" for="price-2">100.000 - 200.000 VNĐ</label>
                                 <span class="badge border font-weight-normal">295</span>
                             </div>
                             <div
-                                class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                                <input type="checkbox" class="custom-control-input" id="price-3">
+                                class="custom-control custom-radio d-flex align-items-center justify-content-between mb-3">
+                                <input type="radio" class="custom-control-input" id="price-3" name="price" value="3">
                                 <label class="custom-control-label" for="price-3">200.000 - 300.000 VNĐ</label>
                                 <span class="badge border font-weight-normal">246</span>
                             </div>
                             <div
-                                class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                                <input type="checkbox" class="custom-control-input" id="price-4">
+                                class="custom-control custom-radio d-flex align-items-center justify-content-between mb-3">
+                                <input type="radio" class="custom-control-input" id="price-4" name="price" value="4">
                                 <label class="custom-control-label" for="price-4">300.000 - 400.000 VNĐ</label>
                                 <span class="badge border font-weight-normal">145</span>
                             </div>
-                            <div
-                                class="custom-control custom-checkbox d-flex align-items-center justify-content-between">
-                                <input type="checkbox" class="custom-control-input" id="price-5">
+                            <div class="custom-control custom-radio d-flex align-items-center justify-content-between">
+                                <input type="radio" class="custom-control-input" id="price-5" name="price" value="5">
                                 <label class="custom-control-label" for="price-5">400.000 - 500.000 VNĐ</label>
                                 <span class="badge border font-weight-normal">168</span>
                             </div>
                         </form>
+
                     </div>
                     <!-- Price End -->
 
-                    <!-- Size Start -->
-                    <div class="mb-5">
+                    <!-- Category Start -->
+                    <div class="border-bottom mb-4 pb-4">
                         <h5 class="font-weight-semi-bold mb-4">Lọc theo Danh mục Trà</h5>
                         <form>
                             <div
-                                class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                                <input type="checkbox" class="custom-control-input" checked id="size-all">
+                                class="custom-control custom-radio d-flex align-items-center justify-content-between mb-3">
+                                <input type="radio" class="custom-control-input" checked id="size-all" name="category"
+                                    value="0">
                                 <label class="custom-control-label" for="size-all">Tất cả Danh mục</label>
                                 {{!-- <span class="badge border font-weight-normal">1000</span> --}}
                             </div>
                             <div
-                                class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                                <input type="checkbox" class="custom-control-input" id="size-1">
+                                class="custom-control custom-radio d-flex align-items-center justify-content-between mb-3">
+                                <input type="radio" class="custom-control-input" id="size-1" name="category" value="1">
                                 <label class="custom-control-label" for="size-1">Phong Vị Yên Trà</label>
                                 <span class="badge border font-weight-normal">150</span>
                             </div>
                             <div
-                                class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                                <input type="checkbox" class="custom-control-input" id="size-2">
+                                class="custom-control custom-radio d-flex align-items-center justify-content-between mb-3">
+                                <input type="radio" class="custom-control-input" id="size-2" name="category" value="2">
                                 <label class="custom-control-label" for="size-2">Hoa Cỏ Dưỡng Tâm</label>
                                 <span class="badge border font-weight-normal">295</span>
                             </div>
                             <div
-                                class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                                <input type="checkbox" class="custom-control-input" id="size-3">
+                                class="custom-control custom-radio d-flex align-items-center justify-content-between mb-3">
+                                <input type="radio" class="custom-control-input" id="size-3" name="category" value="3">
                                 <label class="custom-control-label" for="size-3">Thảo Mộc Nhiệt Đới</label>
                                 <span class="badge border font-weight-normal">246</span>
                             </div>
                             <div
-                                class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                                <input type="checkbox" class="custom-control-input" id="size-4">
+                                class="custom-control custom-radio d-flex align-items-center justify-content-between mb-3">
+                                <input type="radio" class="custom-control-input" id="size-4" name="category" value="4">
                                 <label class="custom-control-label" for="size-4">Yên An Ngự Trà</label>
                                 <span class="badge border font-weight-normal">145</span>
                             </div>
                         </form>
                     </div>
+
+
+                    <!-- Price Product Sorting Start -->
+                    <div class="border-bottom mb-4 pb-4">
+                        <h5 class="font-weight-semi-bold mb-4">Sắp xếp theo giá</h5>
+                        <form>
+                            <div
+                                class="custom-control custom-radio d-flex align-items-center justify-content-between mb-3">
+                                <input type="radio" class="custom-control-input" checked id="priceall"
+                                    name="priceSorting" value="">
+                                <label class="custom-control-label" for="size-all">Tất cả</label>
+                            </div>
+                            <div
+                                class="custom-control custom-radio d-flex align-items-center justify-content-between mb-3">
+                                <input type="radio" class="custom-control-input" id="price1" name="priceSorting"
+                                    value="asc">
+                                <label class="custom-control-label" for="price1">Giá tăng dần</label>
+                            </div>
+                            <div
+                                class="custom-control custom-radio d-flex align-items-center justify-content-between mb-3">
+                                <input type="radio" class="custom-control-input" id="price2" name="priceSorting"
+                                    value="desc">
+                                <label class="custom-control-label" for="price2">Giá giảm dần</label>
+                            </div>
+                        </form>
+                    </div>
+
+
+                    <!-- Time Create Product Sorting Start -->
+                    <div class="border-bottom mb-4 pb-4">
+                        <h5 class="font-weight-semi-bold mb-4">Sắp xếp thời gian tạo</h5>
+                        <form>
+                            <div
+                                class="custom-control custom-radio d-flex align-items-center justify-content-between mb-3">
+                                <input type="radio" class="custom-control-input" checked id="time-all"
+                                    name="timeSorting" value=" ">
+                                <label class="custom-control-label" for="size-all">Tất cả </label>
+                            </div>
+                            <div
+                                class="custom-control custom-radio d-flex align-items-center justify-content-between mb-3">
+                                <input type="radio" class="custom-control-input" id="time1" name="timeSorting"
+                                    value="asc">
+                                <label class="custom-control-label" for="time1">Thời gian tăng dần</label>
+                            </div>
+                            <div
+                                class="custom-control custom-radio d-flex align-items-center justify-content-between mb-3">
+                                <input type="radio" class="custom-control-input" id="time2" name="timeSorting"
+                                    value="desc">
+                                <label class="custom-control-label" for="time2">Thời gian giảm dần</label>
+                            </div>
+                        </form>
+                    </div>
+                    <button id="getDataButton">Get Selected Values</button>
                 </div>
 
                 <div class='col-9'>
                     <div class='row'>
                         <div class='col-5'>
                             <div class='search-product'>
-                                <form action='#' method='post'>
-                                    <input type='search' placeholder='Tìm kiếm sản phẩm' name='search' required='' />
-                                    <input type='submit' value=' ' />
+                                <form action='' method='get'>
+                                    <input type='search' placeholder='Tìm kiếm sản phẩm' name='name' required='' />
+                                    <input type='submit' value=' ' id="getSearch" />
                                 </form>
                             </div>
                         </div>
                         <div class='col-4'>
-                        </div>
-                        <div class='col-3'>
-                            <div class="dropdown ml-4 sortMenu">
-                                <select name="sortBy" id="sort" onchange="handleSortBy(this)">
-                                    <option value="none">Sắp xếp sản phẩm</option>
-                                    <option value="priceAsc">Giá tăng dần</option>
-                                    <option value="priceDesc">Giá giảm dần</option>
-                                    <option value="timeAsc">Thời gian tăng dần</option>
-                                    <option value="timeDesc">Thời gian giảm dần</option>
-                                </select>
-                            </div>
                         </div>
                     </div>
                     <div class='col-lg-12'>
@@ -310,12 +363,54 @@
                 window.location.href = '/pages?priceOrder=desc';
             }
             if (selectedOption === 'timeAsc') {
-                window.location.href = '/pages?createAtOrder=asc';
+                window.location.href = '/pages?createdAtOrder=asc';
             }
             if (selectedOption === 'timeDesc') {
-                window.location.href = '/pages?createAtOrder=desc';
+                window.location.href = '/pages?createdAtOrder=desc';
             }
         }
+
+        // Function to retrieve selected values from radio buttons
+        function getSelectedValues() {
+            const searchInputValue = document.getElementById('searchInput').value;
+            console.log("Search Input Value: ", searchInputValue);
+            const selectedPrice = document.querySelector('input[name="price"]:checked').value;
+            const selectedCategory = document.querySelector('input[name="category"]:checked').value;
+            const selectedPriceSorting = document.querySelector('input[name="priceSorting"]:checked').value;
+            const selectedTimeSorting = document.querySelector('input[name="timeSorting"]:checked').value;
+
+            // Log the retrieved values (you can perform any action you need here)
+            let minPrice = "0"
+            let maxPrice = "1000000"
+            console.log("ooooooooooooooooooooooooo " + selectedPrice)
+            if (selectedPrice === "1") {
+                console.log("ok")
+                maxPrice = "100000"
+            } else if (selectedPrice === "2") {
+                minPrice = 100000
+                maxPrice = 200000
+            } else if (selectedPrice === "3") {
+                minPrice = 200000
+                maxPrice = 300000
+            } else if (selectedPrice === "4") {
+                minPrice = 300000
+                maxPrice = 400000
+            } else if (selectedPrice === "5") {
+                minPrice = 400000
+                maxPrice = 500000
+            }
+            console.log(minPrice + " " + maxPrice)
+            console.log('Selected Price:', selectedPrice);
+            console.log('Selected Category:', selectedCategory);
+            console.log('Selected Price Sorting:', selectedPriceSorting);
+            console.log('Selected Time Sorting:', selectedTimeSorting);
+            const url = '/pages?minPrice=' + minPrice + '&maxPrice=' + maxPrice + '&priceOrder=' + selectedPriceSorting + '&createdAtOrder=' + selectedTimeSorting
+            console.log(url)
+            window.location.href = url
+        }
+
+        // Event listener for the button click to trigger data retrieval
+        document.getElementById('getDataButton').addEventListener('click', getSelectedValues);
     </script>
 </body>
 
