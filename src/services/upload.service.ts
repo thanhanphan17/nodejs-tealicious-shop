@@ -1,11 +1,12 @@
 import { client, PutObjectCommand, GetObjectCommand } from '../configs/config.s3'
-import crypto from 'crypto'
-import fs from 'fs'
 import { BusinessLogicError } from '~/core/error.response'
 import { getSignedUrl } from '@aws-sdk/s3-request-presigner'
+
+import crypto from 'crypto'
+import fs from 'fs'
 import path from 'path'
 import Prisma from '~/dbs/init.prisma'
-import sharp from 'sharp'
+import imageSize from 'image-size'
 
 class UploadService {
     static async uploadImageS3(fileData?: Express.Multer.File) {
@@ -59,8 +60,11 @@ class UploadService {
                 const url = process.env.S3_CLOUDFRONT_DOMAIN + '/' + imageName
 
                 // create image on db
-                const { width, height } = await sharp(fileContent).metadata()
-                if (width && height) {
+                const dimensions = imageSize(Buffer.from(fileContent))
+
+                if (dimensions.width && dimensions.height) {
+                    const { width, height } = dimensions
+
                     await Prisma.image.create({
                         data: {
                             url: url,
