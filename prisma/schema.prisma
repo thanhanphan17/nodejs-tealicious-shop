@@ -23,7 +23,7 @@ model User {
   role          UserRole        @default(user)
   address       String?
   avartarId     String?
-  avatar        Json
+  avatar        Json?
   status        String          @default("active")
   deleted       Boolean         @default(false)
   createdAt     DateTime?       @default(now())
