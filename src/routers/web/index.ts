@@ -13,6 +13,12 @@ router.get('/health-check', function (req, res, next) {
     res.render('health-check.hbs')
 })
 
+router.get('/404', function (req, res, next) {
+    const customerName = req.cookies.customerName
+    const isLoggedIn = req.cookies.isUser
+    res.render('404.hbs', { customerName, isLoggedIn })
+})
+
 router.use('/', shop)
 router.use('/admin', admin)
 router.use('/payment', payment)

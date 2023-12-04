@@ -3572,7 +3572,6 @@ html {
 }
 
 .search-product input[type='search'] {
-    margin-left: 10px;
     background: #f5f5f5;
     border: none;
     width: 81%;

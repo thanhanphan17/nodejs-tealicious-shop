@@ -23,7 +23,7 @@ model User {
   role          UserRole        @default(user)
   address       String?
   avartarId     String?
-  avatar        Image?          @relation(fields: [avartarId], references: [id])
+  avatar        Json?
   status        String          @default("active")
   deleted       Boolean         @default(false)
   createdAt     DateTime?       @default(now())
@@ -45,7 +45,7 @@ enum ProductStatus {
 model Product {
   id            String          @id @default(uuid())
   categoryId    String?
-  category      Category?       @relation(fields: [categoryId], references: [id])
+  category      Category?       @relation(fields: [categoryId], references: [id], onDelete: SetNull)
   name          String
   price         Int
   description   String
@@ -57,7 +57,6 @@ model Product {
   updatedAt     DateTime?       @updatedAt
   ProductRating ProductRating[]
   Cart          Cart[]
-  Image         Image[]
 
   @@index([id, name])
   @@map("products")
@@ -66,9 +65,9 @@ model Product {
 model ProductRating {
   id        String    @id @default(uuid())
   productId String
-  product   Product   @relation(fields: [productId], references: [id])
+  product   Product   @relation(fields: [productId], references: [id], onDelete: Cascade)
   userId    String
-  user      User      @relation(fields: [userId], references: [id])
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
   rating    Int
   comment   String?
   deleted   Boolean   @default(false)
@@ -184,9 +183,7 @@ model Image {
   deleted   Boolean   @default(false)
   createdAt DateTime? @default(now())
   updatedAt DateTime? @updatedAt
-  Product   Product?  @relation(fields: [productId], references: [id])
   productId String?
-  User      User[]
 
   @@index([id, url])
   @@map("images")

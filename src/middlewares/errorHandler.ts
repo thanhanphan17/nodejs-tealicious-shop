@@ -31,6 +31,11 @@ export const handleReturnError = (err: CustomError, req: Request, res: Response,
 }
 
 export const handle404Error = (req: Request, res: Response, next: NextFunction) => {
-    const error = new API404Error('Resource not found')
-    next(error)
+    console.log('handleAPI404Error', req.url)
+    if (req.url.startsWith('/api')) {
+        const error = new API404Error('API Resource not found')
+        next(error)
+    } else {
+        res.redirect('/404')
+    }
 }
