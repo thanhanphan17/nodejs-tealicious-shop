@@ -1,417 +1,515 @@
 <html lang='zxx'>
 
-<head>
-    <meta charset='UTF-8' />
-    <meta name='description' content='WanderStay' />
-    <meta name='keywords' content='unica, creative' />
-    <meta name='viewport' content='width=device-width, initial-scale=1.0' />
-    <meta http-equiv='X-UA-Compatible' content='ie=edge' />
-    <title>Yên Trà Quán</title>
+    <head>
+        <meta charset='UTF-8' />
+        <meta name='description' content='WanderStay' />
+        <meta name='keywords' content='unica, creative' />
+        <meta name='viewport' content='width=device-width, initial-scale=1.0' />
+        <meta http-equiv='X-UA-Compatible' content='ie=edge' />
+        <title>Yên Trà Quán</title>
 
-    <!-- Google Font -->
-    <link href='https://fonts.googleapis.com/css?family=Lora:400,700&display=swap' rel='stylesheet' />
-    <link href='https://fonts.googleapis.com/css?family=Cabin:400,500,600,700&display=swap' rel='stylesheet' />
+        <!-- Google Font -->
+        <link href='https://fonts.googleapis.com/css?family=Lora:400,700&display=swap' rel='stylesheet' />
+        <link href='https://fonts.googleapis.com/css?family=Cabin:400,500,600,700&display=swap' rel='stylesheet' />
 
-    <!-- Css Styles -->
-    <link rel='stylesheet' href='css/bootstrap.min.css' type='text/css' />
-    <link rel='stylesheet' href='css/font-awesome.min.css' type='text/css' />
-    <link rel='stylesheet' href='css/elegant-icons.css' type='text/css' />
-    <link rel='stylesheet' href='css/flaticon.css' type='text/css' />
-    <link rel='stylesheet' href='css/owl.carousel.min.css' type='text/css' />
-    <link rel='stylesheet' href='css/nice-select.css' type='text/css' />
-    <link rel='stylesheet' href='css/jquery-ui.min.css' type='text/css' />
-    <link rel='stylesheet' href='css/magnific-popup.css' type='text/css' />
-    <link rel='stylesheet' href='css/slicknav.min.css' type='text/css' />
-    <link rel='stylesheet' href='css/style.css' type='text/css' />
-</head>
+        <!-- Css Styles -->
+        <link rel='stylesheet' href='css/bootstrap.min.css' type='text/css' />
+        <link rel='stylesheet' href='css/font-awesome.min.css' type='text/css' />
+        <link rel='stylesheet' href='css/elegant-icons.css' type='text/css' />
+        <link rel='stylesheet' href='css/flaticon.css' type='text/css' />
+        <link rel='stylesheet' href='css/owl.carousel.min.css' type='text/css' />
+        <link rel='stylesheet' href='css/nice-select.css' type='text/css' />
+        <link rel='stylesheet' href='css/jquery-ui.min.css' type='text/css' />
+        <link rel='stylesheet' href='css/magnific-popup.css' type='text/css' />
+        <link rel='stylesheet' href='css/slicknav.min.css' type='text/css' />
+        <link rel='stylesheet' href='css/style.css' type='text/css' />
+    </head>
 
-<body>
-    <!-- Page Preloder -->
-    <div id='preloder'>
-        <div class='loader'></div>
-    </div>
-
-    <!-- Header Section Begin -->
-    <header class='header-section header-normal'>
-        <div class='top-nav'>
-            <div class='container'>
-                <div class='row'>
-                    <div class='col-lg-6'></div>
-                </div>
-            </div>
+    <body>
+        <!-- Page Preloder -->
+        <div id='preloder'>
+            <div class='loader'></div>
         </div>
-        <div class='menu-item'>
-            <div class='container'>
-                <div class='row'>
-                    <div class='col-lg-2'>
-                        <div class='logo'>
-                            <a href='/'>
-                                <img src='img/logo.png' alt='' />
-                            </a>
-                        </div>
-                    </div>
-                    <div class='col-lg-10'>
-                        <div class='nav-menu'>
-                            <nav class='mainmenu'>
-                                <ul>
-                                    <li><a href='/'>Trang chủ</a></li>
-                                    <li><a href='/about-us'>Về chúng tôi</a></li>
-                                    <li class='active'>
-                                        <a href='/pages'>Sản phẩm</a>
-                                        <ul class='dropdown'>
-                                            <li><a href='/phong-vi-yen-tra'>Phong Vị Yên Trà</a></li>
-                                            <li><a href='/hoa-co-duong-tam'>Hoa Cỏ Dưỡng Tâm</a></li>
-                                            <li><a href='/thao-moc-nhiet-doi'>Thảo Mộc Nhiệt Đới</a></li>
-                                            <li><a href='/yen-an-ngu-tra'>Yên An Ngự Trà</a></li>
-                                        </ul>
-                                    </li>
-                                    <li><a href='/contact'>Liên hệ</a></li>
-                                    <li>
-                                        <a href='/cart' style='color: #0650c2'><img href='/cart'
-                                                style='color: #333333; width: 20px; ' src='./img/cart-shopping.svg'
-                                                alt='' /></a>
-                                    </li>
-                                    {{#if isLoggedIn}}
-                                    <li>
-                                        <img style='color: #333333; width: 20px; ' src='./img/user-profile.svg'
-                                            alt='' />
-                                        {{customerName}}
-                                        <ul class='dropdown'>
-                                            <li><a href='/profile'><img style='width: 20px' src='/img/user.png' />
-                                                    Trang cá nhân</a></li>
-                                            <li><a href='/change-password'><img style='width: 20px'
-                                                        src='/img/key.svg' />
-                                                    Đổi mật khẩu</a></li>
-                                            <li><a href='/logout'><img style='width: 20px' src='/img/log-out.svg' />
-                                                    Đăng xuất</a></li>
-                                        </ul>
-                                    </li>
-                                    {{else}}
-                                    <li><a href='/login' style='color: #0650c2'>Đăng nhập</a></li>
-                                    <li><a href='/sign-up' style='color: #0650c2'>Tạo tài khoản</a></li>
-                                    {{/if}}
-                                </ul>
-                            </nav>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </header>
-    <!-- Header End -->
 
-    <section class='product-section spad'>
-        <div class='container'>
-            <div class='row'>
-
-                <div class='col-3'>
-                    <div class="border-bottom mb-5 pb-4">
-                        <h5 class="font-weight-semi-bold mb-4">Lọc theo tên</h5>
-                        <div class='search-product'>
-                            <form>
-                                <input type='search' placeholder='Tìm kiếm sản phẩm' name='name' required=''
-                                    id="searchInput" />
-                            </form>
-                        </div>
-                    </div>
-                    <div class="border-bottom mb-4 pb-4">
-                        <h5 class="font-weight-semi-bold mb-4">Lọc theo giá</h5>
-                        <form>
-                            <div
-                                class="custom-control custom-radio d-flex align-items-center justify-content-between mb-3">
-                                <input type="radio" class="custom-control-input" checked id="price-all" name="price"
-                                    value="0">
-                                <label class="custom-control-label" for="price-all">Tất cả giá</label>
-                            </div>
-                            <div
-                                class="custom-control custom-radio d-flex align-items-center justify-content-between mb-3">
-                                <input type="radio" class="custom-control-input" id="price-1" name="price" value="1">
-                                <label class="custom-control-label" for="price-1">0 - 100.000 VNĐ</label>
-                                <span class="badge border font-weight-normal">150</span>
-                            </div>
-                            <div
-                                class="custom-control custom-radio d-flex align-items-center justify-content-between mb-3">
-                                <input type="radio" class="custom-control-input" id="price-2" name="price" value="2">
-                                <label class="custom-control-label" for="price-2">100.000 - 200.000 VNĐ</label>
-                                <span class="badge border font-weight-normal">295</span>
-                            </div>
-                            <div
-                                class="custom-control custom-radio d-flex align-items-center justify-content-between mb-3">
-                                <input type="radio" class="custom-control-input" id="price-3" name="price" value="3">
-                                <label class="custom-control-label" for="price-3">200.000 - 300.000 VNĐ</label>
-                                <span class="badge border font-weight-normal">246</span>
-                            </div>
-                            <div
-                                class="custom-control custom-radio d-flex align-items-center justify-content-between mb-3">
-                                <input type="radio" class="custom-control-input" id="price-4" name="price" value="4">
-                                <label class="custom-control-label" for="price-4">300.000 - 400.000 VNĐ</label>
-                                <span class="badge border font-weight-normal">145</span>
-                            </div>
-                            <div class="custom-control custom-radio d-flex align-items-center justify-content-between">
-                                <input type="radio" class="custom-control-input" id="price-5" name="price" value="5">
-                                <label class="custom-control-label" for="price-5">400.000 - 500.000 VNĐ</label>
-                                <span class="badge border font-weight-normal">168</span>
-                            </div>
-                        </form>
-
-                    </div>
-                    <!-- Price End -->
-
-                    <!-- Category Start -->
-                    <div class="border-bottom mb-4 pb-4">
-                        <h5 class="font-weight-semi-bold mb-4">Lọc theo Danh mục Trà</h5>
-                        <form>
-                            <div
-                                class="custom-control custom-radio d-flex align-items-center justify-content-between mb-3">
-                                <input type="radio" class="custom-control-input" checked id="size-all" name="category"
-                                    value="0">
-                                <label class="custom-control-label" for="size-all">Tất cả Danh mục</label>
-                                {{!-- <span class="badge border font-weight-normal">1000</span> --}}
-                            </div>
-                            <div
-                                class="custom-control custom-radio d-flex align-items-center justify-content-between mb-3">
-                                <input type="radio" class="custom-control-input" id="size-1" name="category" value="1">
-                                <label class="custom-control-label" for="size-1">Phong Vị Yên Trà</label>
-                                <span class="badge border font-weight-normal">150</span>
-                            </div>
-                            <div
-                                class="custom-control custom-radio d-flex align-items-center justify-content-between mb-3">
-                                <input type="radio" class="custom-control-input" id="size-2" name="category" value="2">
-                                <label class="custom-control-label" for="size-2">Hoa Cỏ Dưỡng Tâm</label>
-                                <span class="badge border font-weight-normal">295</span>
-                            </div>
-                            <div
-                                class="custom-control custom-radio d-flex align-items-center justify-content-between mb-3">
-                                <input type="radio" class="custom-control-input" id="size-3" name="category" value="3">
-                                <label class="custom-control-label" for="size-3">Thảo Mộc Nhiệt Đới</label>
-                                <span class="badge border font-weight-normal">246</span>
-                            </div>
-                            <div
-                                class="custom-control custom-radio d-flex align-items-center justify-content-between mb-3">
-                                <input type="radio" class="custom-control-input" id="size-4" name="category" value="4">
-                                <label class="custom-control-label" for="size-4">Yên An Ngự Trà</label>
-                                <span class="badge border font-weight-normal">145</span>
-                            </div>
-                        </form>
-                    </div>
-
-
-                    <!-- Price Product Sorting Start -->
-                    <div class="border-bottom mb-4 pb-4">
-                        <h5 class="font-weight-semi-bold mb-4">Sắp xếp theo giá</h5>
-                        <form>
-                            <div
-                                class="custom-control custom-radio d-flex align-items-center justify-content-between mb-3">
-                                <input type="radio" class="custom-control-input" checked id="priceall"
-                                    name="priceSorting" value="">
-                                <label class="custom-control-label" for="size-all">Tất cả</label>
-                            </div>
-                            <div
-                                class="custom-control custom-radio d-flex align-items-center justify-content-between mb-3">
-                                <input type="radio" class="custom-control-input" id="price1" name="priceSorting"
-                                    value="asc">
-                                <label class="custom-control-label" for="price1">Giá tăng dần</label>
-                            </div>
-                            <div
-                                class="custom-control custom-radio d-flex align-items-center justify-content-between mb-3">
-                                <input type="radio" class="custom-control-input" id="price2" name="priceSorting"
-                                    value="desc">
-                                <label class="custom-control-label" for="price2">Giá giảm dần</label>
-                            </div>
-                        </form>
-                    </div>
-
-
-                    <!-- Time Create Product Sorting Start -->
-                    <div class="border-bottom mb-4 pb-4">
-                        <h5 class="font-weight-semi-bold mb-4">Sắp xếp thời gian tạo</h5>
-                        <form>
-                            <div
-                                class="custom-control custom-radio d-flex align-items-center justify-content-between mb-3">
-                                <input type="radio" class="custom-control-input" checked id="time-all"
-                                    name="timeSorting" value=" ">
-                                <label class="custom-control-label" for="size-all">Tất cả </label>
-                            </div>
-                            <div
-                                class="custom-control custom-radio d-flex align-items-center justify-content-between mb-3">
-                                <input type="radio" class="custom-control-input" id="time1" name="timeSorting"
-                                    value="asc">
-                                <label class="custom-control-label" for="time1">Thời gian tăng dần</label>
-                            </div>
-                            <div
-                                class="custom-control custom-radio d-flex align-items-center justify-content-between mb-3">
-                                <input type="radio" class="custom-control-input" id="time2" name="timeSorting"
-                                    value="desc">
-                                <label class="custom-control-label" for="time2">Thời gian giảm dần</label>
-                            </div>
-                        </form>
-                    </div>
-                    <button id="getDataButton">Get Selected Values</button>
-                </div>
-
-                <div class='col-9'>
+        <!-- Header Section Begin -->
+        <header class='header-section header-normal'>
+            <div class='top-nav'>
+                <div class='container'>
                     <div class='row'>
-                        <div class='col-5'>
+                        <div class='col-lg-6'></div>
+                    </div>
+                </div>
+            </div>
+            <div class='menu-item'>
+                <div class='container'>
+                    <div class='row'>
+                        <div class='col-lg-2'>
+                            <div class='logo'>
+                                <a href='/'>
+                                    <img src='img/logo.png' alt='' />
+                                </a>
+                            </div>
+                        </div>
+                        <div class='col-lg-10'>
+                            <div class='nav-menu'>
+                                <nav class='mainmenu'>
+                                    <ul>
+                                        <li><a href='/'>Trang chủ</a></li>
+                                        <li><a href='/about-us'>Về chúng tôi</a></li>
+                                        <li class='active'>
+                                            <a href='/pages'>Sản phẩm</a>
+                                            <ul class='dropdown'>
+                                                <li><a href='/phong-vi-yen-tra'>Phong Vị Yên Trà</a></li>
+                                                <li><a href='/hoa-co-duong-tam'>Hoa Cỏ Dưỡng Tâm</a></li>
+                                                <li><a href='/thao-moc-nhiet-doi'>Thảo Mộc Nhiệt Đới</a></li>
+                                                <li><a href='/yen-an-ngu-tra'>Yên An Ngự Trà</a></li>
+                                            </ul>
+                                        </li>
+                                        <li><a href='/contact'>Liên hệ</a></li>
+                                        <li>
+                                            <a href='/cart' style='color: #0650c2'><img
+                                                    href='/cart'
+                                                    style='color: #333333; width: 20px; '
+                                                    src='./img/cart-shopping.svg'
+                                                    alt=''
+                                                /></a>
+                                        </li>
+                                        {{#if isLoggedIn}}
+                                            <li>
+                                                <img
+                                                    style='color: #333333; width: 20px; '
+                                                    src='./img/user-profile.svg'
+                                                    alt=''
+                                                />
+                                                {{customerName}}
+                                                <ul class='dropdown'>
+                                                    <li><a href='/profile'><img
+                                                                style='width: 20px'
+                                                                src='/img/user.png'
+                                                            />
+                                                            Trang cá nhân</a></li>
+                                                    <li><a href='/change-password'><img
+                                                                style='width: 20px'
+                                                                src='/img/key.svg'
+                                                            />
+                                                            Đổi mật khẩu</a></li>
+                                                    <li><a href='/logout'><img
+                                                                style='width: 20px'
+                                                                src='/img/log-out.svg'
+                                                            />
+                                                            Đăng xuất</a></li>
+                                                </ul>
+                                            </li>
+                                        {{else}}
+                                            <li><a href='/login' style='color: #0650c2'>Đăng nhập</a></li>
+                                            <li><a href='/sign-up' style='color: #0650c2'>Tạo tài khoản</a></li>
+                                        {{/if}}
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- Header End -->
+
+        <section class='product-section spad'>
+            <div class='container'>
+                <div class='row'>
+
+                    <div class='col-3'>
+                        <div class='border-bottom mb-5 pb-4'>
+                            <h5 class='font-weight-semi-bold mb-4'>Lọc theo tên</h5>
                             <div class='search-product'>
-                                <form action='' method='get'>
-                                    <input type='search' placeholder='Tìm kiếm sản phẩm' name='name' required='' />
-                                    <input type='submit' value=' ' id="getSearch" />
+                                <form>
+                                    <input
+                                        type='search'
+                                        placeholder='Tìm kiếm sản phẩm'
+                                        name='name'
+                                        required=''
+                                        id='searchInput'
+                                    />
                                 </form>
                             </div>
                         </div>
-                        <div class='col-4'>
-                        </div>
-                    </div>
-                    <div class='col-lg-12'>
-                        <div class='row product-list'>
-                            <!-- Start Column-->
-                            {{#each productList.products}}
-                            <div class='col-12 col-md-4 col-lg-3 mb-5 mb-md-0'>
-                                <a class='product-item' href='/detail-product?id={{this.id}}'>
-                                    <img src={{this.image.url.[0]}} class='img-fluid product-thumbnail' />
-                                    <h3 class='product-title'>{{this.name}}</h3>
-                                    <strong class='product-price'>{{this.price}} VNĐ</strong>
+                        <div class='border-bottom mb-4 pb-4'>
+                            <h5 class='font-weight-semi-bold mb-4'>Lọc theo giá</h5>
+                            <form>
+                                <div
+                                    class='custom-control custom-radio d-flex align-items-center justify-content-between mb-3'
+                                >
+                                    <input
+                                        type='radio'
+                                        class='custom-control-input'
+                                        checked
+                                        id='price-all'
+                                        name='price'
+                                        value='0'
+                                    />
+                                    <label class='custom-control-label' for='price-all'>Tất cả giá</label>
+                                </div>
+                                <div
+                                    class='custom-control custom-radio d-flex align-items-center justify-content-between mb-3'
+                                >
+                                    <input
+                                        type='radio'
+                                        class='custom-control-input'
+                                        id='price-1'
+                                        name='price'
+                                        value='1'
+                                    />
+                                    <label class='custom-control-label' for='price-1'>0 - 100.000 VNĐ</label>
+                                    <span class='badge border font-weight-normal'>150</span>
+                                </div>
+                                <div
+                                    class='custom-control custom-radio d-flex align-items-center justify-content-between mb-3'
+                                >
+                                    <input
+                                        type='radio'
+                                        class='custom-control-input'
+                                        id='price-2'
+                                        name='price'
+                                        value='2'
+                                    />
+                                    <label class='custom-control-label' for='price-2'>100.000 - 200.000 VNĐ</label>
+                                    <span class='badge border font-weight-normal'>295</span>
+                                </div>
+                                <div
+                                    class='custom-control custom-radio d-flex align-items-center justify-content-between mb-3'
+                                >
+                                    <input
+                                        type='radio'
+                                        class='custom-control-input'
+                                        id='price-3'
+                                        name='price'
+                                        value='3'
+                                    />
+                                    <label class='custom-control-label' for='price-3'>200.000 - 300.000 VNĐ</label>
+                                    <span class='badge border font-weight-normal'>246</span>
+                                </div>
+                                <div
+                                    class='custom-control custom-radio d-flex align-items-center justify-content-between mb-3'
+                                >
+                                    <input
+                                        type='radio'
+                                        class='custom-control-input'
+                                        id='price-4'
+                                        name='price'
+                                        value='4'
+                                    />
+                                    <label class='custom-control-label' for='price-4'>300.000 - 400.000 VNĐ</label>
+                                    <span class='badge border font-weight-normal'>145</span>
+                                </div>
+                                <div
+                                    class='custom-control custom-radio d-flex align-items-center justify-content-between'
+                                >
+                                    <input
+                                        type='radio'
+                                        class='custom-control-input'
+                                        id='price-5'
+                                        name='price'
+                                        value='5'
+                                    />
+                                    <label class='custom-control-label' for='price-5'>400.000 - 500.000 VNĐ</label>
+                                    <span class='badge border font-weight-normal'>168</span>
+                                </div>
+                            </form>
 
-                                    <span class='icon-cross'>
-                                        <img src='./img/cross.svg' class='img-fluid' />
-                                    </span>
-                                </a>
+                        </div>
+                        <!-- Price End -->
+
+                        <!-- Category Start -->
+                        <div class='border-bottom mb-4 pb-4'>
+                            <h5 class='font-weight-semi-bold mb-4'>Lọc theo Danh mục Trà</h5>
+                            <form>
+                                <div
+                                    class='custom-control custom-radio d-flex align-items-center justify-content-between mb-3'
+                                >
+                                    <input
+                                        type='radio'
+                                        class='custom-control-input'
+                                        checked
+                                        id='size-all'
+                                        name='category'
+                                        value='0'
+                                    />
+                                    <label class='custom-control-label' for='size-all'>Tất cả Danh mục</label>
+                                    {{! <span class="badge border font-weight-normal">1000</span> }}
+                                </div>
+                                <div
+                                    class='custom-control custom-radio d-flex align-items-center justify-content-between mb-3'
+                                >
+                                    <input
+                                        type='radio'
+                                        class='custom-control-input'
+                                        id='size-1'
+                                        name='category'
+                                        value='1'
+                                    />
+                                    <label class='custom-control-label' for='size-1'>Phong Vị Yên Trà</label>
+                                    <span class='badge border font-weight-normal'>150</span>
+                                </div>
+                                <div
+                                    class='custom-control custom-radio d-flex align-items-center justify-content-between mb-3'
+                                >
+                                    <input
+                                        type='radio'
+                                        class='custom-control-input'
+                                        id='size-2'
+                                        name='category'
+                                        value='2'
+                                    />
+                                    <label class='custom-control-label' for='size-2'>Hoa Cỏ Dưỡng Tâm</label>
+                                    <span class='badge border font-weight-normal'>295</span>
+                                </div>
+                                <div
+                                    class='custom-control custom-radio d-flex align-items-center justify-content-between mb-3'
+                                >
+                                    <input
+                                        type='radio'
+                                        class='custom-control-input'
+                                        id='size-3'
+                                        name='category'
+                                        value='3'
+                                    />
+                                    <label class='custom-control-label' for='size-3'>Thảo Mộc Nhiệt Đới</label>
+                                    <span class='badge border font-weight-normal'>246</span>
+                                </div>
+                                <div
+                                    class='custom-control custom-radio d-flex align-items-center justify-content-between mb-3'
+                                >
+                                    <input
+                                        type='radio'
+                                        class='custom-control-input'
+                                        id='size-4'
+                                        name='category'
+                                        value='4'
+                                    />
+                                    <label class='custom-control-label' for='size-4'>Yên An Ngự Trà</label>
+                                    <span class='badge border font-weight-normal'>145</span>
+                                </div>
+                            </form>
+                        </div>
+
+                        <!-- Price Product Sorting Start -->
+                        <div class='border-bottom mb-4 pb-4'>
+                            <h5 class='font-weight-semi-bold mb-4'>Sắp xếp theo giá</h5>
+                            <form>
+                                <div
+                                    class='custom-control custom-radio d-flex align-items-center justify-content-between mb-3'
+                                >
+                                    <input
+                                        type='radio'
+                                        class='custom-control-input'
+                                        checked
+                                        id='priceall'
+                                        name='priceSorting'
+                                        value=''
+                                    />
+                                    <label class='custom-control-label' for='size-all'>Tất cả</label>
+                                </div>
+                                <div
+                                    class='custom-control custom-radio d-flex align-items-center justify-content-between mb-3'
+                                >
+                                    <input
+                                        type='radio'
+                                        class='custom-control-input'
+                                        id='price1'
+                                        name='priceSorting'
+                                        value='asc'
+                                    />
+                                    <label class='custom-control-label' for='price1'>Giá tăng dần</label>
+                                </div>
+                                <div
+                                    class='custom-control custom-radio d-flex align-items-center justify-content-between mb-3'
+                                >
+                                    <input
+                                        type='radio'
+                                        class='custom-control-input'
+                                        id='price2'
+                                        name='priceSorting'
+                                        value='desc'
+                                    />
+                                    <label class='custom-control-label' for='price2'>Giá giảm dần</label>
+                                </div>
+                            </form>
+                        </div>
+
+                        <!-- Time Create Product Sorting Start -->
+                        <div class='border-bottom mb-4 pb-4'>
+                            <h5 class='font-weight-semi-bold mb-4'>Sắp xếp thời gian tạo</h5>
+                            <form>
+                                <div
+                                    class='custom-control custom-radio d-flex align-items-center justify-content-between mb-3'
+                                >
+                                    <input
+                                        type='radio'
+                                        class='custom-control-input'
+                                        checked
+                                        id='time-all'
+                                        name='timeSorting'
+                                        value=' '
+                                    />
+                                    <label class='custom-control-label' for='size-all'>Tất cả </label>
+                                </div>
+                                <div
+                                    class='custom-control custom-radio d-flex align-items-center justify-content-between mb-3'
+                                >
+                                    <input
+                                        type='radio'
+                                        class='custom-control-input'
+                                        id='time1'
+                                        name='timeSorting'
+                                        value='asc'
+                                    />
+                                    <label class='custom-control-label' for='time1'>Thời gian tăng dần</label>
+                                </div>
+                                <div
+                                    class='custom-control custom-radio d-flex align-items-center justify-content-between mb-3'
+                                >
+                                    <input
+                                        type='radio'
+                                        class='custom-control-input'
+                                        id='time2'
+                                        name='timeSorting'
+                                        value='desc'
+                                    />
+                                    <label class='custom-control-label' for='time2'>Thời gian giảm dần</label>
+                                </div>
+                            </form>
+                        </div>
+                        <button id='getDataButton'>Get Selected Values</button>
+                    </div>
+
+                    <div class='col-9'>
+                        <div class='row'>
+                            <div class='col-5'>
+                                <div class='search-product'>
+                                    <form action='' method='get'>
+                                        <input type='search' placeholder='Tìm kiếm sản phẩm' name='name' required='' />
+                                        <input type='submit' value=' ' id='getSearch' />
+                                    </form>
+                                </div>
                             </div>
-                            {{/each}}
-                            <!-- End Column -->
+                            <div class='col-4'>
+                            </div>
+                        </div>
+                        <div class='col-lg-12'>
+                            <div class='row product-list'>
+                                <!-- Start Column-->
+                                {{#each productList.products}}
+                                    <div class='col-12 col-md-4 col-lg-3 mb-5 mb-md-0'>
+                                        <a class='product-item' href='/detail-product?id={{this.id}}'>
+                                            <img src={{this.image.url.0}} class='img-fluid product-thumbnail' />
+                                            <h3 class='product-title'>{{this.name}}</h3>
+                                            <strong class='product-price'>{{this.price}} VNĐ</strong>
+
+                                            <span class='icon-cross'>
+                                                <img src='./img/cross.svg' class='img-fluid' />
+                                            </span>
+                                        </a>
+                                    </div>
+                                {{/each}}
+                                <!-- End Column -->
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Footer Section Begin -->
-    <footer class='footer-section'>
-        <div class='container'>
-            <div class='footer-text'>
-                <div class='row'>
-                    <div class='col-lg-4'>
-                        <div class='ft-about'>
-                            <div class='logo'>
-                                <a href='#'>
-                                    <img class='img-logo' src='img/logo.png' alt='' />
-                                </a>
+        <!-- Footer Section Begin -->
+        <footer class='footer-section'>
+            <div class='container'>
+                <div class='footer-text'>
+                    <div class='row'>
+                        <div class='col-lg-4'>
+                            <div class='ft-about'>
+                                <div class='logo'>
+                                    <a href='#'>
+                                        <img class='img-logo' src='img/logo.png' alt='' />
+                                    </a>
+                                </div>
+                                <p>
+                                    Yên Trà Quán với những tâm hồn tự tại đã trót yêu mẹ thiên nhiên say đắm, mong muốn
+                                    được dùng các loại thảo mộc chữa lành cho tất cả mọi người.
+                                </p>
                             </div>
-                            <p>
-                                Yên Trà Quán với những tâm hồn tự tại đã trót yêu mẹ thiên nhiên say đắm, mong muốn
-                                được dùng các loại thảo mộc chữa lành cho tất cả mọi người.
-                            </p>
+                        </div>
+                        <div class='col-lg-3 offset-lg-1'>
+                            <div class='ft-contact'>
+                                <h6>Liên hệ</h6>
+                                <ul>
+                                    <li>0123456789</li>
+                                    <li>yentraquan@gmail.com</li>
+                                    <li>227 Nguyen Van Cuu, Ward 4, <br />District 5, HCMc</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class='col-lg-3 offset-lg-1'>
+                            <div class='ft-newslatter'>
+                                <h6>Thông tin mới nhất</h6>
+                                <p>Cập nhật những ưu đãi và thông tin mới.</p>
+                                <form action='#' class='fn-form'>
+                                    <input type='text' placeholder='Email' />
+                                    <button type='submit'><i class='fa fa-send'></i></button>
+                                </form>
+                            </div>
                         </div>
                     </div>
-                    <div class='col-lg-3 offset-lg-1'>
-                        <div class='ft-contact'>
-                            <h6>Liên hệ</h6>
+                </div>
+            </div>
+            <div class='copyright-option'>
+                <div class='container'>
+                    <div class='row'>
+                        <div class='col-lg-12'>
                             <ul>
-                                <li>0123456789</li>
-                                <li>yentraquan@gmail.com</li>
-                                <li>227 Nguyen Van Cuu, Ward 4, <br />District 5, HCMc</li>
+                                <li><a href='#'>Chính sách bán hàng</a></li>
+                                <li><a href='#'>Chính sách thanh toán</a></li>
+                                <li><a href='#'>Chính sách bảo hành</a></li>
+                                <li><a href='#'>Điều khoản dịch vụ</a></li>
                             </ul>
                         </div>
                     </div>
-                    <div class='col-lg-3 offset-lg-1'>
-                        <div class='ft-newslatter'>
-                            <h6>Thông tin mới nhất</h6>
-                            <p>Cập nhật những ưu đãi và thông tin mới.</p>
-                            <form action='#' class='fn-form'>
-                                <input type='text' placeholder='Email' />
-                                <button type='submit'><i class='fa fa-send'></i></button>
-                            </form>
-                        </div>
-                    </div>
                 </div>
             </div>
-        </div>
-        <div class='copyright-option'>
-            <div class='container'>
-                <div class='row'>
-                    <div class='col-lg-12'>
-                        <ul>
-                            <li><a href='#'>Chính sách bán hàng</a></li>
-                            <li><a href='#'>Chính sách thanh toán</a></li>
-                            <li><a href='#'>Chính sách bảo hành</a></li>
-                            <li><a href='#'>Điều khoản dịch vụ</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
-    <!-- Footer Section End -->
+        </footer>
+        <!-- Footer Section End -->
 
-    <!-- Js Plugins -->
-    <script src='js/jquery-3.3.1.min.js'></script>
-    <script src='js/bootstrap.min.js'></script>
-    <script src='js/jquery.magnific-popup.min.js'></script>
-    <script src='js/jquery.nice-select.min.js'></script>
-    <script src='js/jquery-ui.min.js'></script>
-    <script src='js/jquery.slicknav.js'></script>
-    <script src='js/owl.carousel.min.js'></script>
-    <script src='js/main.js'></script>
-    <script>
-        function handleSortBy(selectElement) {
-            var selectedOption = selectElement.value;
-            if (selectedOption === 'priceAsc') {
-                window.location.href = '/pages?priceOrder=asc';
-            }
-            if (selectedOption === 'priceDesc') {
-                window.location.href = '/pages?priceOrder=desc';
-            }
-            if (selectedOption === 'timeAsc') {
-                window.location.href = '/pages?createdAtOrder=asc';
-            }
-            if (selectedOption === 'timeDesc') {
-                window.location.href = '/pages?createdAtOrder=desc';
-            }
-        }
-
-        // Function to retrieve selected values from radio buttons
-        function getSelectedValues() {
-            const searchInputValue = document.getElementById('searchInput').value;
-            console.log("Search Input Value: ", searchInputValue);
-            const selectedPrice = document.querySelector('input[name="price"]:checked').value;
-            const selectedCategory = document.querySelector('input[name="category"]:checked').value;
-            const selectedPriceSorting = document.querySelector('input[name="priceSorting"]:checked').value;
-            const selectedTimeSorting = document.querySelector('input[name="timeSorting"]:checked').value;
-
-            // Log the retrieved values (you can perform any action you need here)
-            let minPrice = "0"
-            let maxPrice = "1000000"
-            console.log("ooooooooooooooooooooooooo " + selectedPrice)
-            if (selectedPrice === "1") {
-                console.log("ok")
-                maxPrice = "100000"
-            } else if (selectedPrice === "2") {
-                minPrice = 100000
-                maxPrice = 200000
-            } else if (selectedPrice === "3") {
-                minPrice = 200000
-                maxPrice = 300000
-            } else if (selectedPrice === "4") {
-                minPrice = 300000
-                maxPrice = 400000
-            } else if (selectedPrice === "5") {
-                minPrice = 400000
-                maxPrice = 500000
-            }
-            console.log(minPrice + " " + maxPrice)
-            console.log('Selected Price:', selectedPrice);
-            console.log('Selected Category:', selectedCategory);
-            console.log('Selected Price Sorting:', selectedPriceSorting);
-            console.log('Selected Time Sorting:', selectedTimeSorting);
-            const url = '/pages?minPrice=' + minPrice + '&maxPrice=' + maxPrice + '&priceOrder=' + selectedPriceSorting + '&createdAtOrder=' + selectedTimeSorting
-            console.log(url)
-            window.location.href = url
-        }
-
-        // Event listener for the button click to trigger data retrieval
-        document.getElementById('getDataButton').addEventListener('click', getSelectedValues);
-    </script>
-</body>
+        <!-- Js Plugins -->
+        <script src='js/jquery-3.3.1.min.js'></script>
+        <script src='js/bootstrap.min.js'></script>
+        <script src='js/jquery.magnific-popup.min.js'></script>
+        <script src='js/jquery.nice-select.min.js'></script>
+        <script src='js/jquery-ui.min.js'></script>
+        <script src='js/jquery.slicknav.js'></script>
+        <script src='js/owl.carousel.min.js'></script>
+        <script src='js/main.js'></script>
+        <script>
+            function handleSortBy(selectElement) { var selectedOption = selectElement.value; if (selectedOption ===
+            'priceAsc') { window.location.href = '/pages?priceOrder=asc'; } if (selectedOption === 'priceDesc') {
+            window.location.href = '/pages?priceOrder=desc'; } if (selectedOption === 'timeAsc') { window.location.href
+            = '/pages?createdAtOrder=asc'; } if (selectedOption === 'timeDesc') { window.location.href =
+            '/pages?createdAtOrder=desc'; } } // Function to retrieve selected values from radio buttons function
+            getSelectedValues() { const searchInputValue = document.getElementById('searchInput').value;
+            console.log("Search Input Value: ", searchInputValue); const selectedPrice =
+            document.querySelector('input[name="price"]:checked').value; const selectedCategory =
+            document.querySelector('input[name="category"]:checked').value; const selectedPriceSorting =
+            document.querySelector('input[name="priceSorting"]:checked').value; const selectedTimeSorting =
+            document.querySelector('input[name="timeSorting"]:checked').value; // Log the retrieved values (you can
+            perform any action you need here) let minPrice = "0" let maxPrice = "1000000"
+            console.log("ooooooooooooooooooooooooo " + selectedPrice) if (selectedPrice === "1") { console.log("ok")
+            maxPrice = "100000" } else if (selectedPrice === "2") { minPrice = 100000 maxPrice = 200000 } else if
+            (selectedPrice === "3") { minPrice = 200000 maxPrice = 300000 } else if (selectedPrice === "4") { minPrice =
+            300000 maxPrice = 400000 } else if (selectedPrice === "5") { minPrice = 400000 maxPrice = 500000 }
+            console.log(minPrice + " " + maxPrice) console.log('Selected Price:', selectedPrice); console.log('Selected
+            Category:', selectedCategory); console.log('Selected Price Sorting:', selectedPriceSorting);
+            console.log('Selected Time Sorting:', selectedTimeSorting); const url = '/pages?minPrice=' + minPrice +
+            '&maxPrice=' + maxPrice + '&priceOrder=' + selectedPriceSorting + '&createdAtOrder=' + selectedTimeSorting
+            console.log(url) window.location.href = url } // Event listener for the button click to trigger data
+            retrieval document.getElementById('getDataButton').addEventListener('click', getSelectedValues);
+        </script>
+    </body>
 
 </html>

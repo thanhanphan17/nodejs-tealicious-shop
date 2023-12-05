@@ -19,7 +19,7 @@ class UserController {
             res.cookie('refreshToken', result.tokens.refreshToken)
             res.cookie('customerName', result.user.name)
             res.cookie('customerEmail', result.user.email)
-            res.cookie('isUser', false)
+            res.cookie('isUserLoggedIn', true)
             console.log(response.data)
             res.redirect('/')
         } else {
@@ -46,8 +46,7 @@ class UserController {
             res.cookie('customerName', result.user.name)
             res.cookie('customerEmail', result.user.email)
             res.cookie('customerID', result.user.id)
-            res.cookie('isUser', false)
-            res.cookie('isLogined', true)
+            res.cookie('isUserLoggedIn', true)
             res.redirect('/')
             console.log(req.body)
         } else {

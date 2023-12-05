@@ -19,8 +19,6 @@ class AuthController {
                 })
             }
             const result = user.user
-            res.cookie('accessToken', result.tokens.accessToken)
-            res.cookie('refreshToken', result.tokens.refreshToken)
             OK(res, 'login successfully', result)
         })(req, res)
     })
@@ -43,6 +41,12 @@ class AuthController {
 
     register = catchAsync(async (req: Request, res: Response, next: NextFunction) => {
         CREATED(res, 'create user successfully', await authService.register(req.body))
+    })
+
+    verifyToken = catchAsync(async (req: Request, res: Response, next: NextFunction) => {
+        OK(res, 'token verify successfully', {
+            verifyStatus: true
+        })
     })
 }
 

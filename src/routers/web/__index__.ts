@@ -1,7 +1,7 @@
 import express from 'express'
-import shop from '~/routers/web/shop/index'
-import admin from '~/routers/web/admin/index'
-import payment from '~/routers/web/payment/index'
+import shop from '~/routers/web/shop/__index__'
+import admin from '~/routers/web/admin/__index__'
+import payment from '~/routers/web/payment/__index__'
 
 const router = express.Router()
 
