@@ -1,3 +1,5 @@
+<p style="color:red">For the better format of reading please visit: https://yentraquan.shop/docs
+
 Everything in this document is work well in Ubuntu 23.04 (my local desktop) and Ubuntu 22.04 (my server run in AWS).
 
 The live demo version: https://yentraquan.shop/
@@ -33,7 +35,7 @@ The live demo version: https://yentraquan.shop/
     ```
 
 -   2. Install Docker
-       Download at: https://www.docker.com/
+    -   Download at: https://www.docker.com/
 
 ### II. Run with Docker Compose
 
