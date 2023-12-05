@@ -259,29 +259,17 @@
 
                                     <div class='col-md-7'>
                                         <h4 class='mb-4'>Đánh giá sản phẩm</h4>
-                                        <div class='d-flex my-3'>
-                                            <p class='mb-0 mr-2'>Đánh giá * :</p>
-                                            <div class='product__details__rating'>
-                                                <i class='fa fa-star'></i>
-                                                <i class='fa fa-star'></i>
-                                                <i class='fa fa-star'></i>
-                                                <i class='fa fa-star'></i>
-                                                <i class='fa fa-star-half-o'></i>
-                                            </div>
-                                        </div>
-                                        <form>
+                                        <form action="/rating" action="post">
                                             <div class='form-group'>
-                                                <label for='name'>Họ và tên *</label>
-                                                <input type='text' class='form-control' id='name' />
+                                                <input type="hidden" name="productId" id=""
+                                                    value={{product.product.id}}>
+                                                <label for='email'>Đánh giá sản phẩm *</label>
+                                                <input type='email' class='form-control' id='email' name="rating" />
                                             </div>
                                             <div class='form-group'>
-                                                <label for='email'>Địa chỉ email *</label>
-                                                <input type='email' class='form-control' id='email' />
-                                            </div>
-                                            <div class='form-group'>
-                                                <label for='message'>Đánh giá của bạn *</label>
-                                                <textarea id='message' cols='20' rows='3'
-                                                    class='form-control'></textarea>
+                                                <label for='message'>Bình luận của bạn *</label>
+                                                <textarea id='message' cols='20' rows='2' class='form-control'
+                                                    name="comment"></textarea>
                                             </div>
 
                                             <button type='submit' class='btn btn-primary-hover-outline'>Gửi đánh

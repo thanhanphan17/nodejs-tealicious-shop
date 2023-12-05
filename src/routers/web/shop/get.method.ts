@@ -48,14 +48,14 @@ router.get('/logout', userController.logout)
 router.get('/pages', async (req, res, next) => {
     const customerName = req.cookies.customerName
     const productList = await productController.listProduct(req, res, next)
-    console.log(productList)
+    //console.log(productList)
     const isLoggedIn = req.cookies.isUserLoggedIn
     res.render('shop/pages.hbs', { productList, isLoggedIn, customerName })
 })
 
 router.get('/detail-product', async (req, res, next) => {
     const product = await productController.getProductById(req, res, next)
-    console.log(product.product.image.url)
+    //console.log(product.product.image.url)
     const customerName = req.cookies.customerName
     const isLoggedIn = req.cookies.isUserLoggedIn
     res.render('shop/detail-product.hbs', { customerName, isLoggedIn, product })

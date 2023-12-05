@@ -14,7 +14,7 @@ export const isAdminLoggedInSuccess = catchAsync(async (req: any, res, next: Nex
     }
     try {
         const response = await axios.get(url, { headers })
-        console.log('code', response.data.status)
+        // console.log('code', response.data.status)
         if (response.data.status == 200) {
             return next()
         }
@@ -36,9 +36,12 @@ export const isUserLoggedInSuccess = catchAsync(async (req: any, res, next: Next
         const response = await axios.get(url, { headers })
         console.log('code', response.data.status)
         if (response.data.status == 200) {
+            console.log('oooooooooooooooooooooooo')
             return next()
         }
     } catch (error) {
+        console.log('faillllllllllllllllllllllllllllll')
+
         res.redirect('/login')
     }
 })
