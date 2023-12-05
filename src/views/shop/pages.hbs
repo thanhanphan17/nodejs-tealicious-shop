@@ -166,34 +166,17 @@
                             <div
                                 class="custom-control custom-radio d-flex align-items-center justify-content-between mb-3">
                                 <input type="radio" class="custom-control-input" checked id="size-all" name="category"
-                                    value="0">
+                                    value="">
                                 <label class="custom-control-label" for="size-all">Tất cả Danh mục</label>
-                                {{!-- <span class="badge border font-weight-normal">1000</span> --}}
                             </div>
+                            {{#each categoryList.catagories}}
                             <div
                                 class="custom-control custom-radio d-flex align-items-center justify-content-between mb-3">
-                                <input type="radio" class="custom-control-input" id="size-1" name="category" value="1">
-                                <label class="custom-control-label" for="size-1">Phong Vị Yên Trà</label>
-                                <span class="badge border font-weight-normal">150</span>
+                                <input type="radio" class="custom-control-input" id={{this.id}} name="category"
+                                    value={{this.id}}>
+                                <label class="custom-control-label" for={{this.id}}>{{this.name}}</label>
                             </div>
-                            <div
-                                class="custom-control custom-radio d-flex align-items-center justify-content-between mb-3">
-                                <input type="radio" class="custom-control-input" id="size-2" name="category" value="2">
-                                <label class="custom-control-label" for="size-2">Hoa Cỏ Dưỡng Tâm</label>
-                                <span class="badge border font-weight-normal">295</span>
-                            </div>
-                            <div
-                                class="custom-control custom-radio d-flex align-items-center justify-content-between mb-3">
-                                <input type="radio" class="custom-control-input" id="size-3" name="category" value="3">
-                                <label class="custom-control-label" for="size-3">Thảo Mộc Nhiệt Đới</label>
-                                <span class="badge border font-weight-normal">246</span>
-                            </div>
-                            <div
-                                class="custom-control custom-radio d-flex align-items-center justify-content-between mb-3">
-                                <input type="radio" class="custom-control-input" id="size-4" name="category" value="4">
-                                <label class="custom-control-label" for="size-4">Yên An Ngự Trà</label>
-                                <span class="badge border font-weight-normal">145</span>
-                            </div>
+                            {{/each}}
                         </form>
                     </div>
 
@@ -418,7 +401,7 @@
             console.log('Selected Category:', selectedCategory);
             console.log('Selected Price Sorting:', selectedPriceSorting);
             console.log('Selected Time Sorting:', selectedTimeSorting);
-            const url = '/pages?page=0&minPrice=' + minPrice + '&maxPrice=' + maxPrice + '&priceOrder=' + selectedPriceSorting + '&createdAtOrder=' + selectedTimeSorting
+            const url = '/pages?page=0&minPrice=' + minPrice + '&maxPrice=' + maxPrice + '&categoryId=' + selectedCategory + '&priceOrder=' + selectedPriceSorting + '&createdAtOrder=' + selectedTimeSorting
             console.log(url)
             window.location.href = url
         }

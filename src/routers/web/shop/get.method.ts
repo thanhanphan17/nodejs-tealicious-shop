@@ -2,6 +2,8 @@ import { Console } from 'console'
 import express from 'express'
 import productController from '~/controllers/web/product.controller'
 import userController from '~/controllers/web/user.controller'
+import ratingController from '~/controllers/web/rating.controller'
+import categoryController from '~/controllers/web/category.controller'
 
 const router = express.Router()
 
@@ -49,16 +51,19 @@ router.get('/pages', async (req, res, next) => {
     const customerName = req.cookies.customerName
     const productList = await productController.listProduct(req, res, next)
     //console.log(productList)
+    const categoryList = await categoryController.listCategories(req, res, next)
+    console.log(categoryList)
     const isLoggedIn = req.cookies.isUserLoggedIn
-    res.render('shop/pages.hbs', { productList, isLoggedIn, customerName })
+    res.render('shop/pages.hbs', { productList, isLoggedIn, customerName, categoryList })
 })
 
 router.get('/detail-product', async (req, res, next) => {
     const product = await productController.getProductById(req, res, next)
-    //console.log(product.product.image.url)
+    const rating = await ratingController.listRatings(req, res, next)
     const customerName = req.cookies.customerName
     const isLoggedIn = req.cookies.isUserLoggedIn
-    res.render('shop/detail-product.hbs', { customerName, isLoggedIn, product })
+    console.log(rating)
+    res.render('shop/detail-product.hbs', { customerName, isLoggedIn, product, rating })
 })
 
 router.get('/sign-up', function (req, res, next) {

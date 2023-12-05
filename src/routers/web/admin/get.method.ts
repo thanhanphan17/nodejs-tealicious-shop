@@ -58,8 +58,10 @@ router.get('/add-user', isAdminLoggedInSuccess, function (req, res, next) {
     res.render('admin/add-user.hbs')
 })
 
-router.get('/add-product', isAdminLoggedInSuccess, function (req, res, next) {
-    res.render('admin/add-product.hbs')
+router.get('/add-product', isAdminLoggedInSuccess, async (req, res, next) => {
+    const category = await categoryController.listCategories(req, res, next)
+
+    res.render('admin/add-product.hbs', { category })
 })
 
 router.get('/add-order', isAdminLoggedInSuccess, function (req, res, next) {

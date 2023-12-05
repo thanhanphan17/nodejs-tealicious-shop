@@ -7,6 +7,6 @@ const router = express.Router()
 
 router.post('/login', userController.login)
 router.post('/sign-up', userController.register)
-router.post('/rating', ratingController.createRating)
+router.post('/rating', isUserLoggedInSuccess, ratingController.createRating)
 
 export default router
