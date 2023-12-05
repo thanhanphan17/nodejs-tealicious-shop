@@ -1,3 +1,4 @@
+import { Console } from 'console'
 import express from 'express'
 import productController from '~/controllers/web/product.controller'
 import userController from '~/controllers/web/user.controller'
@@ -46,11 +47,14 @@ router.get('/logout', userController.logout)
 
 router.get('/pages', async (req, res, next) => {
     const productList = await productController.listProduct(req, res, next)
-    res.render('shop/pages.hbs', { productList })
+    console.log(productList)
+    const isLoggedIn = req.cookies.isUserLoggedIn
+    res.render('shop/pages.hbs', { productList, isLoggedIn })
 })
 
 router.get('/detail-product', async (req, res, next) => {
     const product = await productController.getProductById(req, res, next)
+    console.log(product)
     const customerName = req.cookies.customerName
     const isLoggedIn = req.cookies.isUserLoggedIn
     res.render('shop/detail-product.hbs', { customerName, isLoggedIn, product })
