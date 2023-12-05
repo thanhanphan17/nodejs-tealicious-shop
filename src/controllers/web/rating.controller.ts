@@ -17,7 +17,7 @@ class ProductRatingController {
         }
         const data = {
             productId: productId,
-            rating: rating,
+            rating: rating * 1,
             comment: comment
         }
         console.log(data)
@@ -33,7 +33,27 @@ class ProductRatingController {
                 console.error('Error:', error)
             })
     })
-    listRatings = catchAsync(async (req: any, res: any, next: NextFunction) => {})
+    listRatings = catchAsync(async (req: any, res: any, next: NextFunction) => {
+        console.log('rating listtttttttttttttttttttt')
+        const page = 0
+        const limit = 4
+
+        const url = `${appConfig.apiURL}/api/rating/list?page=${page}&limit=${limit}&productId=${req.query.id}`
+        console.log('url comtroller  ' + url)
+        // const url =
+        //     'https://yentraquan.shop/api/rating/list?page=0&limit=4&productId=d11627a3-d75e-4e65-b55e-94e24a3efaec'
+        try {
+            const response = await axios.get(url)
+            // console.log('ratingg controller ' + response.data.data.ratings[0].id)
+
+            // console.log('code', response.data.status)
+            if (response.data.status == 200) {
+                return response.data.data.ratings
+            }
+        } catch (error) {
+            res.redirect('/')
+        }
+    })
 }
 
 export default new ProductRatingController()

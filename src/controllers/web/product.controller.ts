@@ -25,6 +25,7 @@ class ProductController {
                 quantity: quantity * 1,
                 description: description,
                 price: price * 1,
+                categoryId,
                 image: {
                     url: result.data
                 }
