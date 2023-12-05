@@ -46,16 +46,18 @@ class ProductController {
     })
 
     listProduct = catchAsync(async (req: any, res: Response, next: NextFunction) => {
-        const page = req.query.page || 2
-        const limit = req.query.limit || 12
+        const page = req.query.page || 0
+        const limit = req.query.limit || 20
         const name = req.query.name || ''
         const minPrice = req.query.minPrice * 1 || 0
         const maxPrice = req.query.maxPrice * 1 || 1000000
         const priceOrder = req.query.priceOrder || 'asc'
         const createdAtOrder = req.query.createdAtOrder || 'desc'
+        const categoryId = req.query.categoryId || ''
         const result = await axios.get(
-            `${appConfig.apiURL}/api/product/list?page=${page}&name=${name}&maxPrice=${maxPrice}&minPrice=${minPrice}&createAtOrder=${createdAtOrder}&limit=${limit}&priceOrder=${priceOrder}`
-            // `${appConfig.apiURL}/api/product/list?page=${page}&limit=${limit}`
+            `${appConfig.apiURL}/api/product/list?page=${page}&name=${name}&maxPrice=${maxPrice}` +
+                `&minPrice=${minPrice}&createAtOrder=${createdAtOrder}&limit=${limit}&priceOrder=${priceOrder}` +
+                `&categoryId=${categoryId}`
         )
         return result.data.data
     })
