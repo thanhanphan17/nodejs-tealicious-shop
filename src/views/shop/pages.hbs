@@ -23,6 +23,8 @@
     <link rel='stylesheet' href='css/magnific-popup.css' type='text/css' />
     <link rel='stylesheet' href='css/slicknav.min.css' type='text/css' />
     <link rel='stylesheet' href='css/style.css' type='text/css' />
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
 </head>
 
 <body>
@@ -253,8 +255,9 @@
                     <div class='row'>
                         <div class='col-5'>
                             <div class='search-product'>
-                                <form action='' method='get'>
+                                <form action='/pages' method='get'>
                                     <input type='search' placeholder='Tìm kiếm sản phẩm' name='name' required='' />
+                                    <input type='hidden' name='page' value='0' />
                                     <input type='submit' value=' ' id="getSearch" />
                                 </form>
                             </div>
@@ -289,15 +292,15 @@
                                         <span class="sr-only">Previous</span>
                                     </a>
                                 </li>
-                                <li class="page-item active"><a class="page-link" href='/pages?page=0'>1</a></li>
-                                <li class="page-item"><a class="page-link" href='/pages?page=1'>2</a></li>
-                                <li class="page-item"><a class="page-link" href="/pages?page=1">3</a></li>
-                                <li class="page-item"><a class="page-link" href="/pages?page=1">4</a></li>
-                                <li class="page-item"><a class="page-link" href="/pages?page=1">5</a></li>
-                                <li class="page-item"><a class="page-link" href="/pages?page=1">6</a></li>
-                                <li class="page-item"><a class="page-link" href="/pages?page=1">7</a></li>
-                                <li class="page-item"><a class="page-link" href="/pages?page=1">8</a></li>
-                                <li class="page-item"><a class="page-link" href="/pages?page=1">9</a></li>
+                                <li class="page-item"><a class="page-link" href="/pages?page=0">1</a></li>
+                                <li class="page-item"><a class="page-link" href="/pages?page=1">2</a></li>
+                                <li class="page-item"><a class="page-link" href="/pages?page=2">3</a></li>
+                                <li class="page-item"><a class="page-link" href="/pages?page=3">4</a></li>
+                                <li class="page-item"><a class="page-link" href="/pages?page=4">5</a></li>
+                                <li class="page-item"><a class="page-link" href="/pages?page=5">6</a></li>
+                                <li class="page-item"><a class="page-link" href="/pages?page=6">7</a></li>
+                                <li class="page-item"><a class="page-link" href="/pages?page=7">8</a></li>
+                                <li class="page-item"><a class="page-link" href="/pages?page=8">9</a></li>
                                 <li class="page-item">
                                     <a class="page-link" href="#" aria-label="Next">
                                         <span aria-hidden="true">&raquo;</span>
@@ -380,22 +383,7 @@
     <script src='js/owl.carousel.min.js'></script>
     <script src='js/main.js'></script>
     <script>
-        function handleSortBy(selectElement) {
-            var selectedOption = selectElement.value;
-            if (selectedOption === 'priceAsc') {
-                window.location.href = '/pages?priceOrder=asc';
-            }
-            if (selectedOption === 'priceDesc') {
-                window.location.href = '/pages?priceOrder=desc';
-            }
-            if (selectedOption === 'timeAsc') {
-                window.location.href = '/pages?createdAtOrder=asc';
-            }
-            if (selectedOption === 'timeDesc') {
-                window.location.href = '/pages?createdAtOrder=desc';
-            }
-        }
-
+        document.getElementById('getDataButton').addEventListener('click', getSelectedValues);
         // Function to retrieve selected values from radio buttons
         function getSelectedValues() {
             const searchInputValue = document.getElementById('searchInput').value;
@@ -430,22 +418,34 @@
             console.log('Selected Category:', selectedCategory);
             console.log('Selected Price Sorting:', selectedPriceSorting);
             console.log('Selected Time Sorting:', selectedTimeSorting);
-            const url = '/pages?minPrice=' + minPrice + '&maxPrice=' + maxPrice + '&priceOrder=' + selectedPriceSorting + '&createdAtOrder=' + selectedTimeSorting
+            const url = '/pages?page=0&minPrice=' + minPrice + '&maxPrice=' + maxPrice + '&priceOrder=' + selectedPriceSorting + '&createdAtOrder=' + selectedTimeSorting
             console.log(url)
             window.location.href = url
         }
 
-        // Event listener for the button click to trigger data retrieval
-        document.getElementById('getDataButton').addEventListener('click', getSelectedValues);
 
-        // jQuery document ready function
+
+        // Event listener for the button click to trigger data retrieval
         $(document).ready(function () {
+            // Retrieve the last active item index from sessionStorage
+            var lastActiveIndex = sessionStorage.getItem('lastActiveIndex');
+
+            // Set 'active' class to the last active item
+            if (lastActiveIndex !== null) {
+                $('#pagination li.page-item').eq(lastActiveIndex).addClass('active');
+            }
+
             // Click event for pagination links
-            $('#pagination li.page-item').on('click', function () {
+            $('#pagination li.page-item:not(.disabled) a').on('click', function (event) {
                 // Remove 'active' class from all pagination items
                 $('#pagination li.page-item').removeClass('active');
+
                 // Add 'active' class to the clicked item
-                $(this).addClass('active');
+                $(this).parent().addClass('active');
+
+                // Save the index of the clicked item in sessionStorage
+                var clickedIndex = $('#pagination li.page-item').index($(this).parent());
+                sessionStorage.setItem('lastActiveIndex', clickedIndex);
             });
         });
     </script>

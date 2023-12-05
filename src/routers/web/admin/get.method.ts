@@ -1,5 +1,6 @@
 import express from 'express'
 import productController from '~/controllers/web/product.controller'
+import categoryController from '~/controllers/web/category.controller'
 import { isAdminLoggedInSuccess } from '~/middlewares/loginSuccess'
 
 const router = express.Router()
@@ -10,6 +11,16 @@ router.get('/dashboard', isAdminLoggedInSuccess, (req, res, next) => {
 
 router.get('/user', isAdminLoggedInSuccess, function (req, res, next) {
     res.render('admin/user.hbs')
+})
+
+router.get('/category', isAdminLoggedInSuccess, async (req, res, next) => {
+    const category = await categoryController.listCategories(req, res, next)
+    console.log(category)
+    res.render('admin/category.hbs', { category })
+})
+
+router.get('/add-category', isAdminLoggedInSuccess, function (req, res, next) {
+    res.render('admin/add-category.hbs')
 })
 
 router.get('/product', isAdminLoggedInSuccess, async (req, res, next) => {

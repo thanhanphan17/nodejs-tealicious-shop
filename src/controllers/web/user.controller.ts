@@ -20,6 +20,7 @@ class UserController {
             res.cookie('customerName', result.user.name)
             res.cookie('customerEmail', result.user.email)
             res.cookie('isUserLoggedIn', true)
+            res.cookie('customerID', result.user.id)
             console.log(response.data)
             res.redirect('/')
         } else {

@@ -56,11 +56,9 @@ class ProductService {
                 name: {
                     contains: filter.name || ''
                 },
-                categoryId: filter.categoryId
-                    ? {
-                          equals: filter.categoryId
-                      }
-                    : undefined,
+                categoryId: {
+                    equals: filter.categoryId
+                },
                 price: {
                     ...(filter.minPrice !== undefined && { gte: filter.minPrice * 1 }),
                     ...(filter.maxPrice !== undefined && { lte: filter.maxPrice * 1 })

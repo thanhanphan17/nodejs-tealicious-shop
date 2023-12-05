@@ -874,6 +874,11 @@ table.dataTable thead .sorting:after {
     text-align: center;
 }
 
+.id-cate-col {
+    text-align: center;
+    width: 50%;
+}
+
 .name-col {
     width: 20%;
     text-align: center;
