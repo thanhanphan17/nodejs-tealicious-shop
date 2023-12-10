@@ -50,9 +50,7 @@ router.get('/logout', userController.logout)
 router.get('/pages', async (req, res, next) => {
     const customerName = req.cookies.customerName
     const productList = await productController.listProduct(req, res, next)
-    //console.log(productList)
     const categoryList = await categoryController.listCategories(req, res, next)
-    console.log(categoryList)
     const isLoggedIn = req.cookies.isUserLoggedIn
     res.render('shop/pages.hbs', { productList, isLoggedIn, customerName, categoryList })
 })
@@ -62,7 +60,7 @@ router.get('/detail-product', async (req, res, next) => {
     const rating = await ratingController.listRatings(req, res, next)
     const customerName = req.cookies.customerName
     const isLoggedIn = req.cookies.isUserLoggedIn
-    console.log(rating)
+    // console.log(rating)
     res.render('shop/detail-product.hbs', { customerName, isLoggedIn, product, rating })
 })
 

@@ -19,24 +19,19 @@ class ProductRatingController {
             rating: rating * 1,
             comment: comment
         }
-        console.log(data)
 
         await axios
             .post(url, data, { headers })
             .then((response) => {
-                console.log(response)
-                res.redirect(`/detail-product?id=${productId}`)
+                // res.redirect(`/detail-product?id=${productId}`)
             })
             .catch((error) => {
-                // Handle errors here
                 console.error('Error:', error)
             })
     })
     listRatings = catchAsync(async (req: any, res: any, next: NextFunction) => {
-        console.log('rating listtttttttttttttttttttt')
         const page = 0
-        const limit = 10
-
+        const limit = 20
         const url = `${appConfig.apiURL}/api/rating/list?page=${page}&limit=${limit}&productId=${req.query.id}`
         console.log('url comtroller  ' + url)
         try {
