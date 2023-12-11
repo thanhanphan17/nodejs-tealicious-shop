@@ -328,9 +328,8 @@
                                                                 class='form-control' name="comment"></textarea>
                                                         </div>
 
-                                                        <button type='submit' class='btn btn-primary-hover-outline'>Gửi
-                                                            đánh
-                                                            giá</button>
+                                                        <button id="myButton" type="button"
+                                                            class="btn btn-primary-hover-outline">Gửi đánh giá</button>
                                                     </form>
                                                 </div>
                                             </div>
@@ -472,57 +471,81 @@
             }
         });
 
+        function uploadStarNumber() {
+            const ratingContainers = document.querySelectorAll('.product__details__rating');
 
-        function loadRatings() {
-            console.log("first ajax")
-            // Create a new XMLHttpRequest object
-            var xhttp = new XMLHttpRequest();
-            // Set up a callback function to handle the state changes of the request
-            xhttp.onreadystatechange = function () {
-                // Check if the request is complete (readyState 4) and successful (status 200)
-                if (this.readyState == 4 && this.status == 200) {
-                    // Update the content of the HTML element with the ID "ratingsContainer" with the response text
-                    updateRatings(JSON.parse(this.responseText));
-                    console.log("succesfull ajax")
-                    console.log(updateRatings)
+            ratingContainers.forEach(container => {
+                const ratingValue = parseFloat(container.getAttribute('data-value'));
+                displayStarRating(ratingValue, container);
+            });
+
+            function displayStarRating(numStars, container) {
+                container.innerHTML = '';
+
+                for (let i = 1; i <= 5; i++) {
+                    const star = document.createElement('i');
+                    star.classList.add('fa', i <= numStars ? 'fa-star' : 'fa-star-o');
+
+                    if (i === Math.ceil(numStars) && numStars % 1 !== 0) {
+                        star.classList.add('fa-star-half-o');
+                    }
+
+                    container.appendChild(star);
                 }
-            };
-            // Initialize the request with the specified method ("GET"), URL ("ajax_test.asp"), and asynchronous flag (true)
-            xhttp.open("GET", "/detail-product", true);
-            // Send the request
-            xhttp.send();
+            }
         }
 
         $(document).ready(function () {
-            // Handle form submission to add a new rating
-            $("#ratingForm").submit(function (event) {
-                event.preventDefault();
-
-                $.ajax({
-                    url: "/rating", // Replace with your actual form submission endpoint
-                    method: "POST",
-                    data: $(this).serialize(),
-                    success: function (response) {
-                        console.log("create product ajax resposeeeeeeeeeeeeeeeeee ")
-                        console.log(response)
-                        loadRatings();
-                    },
-                    error: function (error) {
-                        console.error('Error submitting rating:', error);
-                    }
-                });
-
-                const ratingsContainer = document.getElementById('ratingsContainer');
-                ratingsContainer.innerHTML = ''; // Clear existing content
-
-                // Add an <h3> element
-                const headingElement = document.createElement('h3');
-                headingElement.textContent = 'New Ratings + {{name}}'; // Set the text content of the heading
-                ratingsContainer.appendChild(headingElement); // Append the heading to the container
-
+            $('#myButton').on('click', function () {
+                updateDOMWithRatings();
+                submitForm()
             });
+        });
+
+        function updateDOMWithRatings() {
+            var ratingsContainer = $("#ratingsContainer");
+            ratingsContainer.empty(); // Clear existing content
+
+            var formData = $('#ratingForm').serialize();
+            console.log(formData);
+
+            var rating = formData.match(/rating=([^&]+)/)[1];
+            var comment = decodeURIComponent(formData.match(/comment=([^&]+)/)[1]);
+
+            console.log("Rating:", rating);
+            console.log("Comment:", comment);
+
+            // Use JavaScript variables directly in the template
+            var newRatingHTML = `
+                                <div class='media mb-4'>
+                                    <img src='/img/profile.jpg' alt='Image' class='img-fluid mr-3 mt-1' style='width: 45px' />
+                                    <div class='media-body'>
+                                        <h6>{{customerName}}<small> - <i>${new Date().toLocaleString()}</i></small></h6>
+                                        <div class='product__details__rating' data-value="${rating}}"></div>
+                                        <p>${comment}</p>
+                                    </div>
+                                </div>`;
+
+            ratingsContainer.append(newRatingHTML);
+            uploadStarNumber()
+        }
 
 
+
+        function submitForm() {
+            var formData = $('#ratingForm').serialize();
+            $.ajax({
+                type: 'POST',
+                url: '/rating',
+                data: formData,
+                success: function (response) {
+                    console.log(response);
+                },
+                error: function (error) {
+                    console.error('Error:', error);
+                }
+            });
+        }
     </script>
 </body>
 
