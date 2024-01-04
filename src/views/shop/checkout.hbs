@@ -106,27 +106,21 @@
                 <div class='col-md-6 mb-5 mb-md-0'>
                     <h2 class='h3 mb-3 text-black'>Chi tiết đơn hàng</h2>
                     <div class='p-3 p-lg-5 border bg-white'>
+
                         <div class='form-group row'>
-                            <div class='col-md'>
-                                <label for='c_fname' class='text-black'>Họ và Tên Người nhận hàng<span
+                            <div class='col-md-12'>
+                                <label for='c_companyname' class='text-black'>Địa chỉ cụ thể (Số nhà, Tên đường)<span
                                         class='text-danger'>*</span></label>
-                                <input type='text' class='form-control' id='c_fname' name='c_fname' />
+                                <input type='text' class='form-control' id='street' name='c_companyname' required />
                             </div>
                         </div>
 
                         <div class='form-group row'>
                             <div class='col-md-12'>
-                                <label for='c_companyname' class='text-black'>Nơi nhận</label>
-                                <input type='text' class='form-control' id='c_companyname' name='c_companyname' />
-                            </div>
-                        </div>
-
-                        <div class='form-group row'>
-                            <div class='col-md-12'>
-                                <label for='c_address' class='text-black'>Địa chỉ<span
+                                <label for='c_address' class='text-black'>Xã/Phường<span
                                         class='text-danger'>*</span></label>
-                                <input type='text' class='form-control' id='c_address' name='c_address'
-                                    placeholder='Tên đường' />
+                                <input type='text' class='form-control' id='ward' name='c_address'
+                                    placeholder='Tên đường' required />
                             </div>
                         </div>
 
@@ -134,22 +128,17 @@
                             <div class='col-md-6'>
                                 <label for='c_state_country' class='text-black'>Quận/Huyện<span
                                         class='text-danger'>*</span></label>
-                                <input type='text' class='form-control' id='c_state_country' name='c_state_country' />
+                                <input type='text' class='form-control' id='district' name='c_state_country' />
                             </div>
                             <div class='col-md-6'>
                                 <label for='c_postal_zip' class='text-black'>Thành phố<span
                                         class='text-danger'>*</span></label>
-                                <input type='text' class='form-control' id='c_postal_zip' name='c_postal_zip' />
+                                <input type='text' class='form-control' id='city' name='c_postal_zip' />
                             </div>
                         </div>
 
                         <div class='form-group row mb-5'>
-                            <div class='col-md-6'>
-                                <label for='c_email_address' class='text-black'>Địa chỉ Email
-                                    <span class='text-danger'>*</span></label>
-                                <input type='text' class='form-control' id='c_email_address' name='c_email_address' />
-                            </div>
-                            <div class='col-md-6'>
+                            <div class='col-md'>
                                 <label for='c_phone' class='text-black'>Số điện thoại
                                     <span class='text-danger'>*</span></label>
                                 <input type='text' class='form-control' id='c_phone' name='c_phone' placeholder='' />
@@ -174,28 +163,25 @@
                                         <th>Tổng</th>
                                     </thead>
                                     <tbody>
+                                    <tbody class='cart-body'>
                                         <tr>
                                             <td>Liên Hoa Ngự Trà <strong class='mx-2'>x</strong> 1</td>
                                             <td>249.00</td>
                                         </tr>
-                                        <tr>
-                                            <td>Gạo Lứt Thất Tinh Hoa<strong class='mx-2'>x</strong> 2</td>
-                                            <td>249.00</td>
-                                        </tr>
-                                        <tr>
-                                            <td class='text-black font-weight-bold'>
-                                                <strong>Tạm tính</strong>
-                                            </td>
-                                            <td class='text-black'>500.00</td>
-                                        </tr>
-                                        <tr>
-                                            <td class='text-black font-weight-bold'>
-                                                <strong>Tổng đơn hàng</strong>
-                                            </td>
-                                            <td class='text-black font-weight-bold'>
-                                                <strong>489.00</strong>
-                                            </td>
-                                        </tr>
+                                    </tbody>
+
+                                    <tr>
+                                        <td class='text-black font-weight-bold' id>
+                                            <strong>Tạm tính</strong>
+                                        </td>
+                                        <td class='text-black' id="sumCart1">500.00</td>
+                                    </tr>
+                                    <tr>
+                                        <td class='text-black font-weight-bold' id>
+                                            <strong>Tổng đơn hàng</strong>
+                                        </td>
+                                        <td class='text-black'><strong id="sumCart2"> </strong></td>
+                                    </tr>
                                     </tbody>
                                 </table>
 
@@ -203,25 +189,23 @@
                                     <div class='p-3 mb-3'>
                                         <div class='input-group-append'>
                                             <button class='btn btn-black btn-sm' type='button'
-                                                id='button-addon2'>COD</button>
+                                                id='codButton'>COD</button>
                                         </div>
                                     </div>
 
                                     <div class='p-3 mb-3'>
                                         <div class='input-group-append'>
                                             <button class='btn btn-black btn-sm' type='button'
-                                                id='button-addon2'>PayPal</button>
+                                                id='vnpayButton'>VNPay</button>
                                         </div>
                                     </div>
                                 </div>
 
+
                                 <div class='form-group'>
-                                    <a href='/payment/'>
-                                        <button class='btn btn-black btn-lg py-3 btn-block'
-                                            onclick="window.location='thankyou.html'">
-                                            Thanh toán
-                                        </button>
-                                    </a>
+                                    <button class='btn btn-black btn-lg py-3 btn-block' onclick="submitForm()">
+                                        Thanh toán
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -303,6 +287,125 @@
     <script src='js/jquery.slicknav.js'></script>
     <script src='js/owl.carousel.min.js'></script>
     <script src='js/main.js'></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', async function () {
+            handleButtonClick('codButton');
+            await loadProduct();
+        })
+
+        let currentButtonId = 'codButton';
+
+        function handleButtonClick(buttonId) {
+            if (currentButtonId) {
+                document.getElementById(currentButtonId).style.backgroundColor = '';
+            }
+            document.getElementById(buttonId).style.backgroundColor = 'green';
+            currentButtonId = buttonId;
+        }
+
+        document.getElementById('codButton').addEventListener('click', function () {
+            handleButtonClick('codButton');
+        });
+
+        document.getElementById('vnpayButton').addEventListener('click', function () {
+            handleButtonClick('vnpayButton');
+        });
+
+        async function loadProduct() {
+            const url = `http://localhost:8080/api/cart/get-cart`
+            const accessToken = getCookie("accessToken")
+            const refreshToken = getCookie("refreshToken")
+            const headers = {
+                authorization: accessToken,
+                'refresh-token': refreshToken
+            }
+
+            let sumCartPro = 0
+            await axios.get(url, { headers }).then(response => {
+                let products = []
+                products = response.data.data
+                const $product_table = $(".cart-body");
+                $product_table.html("");
+                products.forEach((item, index) => {
+                    const sumProduct = item.product.price * item.quantity
+                    sumCartPro += sumProduct * 1
+                    const html = `<tr>
+                                <td>${item.product.name}<strong class='mx-2'>x</strong> ${item.quantity}</td>
+                                <td>${sumProduct} VNĐ</td>
+                                            </tr>`
+                    $product_table.append($.parseHTML(html));
+                })
+            })
+            document.getElementById('sumCart1').innerHTML = sumCartPro + " VNĐ"
+            document.getElementById('sumCart2').innerHTML = sumCartPro + " VNĐ"
+        }
+
+        function getCookie(name) {
+            const match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
+            if (match) {
+                return decodeURIComponent(match[2]);
+            }
+            return null;
+        }
+
+
+        async function submitForm() {
+            // Create a form element
+            var form = document.createElement('form');
+
+
+            // Create input for username
+            var shippingInput = document.createElement('input');
+            shippingInput.type = 'text';
+            shippingInput.name = 'shippingAddress';
+            shippingInput.value = document.getElementById('street').value + ',' + document.getElementById('ward').value + ',' + document.getElementById('district').value + ',' + document.getElementById('city').value;
+            form.appendChild(shippingInput);
+
+            const url = `http://localhost:8080/api/cart/get-cart`
+            const accessToken = getCookie("accessToken")
+            const refreshToken = getCookie("refreshToken")
+            const headers = {
+                authorization: accessToken,
+                'refresh-token': refreshToken
+            }
+
+            let productOrigin = []
+            await axios.get(url, { headers }).then(response => {
+                products = response.data.data;
+                products.forEach((item, index) => {
+                    const product = {
+                        productName: item.product.name,
+                        productImage: item.product.image.url[0],
+                        quantity: item.quantity,
+                        price: item.price
+                    }
+                    productOrigin.push(product)
+                })
+
+            })
+            document.body.appendChild(form);
+
+            const data = {
+                shippingAddress: shippingInput.value,
+                productOrigin: productOrigin
+            }
+
+            await axios.post(`http://localhost:8080/api/order/create-order`, data, { headers }).then(response => {
+                const order = response.data.data;
+                alert(order.id)
+                const amount = document.getElementById('sumCart1').textContent.match(/\d+/) * 1
+                let paymentUrl = '/payment/pay?amount=' + amount + '&order_Id=' + order.id
+                if (currentButtonId == 'vnpayButton') {
+                    window.location.href = paymentUrl
+                }
+            })
+
+
+
+        }
+    </script>
 </body>
 
 </html>
