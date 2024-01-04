@@ -39,7 +39,6 @@ class ProductController {
                     res.redirect('/admin/product')
                 })
                 .catch((error) => {
-                    // Handle errors here
                     console.error('Error:', error)
                 })
         }

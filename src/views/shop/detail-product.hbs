@@ -136,23 +136,25 @@
                             {{product.product.description}}</p>
 
                         <div class='row'>
+
                             <div style='margin-left: 15px' class='center-submit'>
                                 <strong class='product-price'>Số lượng</strong>
                             </div>
                             <div class='col-md-2 mb-3 mb-md-0'>
                                 <input style='text-align: center;' type='text' class='form-control py-3' id='coupon'
-                                    value='1' />
+                                    name="quantityInput" value='1' />
                             </div>
                             <div class='col-md-6'>
-                                <a href='/cart'><button style='color:#333333' class='btn btn-primary px-3'>
-                                        <i class='fa fa-shopping-cart mr-1'></i>
-                                        Thêm vào giỏ hàng
+                                <form action="/add-to-cart" method='post'>
+                                    <input type="hidden" name="quantity" id="quantity" value=>
+                                    <input type="hidden" name="productId" id="" value={{product.product.id}}>
+                                    <button style='color:#333333, width=400' class='btn btn-primary px-3' type='submit'
+                                        onclick="addToCart()">
+                                        <i class='fa fa-shopping-cart mr-1'></i> Thêm vào giỏ hàng
                                     </button>
-                                </a>
+                                </form>
                             </div>
-
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -447,6 +449,17 @@
     <script src='/js/main.js'></script>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script>
+        // Get the coupon input element
+        const couponInput = document.getElementById('coupon');
+
+        // Get the quantity input element
+        const quantityInput = document.getElementById('quantity');
+
+        // Add an event listener to the coupon input
+        couponInput.addEventListener('input', function () {
+            quantityInput.value = couponInput.value;
+        });
+
         document.addEventListener('DOMContentLoaded', function () {
             const ratingContainers = document.querySelectorAll('.product__details__rating');
 
@@ -545,6 +558,15 @@
                     console.error('Error:', error);
                 }
             });
+        }
+
+        function addToCart() {
+            // Get the value from the "quantityProduct" input field
+            var quantityProductValue = document.getElementById('coupon').value;
+
+            // Set the value to the hidden input field "quantity"
+            document.getElementById('quantity').value = quantityProductValue;
+
         }
     </script>
 </body>

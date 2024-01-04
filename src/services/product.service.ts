@@ -21,6 +21,7 @@ class ProductService {
     }
 
     static async listProducts(filter: any, page: number, limit: number) {
+        console.log('List product')
         const products = await Prisma.product.findMany({
             skip: page * limit,
             take: limit * 1,

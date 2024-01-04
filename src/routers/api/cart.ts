@@ -6,7 +6,7 @@ const router = express.Router()
 
 router.post('/add-to-cart', loginRequired, cartController.addToCart)
 router.get('/get-cart', loginRequired, cartController.getCart)
-router.patch('/h', loginRequired, cartController.updateQuantity)
-router.delete('/remove-product-from-cart', loginRequired, cartController.removeProductFromCart)
+router.patch('/update-quantity', loginRequired, cartController.updateQuantity)
+router.post('/remove-product-from-cart', loginRequired, cartController.removeProductFromCart)
 
 export default router
