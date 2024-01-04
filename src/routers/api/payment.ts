@@ -87,7 +87,7 @@ router.get('/vnpay_return', async function (req: any, res, next) {
                 data: {
                     paymentMethod: 'vnpay',
                     status: 'failed',
-                    userId: req.userId + '',
+                    // userId: req.userId + '',
                     orderId: vnp_Params['vnp_TxnRef'] + '',
                     amount: Number(vnp_Params['vnp_Amount']) / 100
                 }
