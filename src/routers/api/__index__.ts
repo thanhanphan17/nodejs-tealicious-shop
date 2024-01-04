@@ -6,6 +6,7 @@ import uploadRouter from './upload'
 import categoryRouter from './category'
 import ratingRouter from './rating'
 import cateRouter from './cart'
+import orderRouter from './order'
 
 const router = express.Router()
 
@@ -23,5 +24,6 @@ router.use('/upload', uploadRouter)
 router.use('/category', categoryRouter)
 router.use('/rating', ratingRouter)
 router.use('/cart', cateRouter)
+router.use('/order', orderRouter)
 
 export default router
