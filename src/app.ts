@@ -1,4 +1,5 @@
 import path from 'path'
+import cors from 'cors'
 import morgan from 'morgan'
 import express from 'express'
 import passport from 'passport'
@@ -57,6 +58,7 @@ app.use(
     })
 )
 
+app.use(cors())
 app.use(morgan('dev'))
 app.use(compression())
 app.use(cookieParser())

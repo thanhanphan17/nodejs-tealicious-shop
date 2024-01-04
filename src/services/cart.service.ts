@@ -16,6 +16,17 @@ class CartService {
     }
 
     static async addToCart(userId: string, productId: string, quantity: number) {
+        const oldProductInCart = await Prisma.cart.findMany({
+            where: {
+                userId,
+                productId
+            }
+        })
+
+        if (oldProductInCart.length) {
+            throw new BusinessLogicError('product already in cart')
+        }
+
         const cart = await Prisma.cart.create({
             data: {
                 userId,
