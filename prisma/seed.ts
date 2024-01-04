@@ -40,7 +40,7 @@ async function main() {
                 name: 'ptan21',
                 email: 'ptan21@clc.fitus.edu.vn',
                 role: 'admin',
-                avartarId: '729e55ec-cdd5-40ba-8cbf-2452d5c8a5c4',
+                avartar: '729e55ec-cdd5-40ba-8cbf-2452d5c8a5c4',
                 //12340000@N
                 password: '$2a$10$FHaw3ck8yefN9Z.Gir5Om.a46BX9HGY4j5D2K3cauOQQvnjVqyqY2'
             },

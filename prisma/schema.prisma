@@ -22,8 +22,7 @@ model User {
   password      String
   role          UserRole        @default(user)
   address       String?
-  avartarId     String?
-  avatar        Json?
+  avatar        String?
   status        String          @default("active")
   deleted       Boolean         @default(false)
   createdAt     DateTime?       @default(now())
@@ -152,8 +151,6 @@ enum PaymentStatus {
 
 enum PaymentMethod {
   cod // cash on delivery
-  credit_card // credit card
-  momo // momo
   vnpay // vnpay
 }
 
@@ -161,16 +158,16 @@ model Payment {
   id            String        @id @default(uuid())
   paymentMethod PaymentMethod @default(cod)
   amount        Int
-  userId        String?
-  user          User?         @relation(fields: [userId], references: [id])
   orderId       String?       @unique
   Order         Order?
   status        PaymentStatus @default(pending)
   deleted       Boolean       @default(false)
   createdAt     DateTime?     @default(now())
   updatedAt     DateTime?     @updatedAt
+  User          User?         @relation(fields: [userId], references: [id])
+  userId        String?
 
-  @@index([id, userId, orderId])
+  @@index([id, orderId])
   @@map("payments")
 }
 
