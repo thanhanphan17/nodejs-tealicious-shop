@@ -277,13 +277,13 @@
                                 </li>
                                 <li class="page-item"><a class="page-link" href="/pages?page=0">1</a></li>
                                 <li class="page-item"><a class="page-link" href="/pages?page=1">2</a></li>
-                                <li class="page-item"><a class="page-link" href="/pages?page=2">3</a></li>
+                                {{!-- <li class="page-item"><a class="page-link" href="/pages?page=2">3</a></li>
                                 <li class="page-item"><a class="page-link" href="/pages?page=3">4</a></li>
                                 <li class="page-item"><a class="page-link" href="/pages?page=4">5</a></li>
                                 <li class="page-item"><a class="page-link" href="/pages?page=5">6</a></li>
                                 <li class="page-item"><a class="page-link" href="/pages?page=6">7</a></li>
                                 <li class="page-item"><a class="page-link" href="/pages?page=7">8</a></li>
-                                <li class="page-item"><a class="page-link" href="/pages?page=8">9</a></li>
+                                <li class="page-item"><a class="page-link" href="/pages?page=8">9</a></li> --}}
                                 <li class="page-item">
                                     <a class="page-link" href="#" aria-label="Next">
                                         <span aria-hidden="true">&raquo;</span>
@@ -431,6 +431,59 @@
                 sessionStorage.setItem('lastActiveIndex', clickedIndex);
             });
         });
+
+        $(document).ready(() => {
+            const loadProducts = (page) => {
+                $.ajax({
+                    url: `/pages/${page}`,
+                    method: 'GET',
+                    dataType: 'json',
+                    success: (data) => {
+                        updateProductList(data.products);
+                        updatePagination(data.totalPages, page);
+                    },
+                    error: (error) => {
+                        console.error('Error fetching products:', error);
+                    },
+                });
+            };
+
+            const updateProductList = (products) => {
+                const productsContainer = $('#products-container');
+                productsContainer.empty();
+
+                products.forEach((product) => {
+                    // Create and append product HTML elements
+                    const productElement = $('<div>').text(product.name);
+                    productsContainer.append(productElement);
+                });
+            };
+
+            const updatePagination = (totalPages, currentPage) => {
+                const paginationContainer = $('#pagination-container');
+                paginationContainer.empty();
+
+                for (let i = 1; i <= totalPages; i++) {
+                    // Create and append pagination links
+                    const link = $(`<a href="#" data-page="${i}">${i}</a>`);
+                    link.click((e) => {
+                        e.preventDefault();
+                        const page = $(e.target).data('page');
+                        loadProducts(page);
+                    });
+
+                    if (i === currentPage) {
+                        link.addClass('active');
+                    }
+
+                    paginationContainer.append(link);
+                }
+            };
+
+            // Initial load on page load
+            loadProducts(1);
+        });
+
     </script>
 </body>
 

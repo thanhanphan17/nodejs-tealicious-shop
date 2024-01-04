@@ -19,7 +19,24 @@ import '~/dbs/init.mongoose'
 const app = express()
 
 // Configure the template engine to use Handlebars
-app.engine('hbs', create({ extname: '.hbs', defaultLayout: false, layoutsDir: 'views/' }).engine)
+app.engine(
+    'hbs',
+    create({
+        extname: '.hbs',
+        defaultLayout: false,
+        layoutsDir: 'views/',
+        helpers: {
+            // Define a custom helper for addition
+            add: function (num1: any, num2: any) {
+                return num1 + num2
+            },
+
+            multiply: function (num1: any, num2: any) {
+                return num1 * num2
+            }
+        }
+    }).engine
+)
 // Set the default view engine to Handlebars and Jade
 app.set('view engine', 'hbs')
 app.set('view engine', 'jade')
