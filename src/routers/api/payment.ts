@@ -1,4 +1,6 @@
 import express from 'express'
+import Prisma from '~/dbs/init.prisma'
+
 import moment from 'moment'
 import config from '~/configs/config.vnpay'
 import crypto from 'crypto'
@@ -47,13 +49,12 @@ router.post('/create_payment_url', function (req, res, next) {
     const signed = hmac.update(Buffer.from(signData, 'utf-8')).digest('hex')
     vnp_Params['vnp_SecureHash'] = signed
 
-    console.log(vnp_Params)
     vnpUrl += '?' + querystring.stringify(vnp_Params, { encode: false })
 
     res.redirect(vnpUrl)
 })
 
-router.get('/vnpay_return', function (req, res, next) {
+router.get('/vnpay_return', async function (req: any, res, next) {
     let vnp_Params = req.query
 
     const secureHash = vnp_Params['vnp_SecureHash']
@@ -71,13 +72,39 @@ router.get('/vnpay_return', function (req, res, next) {
 
     if (secureHash === signed) {
         if (vnp_Params['vnp_ResponseCode'] === '00') {
-            // Success
+            await Prisma.payment.create({
+                data: {
+                    paymentMethod: 'vnpay',
+                    status: 'success',
+                    userId: req.userId + '',
+                    orderId: vnp_Params['vnp_TxnRef'] + '',
+                    amount: Number(vnp_Params['vnp_Amount']) / 100
+                }
+            })
             res.render('payment/success.jade', { code: vnp_Params['vnp_ResponseCode'] })
         } else {
-            // Fail
+            await Prisma.payment.create({
+                data: {
+                    paymentMethod: 'vnpay',
+                    status: 'failed',
+                    userId: req.userId + '',
+                    orderId: vnp_Params['vnp_TxnRef'] + '',
+                    amount: Number(vnp_Params['vnp_Amount']) / 100
+                }
+            })
+
             res.render('payment/fail.jade', { code: vnp_Params['vnp_ResponseCode'] })
         }
     } else {
+        await Prisma.payment.create({
+            data: {
+                paymentMethod: 'vnpay',
+                status: 'failed',
+                userId: req.userId + '',
+                orderId: vnp_Params['vnp_TxnRef'] + '',
+                amount: Number(vnp_Params['vnp_Amount']) / 100
+            }
+        })
         res.render('payment/fail.jade', { code: '97' })
     }
 })
