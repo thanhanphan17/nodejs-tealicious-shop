@@ -42,7 +42,6 @@ class UserController {
         } else {
             res.render('shop/login.hbs', { data: { loginFail: true } })
         }
-        //console.log(response.data)
     })
 
     register = catchAsync(async (req: any, res: Response, next: NextFunction) => {
@@ -65,7 +64,6 @@ class UserController {
             res.cookie('customerID', result.user.id)
             res.cookie('isUserLoggedIn', true)
             res.redirect('/')
-            console.log(req.body)
         } else {
             res.render('shop/signup.hbs', { data: { registerFail: true } })
         }
