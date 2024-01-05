@@ -1,10 +1,8 @@
-import { Message } from './../../../node_modules/@smithy/eventstream-codec/dist-types/Message.d'
-import catchAsync from '~/helpers/catch.async'
-import { Response, NextFunction } from 'express'
 import axios from 'axios'
+import catchAsync from '~/helpers/catch.async'
 import appConfig from '~/configs/config.app'
+import { Response, NextFunction } from 'express'
 import uploadController from './upload.controller'
-
 class ProductController {
     createProduct = catchAsync(async (req: any, res: Response, next: NextFunction) => {
         const result = await uploadController.uploadImagesS3(req, res, next)
@@ -34,8 +32,6 @@ class ProductController {
             axios
                 .post(url, data, { headers })
                 .then((response) => {
-                    console.log(response.data)
-
                     res.redirect('/admin/product')
                 })
                 .catch((error) => {
