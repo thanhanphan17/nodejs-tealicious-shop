@@ -3,6 +3,7 @@ import catchAsync from '~/helpers/catch.async'
 import axios from 'axios'
 import appConfig from '~/configs/config.app'
 import cartController from './cart.controller'
+import uploadController from './upload.controller'
 
 function getArrayCookie(name: string) {
     const cookieName = name + '='
@@ -96,6 +97,14 @@ class UserController {
         })
 
         res.redirect('/')
+    })
+
+    uploadAvatar = catchAsync(async (req: any, res: Response, next: NextFunction) => {
+        const result = await uploadController.uploadImageS3(req, res, next)
+        if (result.code == 200) {
+            res.cookie('avatar', result.data)
+        }
+        res.redirect('/profile')
     })
 }
 export default new UserController()

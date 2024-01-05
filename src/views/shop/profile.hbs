@@ -113,7 +113,12 @@
                         <div class='card'>
                             <div class='card-body'>
                                 <div class='d-flex flex-column align-items-center text-center'>
-                                    <img src={{avatar}} alt='user' class='rounded-circle' width='150' />
+                                    <img src={{avatar}} id='userImage' class='rounded-circle' width='150'
+                                        onclick="triggerAddImg()" />
+                                    <form action="/upload-avatar" method="post" enctype='multipart/form-data'>
+                                        <input id='avatarUrl' type='file' name='file' multiple style='display: none' />
+                                        <button type="submit" id='buttonImg'>Upload Avatar</button>
+                                    </form>
                                     <div class='mt-3'>
                                         <h4>{{customerName}}</h4>
                                         <p style="display: none;" id="userId" class='text-muted font-size-sm'>
@@ -233,7 +238,14 @@
             const loginLink =
                 document.getElementById('isLoggedIn'); if (isLogged != null) { loginLink.style.display = 'none'; }
         });
+
+        function triggerAddImg() {
+            const inputImage = document.getElementById('avatarUrl')
+            inputImage.click()
+        }
+
     </script>
+
 </body>
 
 </html>
