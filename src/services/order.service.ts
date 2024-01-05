@@ -24,6 +24,67 @@ class OrderService {
 
         return order
     }
+
+    static async updateOrderStatus(payload: any) {
+        const order = await Prisma.order.update({
+            where: {
+                id: payload.orderId
+            },
+            data: {
+                status: payload.status
+            }
+        })
+
+        if (!order) {
+            throw new BusinessLogicError("can't update order")
+        }
+
+        return order
+    }
+
+    static async getOrderById(id: string) {
+        const order = await Prisma.order.findFirst({
+            where: {
+                id
+            },
+            include: {
+                OrderDetail: true
+            }
+        })
+
+        return order
+    }
+
+    static async getOrdersByUserId(userId: string) {
+        const orders = await Prisma.order.findMany({
+            where: {
+                userId
+            },
+            include: {
+                OrderDetail: true
+            }
+        })
+
+        return orders
+    }
+
+    static async getOrders() {
+        const orders = await Prisma.order.findMany({
+            include: {
+                OrderDetail: true
+            },
+            orderBy: [
+                {
+                    createdAt: 'desc'
+                },
+                {
+                    status: 'desc'
+                }
+            ]
+        })
+
+        return orders
+    }
 }
 
 export default OrderService
