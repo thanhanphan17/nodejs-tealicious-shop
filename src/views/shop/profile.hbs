@@ -135,31 +135,39 @@
                                     <div class='col-sm-3'>
                                         <h6 class='mb-0'>Họ và tên</h6>
                                     </div>
-                                    <div class='col-sm-9 text-secondary'>
-                                        {{customerName}}
-                                    </div>
+                                    <input class='col-sm-9 text-secondary' style="border: none;
+                                    outline: none;" value='{{customerName}}' id="userName" disabled>
+                                    </input>
                                 </div>
                                 <hr />
                                 <div class='row'>
                                     <div class='col-sm-3'>
                                         <h6 class='mb-0'>Địa chỉ email</h6>
                                     </div>
-                                    <div class='col-sm-9 text-secondary'>
-                                        {{customerEmail}}
-                                    </div>
+                                    <input class='col-sm-9 text-secondary' style="border: none;
+                                    outline: none;" value='{{customerEmail}}' id="userEmail" disabled>
+                                    </input>
+
                                 </div>
                                 <hr />
                                 <div class='row'>
                                     <div class='col-sm-3'>
-                                        <h6 class='mb-0'>Số điện thoại</h6>
+                                        <h6 class='mb-0'>Địa chỉ</h6>
                                     </div>
-                                    <div class='col-sm-9 text-secondary'>
-                                        (239) 816-9029
-                                    </div>
+                                    <input class='col-sm-9 text-secondary' style="border: none;
+                                    outline: none;" value='{{customerEmail}}' id="userAddress" disabled>
+                                    </input>
                                 </div>
                             </div>
+
+
+                        </div>
+                        <div class='row'>
+                            <button onclick="enableEditProfile()">Edit</button>
+                            <button onclick="updateProfile()">Update</button>
                         </div>
                     </div>
+
                 </div>
             </div>
         </div>
@@ -244,6 +252,20 @@
             inputImage.click()
         }
 
+        function enableEditProfile() {
+            const inputName = document.getElementById('userName');
+            inputName.removeAttribute('disabled');
+
+            const inputEmail = document.getElementById('userEmail');
+            inputEmail.removeAttribute('disabled');
+
+            const inputAddress = document.getElementById('userAddress');
+            inputAddress.removeAttribute('disabled');
+        }
+
+        function updateProfile() {
+
+        }
     </script>
 
 </body>
