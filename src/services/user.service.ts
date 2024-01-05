@@ -50,6 +50,8 @@ class UserService {
             },
             data: {
                 name: payload.name,
+                address: payload.address,
+                email: payload.email,
                 avatar: payload.avatar
             }
         })

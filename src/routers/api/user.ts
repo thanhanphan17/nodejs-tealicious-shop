@@ -1,9 +1,10 @@
 import express from 'express'
 import userController from '~/controllers/api/user.controller'
+import { loginRequired } from '~/middlewares/api/authentication'
 
 const router = express.Router()
 
-router.post('/update-profile', userController.updateProfile)
-router.post('/change-password', userController.changePassword)
+router.post('/update-profile', loginRequired, userController.updateProfile)
+router.post('/change-password', loginRequired, userController.changePassword)
 
 export default router

@@ -87,7 +87,8 @@ router.get('/profile', function (req, res, next) {
     const isLoggedIn = req.cookies.isUserLoggedIn
     const customerEmail = req.cookies.customerEmail
     const customerID = req.cookies.customerID
-    res.render('shop/profile.hbs', { customerName, isLoggedIn, customerID, customerEmail, avatar })
+    const customerAddress = req.cookies.customerAddress
+    res.render('shop/profile.hbs', { customerName, isLoggedIn, customerID, customerEmail, avatar, customerAddress })
 })
 
 router.get('/change-password', function (req, res, next) {
