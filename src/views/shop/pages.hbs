@@ -275,8 +275,8 @@
                                         <span class="sr-only">Previous</span>
                                     </a>
                                 </li>
-                                <li class="page-item"><a class="page-link" href="/pages?page=0">1</a></li>
-                                <li class="page-item"><a class="page-link" href="/pages?page=1">2</a></li>
+                                <li class="page-item"><a class="page-link" onclick="loadPage(0)">1</a></li>
+                                <li class="page-item"><a class="page-link" onclick="loadPage(1)">2</a></li>
                                 {{!-- <li class="page-item"><a class="page-link" href="/pages?page=2">3</a></li>
                                 <li class="page-item"><a class="page-link" href="/pages?page=3">4</a></li>
                                 <li class="page-item"><a class="page-link" href="/pages?page=4">5</a></li>
@@ -365,7 +365,31 @@
     <script src='js/jquery.slicknav.js'></script>
     <script src='js/owl.carousel.min.js'></script>
     <script src='js/main.js'></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
+        async function loadPage(page) {
+            const url = `http://localhost:8080/api/product/list?page=${page}&limit=20`
+            await axios.get(url).then(response => {
+                let productsApi = response.data.data
+                const productList = productsApi.products
+                const $product_list = $(".product-list");
+                $product_list.html("");
+                productList.forEach((item, index) => {
+                    const html = `<div class='col-12 col-md-4 col-lg-3 mb-5 mb-md-0'>
+                                <a class='product-item' href='/detail-product?id=${item.id}'>
+                                    <img src=${item.image.url[0]} class='img-fluid product-thumbnail' />
+                                    <h3 class='product-title'>${item.name}</h3>
+                                    <strong class='product-price'>${item.price} VNĐ</strong>
+                                    <span class='icon-cross'>
+                                        <img src='./img/cross.svg' class='img-fluid' />
+                                    </span>
+                                </a>
+                            </div>`
+                    $product_list.append($.parseHTML(html));
+                })
+            })
+        }
+
         document.getElementById('getDataButton').addEventListener('click', getSelectedValues);
         // Function to retrieve selected values from radio buttons
         function getSelectedValues() {
