@@ -494,7 +494,7 @@
                                 </a>
                                 <a class='nav-item nav-link' data-toggle='tab' href='#tab-pane-3'>
                                     <div style='text-align: center;' class='section-title'>
-                                        <span>Đánh giá sản phẩm ({{rating.length}})</span>
+                                        <span>Đánh giá sản phẩm</span>
                                     </div>
                                 </a>
                             </div>
@@ -1054,41 +1054,13 @@
             })
         }
 
-        const couponInput = document.getElementById('coupon');
-
-        // Get the quantity input element
-        const quantityInput = document.getElementById('quantity');
-
-        // Add an event listener to the coupon input
-        couponInput.addEventListener('input', function () {
-            quantityInput.value = couponInput.value;
-        });
-
-        document.addEventListener('DOMContentLoaded', function () {
-            const ratingContainers = document.querySelectorAll('.product__details__rating');
-
-            ratingContainers.forEach(container => {
-                const ratingValue = parseFloat(container.getAttribute('data-value'));
-                displayStarRating(ratingValue, container);
-            });
-
-            function displayStarRating(numStars, container) {
-                container.innerHTML = '';
-
-                for (let i = 1; i <= 5; i++) {
-                    const star = document.createElement('i');
-                    star.classList.add('fa', i <= numStars ? 'fa-star' : 'fa-star-o');
-
-                    if (i === Math.ceil(numStars) && numStars % 1 !== 0) {
-                        star.classList.add('fa-star-half-o');
-                    }
-
-                    container.appendChild(star);
-                }
-            }
-        });
 
         $(document).ready(function () {
+            $('#myButton').on('click', function () {
+                updateDOMWithRatings();
+                submitForm()
+            });
+
             var lastActiveIndex = sessionStorage.getItem('lastActiveIndex');
 
             if (lastActiveIndex !== null) {
@@ -1104,67 +1076,6 @@
                 sessionStorage.setItem('lastActiveIndex', clickedIndex);
             });
         });
-
-        function uploadStarNumber() {
-            const ratingContainers = document.querySelectorAll('.product__details__rating');
-
-            ratingContainers.forEach(container => {
-                const ratingValue = parseFloat(container.getAttribute('data-value'));
-                displayStarRating(ratingValue, container);
-            });
-
-            function displayStarRating(numStars, container) {
-                container.innerHTML = '';
-
-                for (let i = 1; i <= 5; i++) {
-                    const star = document.createElement('i');
-                    star.classList.add('fa', i <= numStars ? 'fa-star' : 'fa-star-o');
-
-                    if (i === Math.ceil(numStars) && numStars % 1 !== 0) {
-                        star.classList.add('fa-star-half-o');
-                    }
-
-                    container.appendChild(star);
-                }
-            }
-        }
-
-        $(document).ready(function () {
-            $('#myButton').on('click', function () {
-                updateDOMWithRatings();
-                submitForm()
-            });
-        });
-
-        function updateDOMWithRatings() {
-            var ratingsContainer = $("#ratingsContainer");
-            ratingsContainer.empty(); // Clear existing content
-
-            var formData = $('#ratingForm').serialize();
-            console.log(formData);
-
-            var rating = formData.match(/rating=([^&]+)/)[1];
-            var comment = decodeURIComponent(formData.match(/comment=([^&]+)/)[1]);
-
-            console.log("Rating:", rating);
-            console.log("Comment:", comment);
-
-            // Use JavaScript variables directly in the template
-            var newRatingHTML = `
-                                <div class='media mb-4'>
-                                    <img src='/img/profile.jpg' alt='Image' class='img-fluid mr-3 mt-1' style='width: 45px' />
-                                    <div class='media-body'>
-                                        <h6>{{customerName}}<small> - <i>${new Date().toLocaleString()}</i></small></h6>
-                                        <div class='product__details__rating' data-value="${rating}}"></div>
-                                        <p>${comment}</p>
-                                    </div>
-                                </div>`;
-
-            ratingsContainer.append(newRatingHTML);
-            uploadStarNumber()
-        }
-
-
 
         async function addToCart() {
             var quantity = document.getElementById('productQuantity').value;
@@ -1224,9 +1135,6 @@
                 return
             }
 
-
-
-
             const url = `http://localhost:8080/api/cart/add-to-cart`
             const headers = {
                 authorization: accessToken,
@@ -1241,9 +1149,10 @@
             await axios
                 .post(url, data, { headers })
                 .then((response) => {
-                    res.redirect('/cart')
+                    Toast_success();
                 })
                 .catch((error) => {
+                    Toast_danger();
                     console.error('Error:', error)
                 })
         }
@@ -1312,6 +1221,100 @@
                 return decodeURIComponent(match[2]);
             }
             return null;
+        }
+
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const ratingContainers = document.querySelectorAll('.product__details__rating');
+
+            ratingContainers.forEach(container => {
+                const ratingValue = parseFloat(container.getAttribute('data-value'));
+                displayStarRating(ratingValue, container);
+            });
+
+            function displayStarRating(numStars, container) {
+                container.innerHTML = '';
+
+                for (let i = 1; i <= 5; i++) {
+                    const star = document.createElement('i');
+                    star.classList.add('fa', i <= numStars ? 'fa-star' : 'fa-star-o');
+
+                    if (i === Math.ceil(numStars) && numStars % 1 !== 0) {
+                        star.classList.add('fa-star-half-o');
+                    }
+
+                    container.appendChild(star);
+                }
+            }
+        });
+
+        function uploadStarNumber() {
+            const ratingContainers = document.querySelectorAll('.product__details__rating');
+
+            ratingContainers.forEach(container => {
+                const ratingValue = parseFloat(container.getAttribute('data-value'));
+                displayStarRating(ratingValue, container);
+            });
+
+            function displayStarRating(numStars, container) {
+                container.innerHTML = '';
+
+                for (let i = 1; i <= 5; i++) {
+                    const star = document.createElement('i');
+                    star.classList.add('fa', i <= numStars ? 'fa-star' : 'fa-star-o');
+
+                    if (i === Math.ceil(numStars) && numStars % 1 !== 0) {
+                        star.classList.add('fa-star-half-o');
+                    }
+
+                    container.appendChild(star);
+                }
+            }
+        }
+
+        function updateDOMWithRatings() {
+            var ratingsContainer = $("#ratingsContainer");
+            ratingsContainer.empty(); // Clear existing content
+
+            var formData = $('#ratingForm').serialize();
+            console.log(formData);
+
+            var rating = formData.match(/rating=([^&]+)/)[1];
+            var comment = decodeURIComponent(formData.match(/comment=([^&]+)/)[1]);
+
+            console.log("Rating:", rating);
+            console.log("Comment:", comment);
+
+            // Use JavaScript variables directly in the template
+            var newRatingHTML = `
+                                <div class='media mb-4'>
+                                    <img src='/img/profile.jpg' alt='Image' class='img-fluid mr-3 mt-1' style='width: 45px' />
+                                    <div class='media-body'>
+                                        <h6>{{customerName}}<small> - <i>${new Date().toLocaleString()}</i></small></h6>
+                                        <div class='product__details__rating' data-value="${rating}}"></div>
+                                        <p>${comment}</p>
+                                    </div>
+                                </div>`;
+
+            ratingsContainer.append(newRatingHTML);
+            uploadStarNumber()
+        }
+
+
+
+        function submitForm() {
+            var formData = $('#ratingForm').serialize();
+            $.ajax({
+                type: 'POST',
+                url: '/rating',
+                data: formData,
+                success: function (response) {
+                    console.log(response);
+                },
+                error: function (error) {
+                    console.error('Error:', error);
+                }
+            });
         }
 
     </script>

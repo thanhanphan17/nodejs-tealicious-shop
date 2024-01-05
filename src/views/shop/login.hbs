@@ -805,6 +805,7 @@
                     setCookie('customerEmail', result.user.email)
                     setCookie('isUserLoggedIn', true)
                     setCookie('customerID', result.user.id)
+                    setCookie('avatar', result.user.avatar)
                     window.location.href = '/'
                 } else {
                     Toast_danger('Vui lòng kiểm tra lại Email hoặc Mật khẩu!')

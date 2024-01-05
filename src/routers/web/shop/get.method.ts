@@ -82,11 +82,12 @@ router.get('/thankyou', function (req, res, next) {
 })
 
 router.get('/profile', function (req, res, next) {
+    const avatar = req.cookies.avatar
     const customerName = req.cookies.customerName
     const isLoggedIn = req.cookies.isUserLoggedIn
     const customerEmail = req.cookies.customerEmail
     const customerID = req.cookies.customerID
-    res.render('shop/profile.hbs', { customerName, isLoggedIn, customerID, customerEmail })
+    res.render('shop/profile.hbs', { customerName, isLoggedIn, customerID, customerEmail, avatar })
 })
 
 router.get('/change-password', function (req, res, next) {
