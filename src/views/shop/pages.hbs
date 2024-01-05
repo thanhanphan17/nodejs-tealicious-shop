@@ -430,27 +430,18 @@
             window.location.href = url
         }
 
-
-
-        // Event listener for the button click to trigger data retrieval
         $(document).ready(function () {
-            // Retrieve the last active item index from sessionStorage
             var lastActiveIndex = sessionStorage.getItem('lastActiveIndex');
 
-            // Set 'active' class to the last active item
             if (lastActiveIndex !== null) {
                 $('#pagination li.page-item').eq(lastActiveIndex).addClass('active');
             }
 
-            // Click event for pagination links
             $('#pagination li.page-item:not(.disabled) a').on('click', function (event) {
-                // Remove 'active' class from all pagination items
                 $('#pagination li.page-item').removeClass('active');
 
-                // Add 'active' class to the clicked item
                 $(this).parent().addClass('active');
 
-                // Save the index of the clicked item in sessionStorage
                 var clickedIndex = $('#pagination li.page-item').index($(this).parent());
                 sessionStorage.setItem('lastActiveIndex', clickedIndex);
             });

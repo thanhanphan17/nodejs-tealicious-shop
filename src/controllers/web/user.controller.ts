@@ -2,6 +2,23 @@ import { Response, NextFunction } from 'express'
 import catchAsync from '~/helpers/catch.async'
 import axios from 'axios'
 import appConfig from '~/configs/config.app'
+import cartController from './cart.controller'
+
+function getArrayCookie(name: string) {
+    const cookieName = name + '='
+    const decodedCookie = decodeURIComponent(document.cookie)
+    const cookieArray = decodedCookie.split(';')
+
+    for (let i = 0; i < cookieArray.length; i++) {
+        const cookie = cookieArray[i].trim()
+        if (cookie.indexOf(cookieName) === 0) {
+            // Extract and parse the stored value using JSON.parse
+            return JSON.parse(cookie.substring(cookieName.length, cookie.length))
+        }
+    }
+
+    return null
+}
 
 class UserController {
     login = catchAsync(async (req: any, res: Response, next: NextFunction) => {
@@ -21,7 +38,6 @@ class UserController {
             res.cookie('customerEmail', result.user.email)
             res.cookie('isUserLoggedIn', true)
             res.cookie('customerID', result.user.id)
-            console.log(response.data)
             res.redirect('/')
         } else {
             res.render('shop/login.hbs', { data: { loginFail: true } })

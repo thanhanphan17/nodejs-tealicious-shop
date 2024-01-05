@@ -29,9 +29,10 @@ class ProductRatingController {
                 console.error('Error:', error)
             })
     })
+
     listRatings = catchAsync(async (req: any, res: any, next: NextFunction) => {
         const page = 0
-        const limit = 30
+        const limit = 3
         const url = `${appConfig.apiURL}/api/rating/list?page=${page}&limit=${limit}&productId=${req.query.id}`
         console.log('url comtroller  ' + url)
         try {
