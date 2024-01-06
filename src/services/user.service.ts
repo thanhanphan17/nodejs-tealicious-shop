@@ -126,6 +126,13 @@ class UserService {
 
         return true
     }
+
+    static async getListAccount() {
+        const users = await Prisma.user.findMany()
+        return {
+            users
+        }
+    }
 }
 
 export default UserService
