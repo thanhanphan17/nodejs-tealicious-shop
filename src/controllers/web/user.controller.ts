@@ -2,6 +2,24 @@ import { Response, NextFunction } from 'express'
 import catchAsync from '~/helpers/catch.async'
 import axios from 'axios'
 import appConfig from '~/configs/config.app'
+import cartController from './cart.controller'
+import uploadController from './upload.controller'
+
+function getArrayCookie(name: string) {
+    const cookieName = name + '='
+    const decodedCookie = decodeURIComponent(document.cookie)
+    const cookieArray = decodedCookie.split(';')
+
+    for (let i = 0; i < cookieArray.length; i++) {
+        const cookie = cookieArray[i].trim()
+        if (cookie.indexOf(cookieName) === 0) {
+            // Extract and parse the stored value using JSON.parse
+            return JSON.parse(cookie.substring(cookieName.length, cookie.length))
+        }
+    }
+
+    return null
+}
 
 class UserController {
     login = catchAsync(async (req: any, res: Response, next: NextFunction) => {
@@ -19,14 +37,13 @@ class UserController {
             res.cookie('refreshToken', result.tokens.refreshToken)
             res.cookie('customerName', result.user.name)
             res.cookie('customerEmail', result.user.email)
+            res.cookie('customerAddress', result.user.address)
             res.cookie('isUserLoggedIn', true)
             res.cookie('customerID', result.user.id)
-            console.log(response.data)
             res.redirect('/')
         } else {
             res.render('shop/login.hbs', { data: { loginFail: true } })
         }
-        //console.log(response.data)
     })
 
     register = catchAsync(async (req: any, res: Response, next: NextFunction) => {
@@ -46,10 +63,10 @@ class UserController {
             res.cookie('refreshToken', result.tokens.refreshToken)
             res.cookie('customerName', result.user.name)
             res.cookie('customerEmail', result.user.email)
+            res.cookie('customerAddress', result.user.address)
             res.cookie('customerID', result.user.id)
             res.cookie('isUserLoggedIn', true)
             res.redirect('/')
-            console.log(req.body)
         } else {
             res.render('shop/signup.hbs', { data: { registerFail: true } })
         }
@@ -83,5 +100,44 @@ class UserController {
 
         res.redirect('/')
     })
+
+    uploadAvatar = catchAsync(async (req: any, res: Response, next: NextFunction) => {
+        const result = await uploadController.uploadImageS3(req, res, next)
+        if (result.code == 200) {
+            res.cookie('avatar', result.data)
+        }
+        res.redirect('/profile')
+    })
+
+    getProfile = catchAsync(async (req: any, res: Response, next: NextFunction) => {
+        const accessToken = req.body.accessToken
+        const refreshToken = req.body.refreshToken
+
+        const url = `${appConfig.apiURL}/api/user/profile`
+        const headers = {
+            authorization: accessToken,
+            'refresh-token': refreshToken
+        }
+
+        await axios
+            .get(url, { headers })
+            .then((response) => {
+                const result = response.data.data
+                res.cookie('accessToken', req.body.accessToken)
+                res.cookie('refreshToken', req.body.refreshToken)
+                res.cookie('customerName', result.user.name)
+                res.cookie('customerEmail', result.user.email)
+                res.cookie('customerAddress', result.user.address)
+                res.cookie('customerID', result.user.id)
+                res.cookie('avatar', result.user.avatar)
+                res.cookie('isUserLoggedIn', true)
+
+                res.redirect('/')
+            })
+            .catch((error) => {
+                return null
+            })
+    })
 }
+
 export default new UserController()

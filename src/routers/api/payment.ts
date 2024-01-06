@@ -72,37 +72,64 @@ router.get('/vnpay_return', async function (req: any, res, next) {
 
     if (secureHash === signed) {
         if (vnp_Params['vnp_ResponseCode'] === '00') {
-            await Prisma.payment.create({
+            const payment = await Prisma.payment.create({
                 data: {
                     paymentMethod: 'vnpay',
                     status: 'success',
-                    userId: req.userId + '',
                     orderId: vnp_Params['vnp_TxnRef'] + '',
                     amount: Number(vnp_Params['vnp_Amount']) / 100
                 }
             })
+
+            await Prisma.order.update({
+                where: {
+                    id: vnp_Params['vnp_TxnRef'] + ''
+                },
+                data: {
+                    paymentId: payment.id,
+                    status: 'processing'
+                }
+            })
             res.render('payment/success.jade', { code: vnp_Params['vnp_ResponseCode'] })
         } else {
-            await Prisma.payment.create({
+            const payment = await Prisma.payment.create({
                 data: {
                     paymentMethod: 'vnpay',
                     status: 'failed',
-                    // userId: req.userId + '',
                     orderId: vnp_Params['vnp_TxnRef'] + '',
                     amount: Number(vnp_Params['vnp_Amount']) / 100
+                }
+            })
+
+            await Prisma.order.update({
+                where: {
+                    id: vnp_Params['vnp_TxnRef'] + ''
+                },
+                data: {
+                    paymentId: payment.id,
+                    status: 'pending'
                 }
             })
 
             res.render('payment/fail.jade', { code: vnp_Params['vnp_ResponseCode'] })
         }
     } else {
-        await Prisma.payment.create({
+        const payment = await Prisma.payment.create({
             data: {
                 paymentMethod: 'vnpay',
                 status: 'failed',
-                userId: req.userId + '',
                 orderId: vnp_Params['vnp_TxnRef'] + '',
                 amount: Number(vnp_Params['vnp_Amount']) / 100
+            }
+        })
+
+        await Prisma.order.update({
+            where: {
+                id: vnp_Params['vnp_TxnRef'] + ''
+            },
+            data: {
+                paymentId: payment.id,
+                status: 'pending'
             }
         })
         res.render('payment/fail.jade', { code: '97' })

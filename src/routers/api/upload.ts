@@ -5,7 +5,7 @@ import { adminRequired } from '~/middlewares/api/authentication'
 
 const router = express.Router()
 
-router.post('/single', uploadDisk.single('file'), adminRequired, uploadController.uploadImageS3)
-router.post('/multiple', uploadDisk.array('files', 4), adminRequired, uploadController.uploadImagesS3)
+router.post('/single', uploadDisk.single('file'), uploadController.uploadImageS3)
+router.post('/multiple', uploadDisk.array('files', 4), uploadController.uploadImagesS3)
 
 export default router

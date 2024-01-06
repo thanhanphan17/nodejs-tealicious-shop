@@ -23,6 +23,319 @@
     <link rel='stylesheet' href='/css/magnific-popup.css' type='text/css' />
     <link rel='stylesheet' href='/css/slicknav.min.css' type='text/css' />
     <link rel='stylesheet' href='/css/style.css' type='text/css' />
+    <style>
+        * {
+            box-sizing: border-box;
+            padding: 0;
+            margin: 0;
+            outline: 0;
+            direction: ltr;
+        }
+
+
+        .ava-modal {
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: rgba(0, 0, 0, 0.85);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .ava-modal>* {
+            box-sizing: border-box;
+        }
+
+        .ava-alert {
+            background-color: white;
+            width: 80%;
+            text-align: right;
+            font-family: "Gill Sans", "Gill Sans MT", Calibri;
+            font-weight: 900;
+            animation: 25s 1 ava_alert_animation;
+            -webkit-animation: 0.5s 1 ava_alert_animation;
+        }
+
+        @media (min-width: 650px) {
+            .ava-alert {
+                width: 300px;
+            }
+        }
+
+        @keyframes ava_alert_animation {
+            from {
+                transform: scale(0.5);
+            }
+
+            50% {
+                transform: scale(1.1);
+            }
+
+            to {
+                transform: scale(1);
+            }
+        }
+
+        .ava-alert .ava-progress-bar {
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.04);
+            animation-name: progressBarAnimation;
+            -webkit-animation-name: progressBarAnimation;
+        }
+
+        .ava-alert .ava-text-con {
+            position: relative;
+        }
+
+        @keyframes progressBarAnimation {
+            from {
+                width: 0%;
+            }
+
+            to {
+                width: 100%;
+            }
+        }
+
+        .ava-alert__icon {
+            padding: 0px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            box-shadow: inset 0px -5px 7px rgba(0, 0, 0, 0.3);
+        }
+
+        .ava-alert__text {
+            padding: 15px;
+            line-height: 1.5em;
+            color: #8a8a8a;
+            font-size: 13px;
+        }
+
+        .ava-alert__btn {
+            width: 70px;
+            padding: 7px 0px;
+            display: block;
+            margin: auto;
+            margin-bottom: 13px;
+            border-radius: 0;
+            border: 0;
+            background-color: #dfdfdf;
+            color: #b1b1b1;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .ava-toast {
+            position: fixed;
+            box-shadow: 0px 5px 7px rgba(0, 0, 0, 0.1);
+            width: 250px;
+            display: flex;
+            flex-direction: row;
+            background-color: white;
+        }
+
+        .ava-toast svg {
+            width: 30px;
+            height: 30px;
+        }
+
+        .ava-toast .ava-alert__icon {
+            padding: 0 10px;
+            box-shadow: none;
+        }
+
+        .ava-toast .ava-text-con {
+            width: 100%;
+        }
+
+        .ava-toast .ava-alert__btn {
+            margin: 0;
+        }
+
+        .ava-toast .ava-alert__text {
+            padding: 5px;
+            width: 100%;
+        }
+
+        .svg-box {
+            display: inline-block;
+            position: relative;
+            width: 150px;
+        }
+
+        .ava-text-con {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .green-stroke {
+            stroke: #ffffff;
+        }
+
+        .red-stroke {
+            stroke: #ffffff;
+        }
+
+        .yellow-stroke {
+            stroke: #ffffff;
+        }
+
+        .circular circle.path {
+            stroke-dasharray: 330;
+            stroke-dashoffset: 0;
+            stroke-linecap: round;
+            opacity: 0.4;
+            animation: 0.7s draw-circle ease-out;
+        }
+
+        /*------- Checkmark ---------*/
+        .checkmark {
+            stroke-width: 6.25;
+            stroke-linecap: round;
+            position: absolute;
+            top: 56px;
+            left: 49px;
+            width: 52px;
+            height: 40px;
+        }
+
+        .checkmark path {
+            animation: 1s draw-check ease-out;
+        }
+
+        @keyframes draw-circle {
+            0% {
+                stroke-dasharray: 0, 330;
+                stroke-dashoffset: 0;
+                opacity: 1;
+            }
+
+            80% {
+                stroke-dasharray: 330, 330;
+                stroke-dashoffset: 0;
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 0.4;
+            }
+        }
+
+        @keyframes draw-check {
+            0% {
+                stroke-dasharray: 49, 80;
+                stroke-dashoffset: 48;
+                opacity: 0;
+            }
+
+            50% {
+                stroke-dasharray: 49, 80;
+                stroke-dashoffset: 48;
+                opacity: 1;
+            }
+
+            100% {
+                stroke-dasharray: 130, 80;
+                stroke-dashoffset: 48;
+            }
+        }
+
+        /*---------- Cross ----------*/
+        .cross {
+            stroke-width: 6.25;
+            stroke-linecap: round;
+            position: absolute;
+            top: 54px;
+            left: 54px;
+            width: 40px;
+            height: 40px;
+        }
+
+        .cross .first-line {
+            animation: 0.7s draw-first-line ease-out;
+        }
+
+        .cross .second-line {
+            animation: 0.7s draw-second-line ease-out;
+        }
+
+        @keyframes draw-first-line {
+            0% {
+                stroke-dasharray: 0, 56;
+                stroke-dashoffset: 0;
+            }
+
+            50% {
+                stroke-dasharray: 0, 56;
+                stroke-dashoffset: 0;
+            }
+
+            100% {
+                stroke-dasharray: 56, 330;
+                stroke-dashoffset: 0;
+            }
+        }
+
+        @keyframes draw-second-line {
+            0% {
+                stroke-dasharray: 0, 55;
+                stroke-dashoffset: 1;
+            }
+
+            50% {
+                stroke-dasharray: 0, 55;
+                stroke-dashoffset: 1;
+            }
+
+            100% {
+                stroke-dasharray: 55, 0;
+                stroke-dashoffset: 70;
+            }
+        }
+
+        .alert-sign {
+            stroke-width: 6.25;
+            stroke-linecap: round;
+            position: absolute;
+            top: 40px;
+            left: 68px;
+            width: 15px;
+            height: 70px;
+            animation: 0.5s alert-sign-bounce cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .alert-sign .dot {
+            stroke: none;
+            fill: #ffffff;
+        }
+
+        @keyframes alert-sign-bounce {
+            0% {
+                transform: scale(0);
+                opacity: 0;
+            }
+
+            50% {
+                transform: scale(0);
+                opacity: 1;
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+    </style>
 </head>
 
 <body>
@@ -107,7 +420,8 @@
                     <div id='product-carousel' class='carousel slide' data-ride='carousel'>
                         <div class='carousel-inner border'>
                             <div class='carousel-item active'>
-                                <img style='width: 100%' src={{product.product.image.url.[1]}} alt='Image' />
+                                <img style='width: 100%' id="productUrl" src={{product.product.image.url.[1]}}
+                                    alt='Image' />
                             </div>
                             {{#each product.product.image.url}}
                             <div class='carousel-item'>
@@ -127,10 +441,12 @@
 
                 <div class='col-lg-7 col-md-6'>
                     <div class='product__details__text'>
-                        <h2 class='font-weight-semi-bold'><strong>{{product.product.name}}</strong></h2>
+                        <h2 class='font-weight-semi-bold' id="productName"><strong>{{product.product.name}}</strong>
+                        </h2>
                         <div>
                             <br />
-                            <h3 class='font-weight-semi-bold mb-4'>Giá: {{product.product.price}} VNĐ</h3>
+                            <h3 class='font-weight-semi-bold mb-4' id="productPrice">Giá: {{product.product.price}} VNĐ
+                            </h3>
                         </div>
                         <p><b>Mô tả:</b>
                             {{product.product.description}}</p>
@@ -141,18 +457,16 @@
                                 <strong class='product-price'>Số lượng</strong>
                             </div>
                             <div class='col-md-2 mb-3 mb-md-0'>
-                                <input style='text-align: center;' type='text' class='form-control py-3' id='coupon'
-                                    name="quantityInput" value='1' />
+                                <input style='text-align: center;' type='text' class='form-control py-3'
+                                    id='productQuantity' name="quantityInput" value='1' />
                             </div>
                             <div class='col-md-6'>
-                                <form action="/add-to-cart" method='post'>
-                                    <input type="hidden" name="quantity" id="quantity" value=>
-                                    <input type="hidden" name="productId" id="" value={{product.product.id}}>
-                                    <button style='color:#333333, width=400' class='btn btn-primary px-3' type='submit'
-                                        onclick="addToCart()">
-                                        <i class='fa fa-shopping-cart mr-1'></i> Thêm vào giỏ hàng
-                                    </button>
-                                </form>
+                                <input type="hidden" name="quantity" id="quantity" value=>
+                                <input type="hidden" name="productId" id="productIdInput" value={{product.product.id}}>
+                                <button style='color:#333333, width=400' class='btn btn-primary px-3'
+                                    onclick="addToCart()">
+                                    <i class='fa fa-shopping-cart mr-1'></i> Thêm vào giỏ hàng
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -180,7 +494,7 @@
                                 </a>
                                 <a class='nav-item nav-link' data-toggle='tab' href='#tab-pane-3'>
                                     <div style='text-align: center;' class='section-title'>
-                                        <span>Đánh giá sản phẩm ({{rating.length}})</span>
+                                        <span>Đánh giá sản phẩm</span>
                                     </div>
                                 </a>
                             </div>
@@ -286,7 +600,7 @@
                                                 <div class='col-6'>
                                                     <div id="ratingsContainer">
                                                     </div>
-                                                    <div id="r">
+                                                    <div class="review-list">
                                                         {{#each rating}}
                                                         <div class='media mb-4'>
                                                             <img src='/img/profile.jpg' alt='Image'
@@ -306,12 +620,49 @@
                                                         </div>
                                                         {{/each}}
                                                     </div>
+                                                    <div class="col-12 pb-1">
+                                                        <nav aria-label="Page navigation">
+                                                            <ul class="pagination justify-content-center mb-3"
+                                                                id="pagination">
+                                                                <li class="page-item disabled">
+                                                                    <a class="page-link" href="#" aria-label="Previous">
+                                                                        <span aria-hidden="true">&laquo;</span>
+                                                                        <span class="sr-only">Previous</span>
+                                                                    </a>
+                                                                </li>
+                                                                <li class="page-item"><a class="page-link"
+                                                                        onclick="loadReviewPaging(0)">1</a></li>
+                                                                <li class="page-item"><a class="page-link"
+                                                                        onclick="loadReviewPaging(1)">2</a></li>
+                                                                {{!-- <li class="page-item"><a class="page-link"
+                                                                        href="/pages?page=2">3</a></li>
+                                                                <li class="page-item"><a class="page-link"
+                                                                        href="/pages?page=3">4</a></li>
+                                                                <li class="page-item"><a class="page-link"
+                                                                        href="/pages?page=4">5</a></li>
+                                                                <li class="page-item"><a class="page-link"
+                                                                        href="/pages?page=5">6</a></li>
+                                                                <li class="page-item"><a class="page-link"
+                                                                        href="/pages?page=6">7</a></li>
+                                                                <li class="page-item"><a class="page-link"
+                                                                        href="/pages?page=7">8</a></li>
+                                                                <li class="page-item"><a class="page-link"
+                                                                        href="/pages?page=8">9</a></li> --}}
+                                                                <li class="page-item">
+                                                                    <a class="page-link" href="#" aria-label="Next">
+                                                                        <span aria-hidden="true">&raquo;</span>
+                                                                        <span class="sr-only">Next</span>
+                                                                    </a>
+                                                                </li>
+                                                            </ul>
+                                                        </nav>
+                                                    </div>
                                                 </div>
                                                 <div class="col-6">
                                                     <h4 class='mb-4'>Đánh giá sản phẩm</h4>
                                                     <form id="ratingForm">
                                                         <div class='form-group'>
-                                                            <input type="hidden" name="productId" id=""
+                                                            <input type="hidden" name="productId" id="productIdInput"
                                                                 value={{product.product.id}}>
                                                             <label for='email'>Đánh giá sản phẩm *</label>
                                                             <div style='margin-left: 5px' class='row'>
@@ -448,17 +799,430 @@
     <script src='/js/owl.carousel.min.js'></script>
     <script src='/js/main.js'></script>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
     <script>
-        // Get the coupon input element
-        const couponInput = document.getElementById('coupon');
+        let ava
+        document.addEventListener('DOMContentLoaded', async function () {
+            ava = ({ icon = 'success', toast = false, progressBar = true, text = null, timer = 4000, btnText = 'Okay', direction = 'rtl', position = 'top-right' }) => {
+                const modal = document.createElement('section');
+                modal.setAttribute('class', 'ava-modal');
+                document.body.appendChild(modal);
+                const alert = document.createElement('div');
+                alert.setAttribute('class', 'ava-alert');
+                modal.appendChild(alert);
+                var avaIcon;
+                if (icon == 'success' && toast == false) {
+                    avaIcon = `
+                <div class="ava-alert__icon" style="background: #438C5E;">
+                <div class="svg-box">
+                    <svg class="circular green-stroke">
+                    <circle class="path" cx="75" cy="75" r="50" fill="none" stroke-width="5" stroke-miterlimit="10"/>
+                </svg>
+                <svg class="checkmark green-stroke">
+                    <g transform="matrix(0.79961,8.65821e-32,8.39584e-32,0.79961,-489.57,-205.679)">
+                        <path class="checkmark__check" fill="none" d="M616.306,283.025L634.087,300.805L673.361,261.53"/>
+                    </g>
+                </svg>
+                </div>
+            </div>
+              `;
 
-        // Get the quantity input element
-        const quantityInput = document.getElementById('quantity');
+                } else if (icon == 'info' && toast == false) {
+                    avaIcon = `
+                <div class="ava-alert__icon" style="background: #434D8C;">
+                <div class="svg-box">
+                    <svg class="circular yellow-stroke">
+                        <circle class="path" cx="75" cy="75" r="50" fill="none" stroke-width="5"
+                            stroke-miterlimit="10" />
+                    </svg>
+                    <svg class="alert-sign yellow-stroke">
+                        <g transform="matrix(1,0,0,1,-615.516,-257.346)">
+                            <g transform="matrix(0.56541,-0.56541,0.56541,0.56541,93.7153,495.69)">
+                                <path class="line" d="M634.087,300.805L673.361,261.53" fill="none" />
+                            </g>
+                            <g transform="matrix(2.27612,-2.46519e-32,0,2.27612,-792.339,-404.147)">
+                                <circle class="dot" cx="621.52" cy="316.126" r="1.318" />
+                            </g>
+                        </g>
+                    </svg>
+                </div>
+            </div>
 
-        // Add an event listener to the coupon input
-        couponInput.addEventListener('input', function () {
-            quantityInput.value = couponInput.value;
+              `;
+
+                } else if (icon == 'danger' && toast == false) {
+                    avaIcon = `
+                <div class="ava-alert__icon" style="background: #8C4343;">
+                <div class="svg-box">
+                    <svg class="circular red-stroke">
+                    <circle class="path" cx="75" cy="75" r="50" fill="none" stroke-width="5" stroke-miterlimit="10"/>
+                </svg>
+                <svg class="cross red-stroke">
+                    <g transform="matrix(0.79961,8.65821e-32,8.39584e-32,0.79961,-502.652,-204.518)">
+                        <path class="first-line" d="M634.087,300.805L673.361,261.53" fill="none"/>
+                    </g>
+                    <g transform="matrix(-1.28587e-16,-0.79961,0.79961,-1.28587e-16,-204.752,543.031)">
+                        <path class="second-line" d="M634.087,300.805L673.361,261.53"/>
+                    </g>
+                </svg>
+                </div>
+            </div>
+              `;
+
+                } else if (icon == 'info' && toast == true) {
+                    avaIcon = `
+                    <div class="ava-alert__icon" style="background: #434D8C;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2"><path stroke-dasharray="60" stroke-dashoffset="60" d="M12 3C16.9706 3 21 7.02944 21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3Z"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.5s" values="60;0"/></path><path stroke-dasharray="8" stroke-dashoffset="8" d="M12 7V13"><animate fill="freeze" attributeName="stroke-dashoffset" begin="0.6s" dur="0.2s" values="8;0"/></path></g><circle cx="12" cy="17" r="1" fill="currentColor" fill-opacity="0"><animate fill="freeze" attributeName="fill-opacity" begin="0.8s" dur="0.4s" values="0;1"/></circle></svg>
+            </div>
+                    `;
+                    btnText = '';
+                } else if (icon == 'success' && toast == true) {
+                    avaIcon = `
+                    <div class="ava-alert__icon" style="background: #438C5E;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path stroke-dasharray="60" stroke-dashoffset="60" d="M3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12Z"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.5s" values="60;0"/></path><path stroke-dasharray="14" stroke-dashoffset="14" d="M8 12L11 15L16 10"><animate fill="freeze" attributeName="stroke-dashoffset" begin="0.6s" dur="0.2s" values="14;0"/></path></g></svg>
+            </div>
+                    `;
+                    btnText = '';
+                } else if (icon == 'danger' && toast == true) {
+                    avaIcon = `
+                    <div class="ava-alert__icon" style="background: #8C4343;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2"><path stroke-dasharray="60" stroke-dashoffset="60" d="M12 3C16.9706 3 21 7.02944 21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3Z"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.5s" values="60;0"/></path><path stroke-dasharray="8" stroke-dashoffset="8" d="M12 12L16 16M12 12L8 8M12 12L8 16M12 12L16 8"><animate fill="freeze" attributeName="stroke-dashoffset" begin="0.6s" dur="0.2s" values="8;0"/></path></g></svg>
+            </div>
+                    `;
+                    btnText = '';
+                } else if (toast == true && icon == 'none') {
+                    avaIcon = '';
+                    btnText = '';
+                } else if (toast == false && icon == 'none') {
+                    avaIcon = '';
+                }
+                document.querySelector('.ava-alert').innerHTML = `
+          ${avaIcon}
+<div class='ava-text-con'>
+            <p class="ava-alert__text">
+            ${text}
+            </p>
+            <button class="ava-alert__btn">${btnText}</button>
+        </div>
+            `;
+                var new_timer_format = '';
+                switch (timer) {
+                    case 1000:
+                        new_timer_format = '1s';
+                        break;
+                    case 2000:
+                        new_timer_format = '2s';
+                        break;
+                    case 3000:
+                        new_timer_format = '3s';
+                        break;
+                    case 4000:
+                        new_timer_format = '4s';
+                        break;
+                    case 5000:
+                        new_timer_format = '5s';
+                        break;
+                    case 6000:
+                        new_timer_format = '6s';
+                        break;
+                    case 7000:
+                        new_timer_format = '7s';
+                        break;
+                    case 8000:
+                        new_timer_format = '8s';
+                        break;
+                    case 9000:
+                        new_timer_format = '9s';
+                        break;
+                    case 10000:
+                        new_timer_format = '10s';
+                        break;
+                    default:
+                        new_timer_format = '4s';
+                }
+                if (timer > 10000) {
+                    timer = 4000;
+                }
+                if (toast == true) {
+                    modal.style = 'background-color: rgba(0, 0, 0, 0);';
+                    alert.classList.add('ava-toast');
+                    if (progressBar == false) {
+                        document.querySelector('.ava-alert__btn').remove();
+                    } else {
+                        document.querySelector('.ava-alert__btn').style = 'width: 100%; padding: 2px;'
+                    }
+                    switch (position) {
+                        case 'top-right':
+                            alert.style = `
+                    top: 10px;
+                    right: 10px;
+                    `;
+                            break;
+                        case 'top-left':
+                            alert.style = `
+                    top: 10px;
+                    left: 10px;
+                    `;
+                            break;
+                        case 'bottom-left':
+                            alert.style = `
+                        bottom: 10px;
+                        left: 10px;
+                    `;
+                            break;
+                        case 'bottom-right':
+                            alert.style = `
+                        bottom: 10px;
+                    right: 10px;
+                    `;
+                            break;
+                    }
+                }
+                if (progressBar == true) {
+                    const progressBar_el = document.createElement('div');
+                    progressBar_el.setAttribute('class', 'ava-progress-bar');
+                    document.querySelector('.ava-alert__btn').appendChild(progressBar_el);
+                    document.querySelector('.ava-progress-bar').style = `
+                animation-duration: ${new_timer_format};
+        -webkit-animation-duration: ${new_timer_format};
+                `;
+                }
+
+                if (progressBar == true) {
+                    setTimeout(() => {
+                        modal.remove();
+                        alert.remove();
+                    }, timer);
+                } else if (progressBar == false && toast == true) {
+                    setTimeout(() => {
+                        modal.remove();
+                        alert.remove();
+                    }, timer);
+                }
+                if (direction == 'rtl' && toast == true) {
+                    document.querySelector('.ava-modal > *').style.direction = 'rtl';
+                    document.querySelector('.ava-modal > *').style.textAlign = 'right';
+                    document.querySelector('.ava-alert__btn').style.direction = 'rtl';
+                } else if (direction == 'ltr' && toast == true) {
+                    document.querySelector('.ava-modal > *').style.direction = 'ltr';
+                    document.querySelector('.ava-modal > *').style.textAlign = 'left';
+                    document.querySelector('.ava-alert__btn').style.direction = 'ltr';
+                } else {
+                    document.querySelector('.ava-modal > *').style.textAlign = 'center';
+                }
+                document.querySelector('.ava-alert__btn').addEventListener('click', function () {
+                    alert.remove();
+                    modal.remove();
+                })
+                window.addEventListener('click', function (e) {
+                    if (e.target == document.querySelector('.ava-modal')) {
+                        modal.remove();
+                        alert.remove();
+                    }
+                })
+            }
+        })
+
+        async function loadReviewPaging(page) {
+            const productId = document.getElementById('productIdInput').value
+            const url = `http://localhost:8080/api/rating/list?page=${page}&limit=3&productId=${productId}`
+            await axios.get(url).then(response => {
+                let reviewsApi = response.data.data.ratings
+                const $review_list = $(".review-list");
+                $review_list.html("");
+
+                reviewsApi.forEach((review) => {
+                    const html = `<div class='media mb-4'>
+                                                            <img src='/img/profile.jpg' alt='Image'
+                                                                class='img-fluid mr-3 mt-1' style='width: 45px' />
+                                                            <div class='media-body'>
+                                                                <h6>
+                                                                    ${review.user.name}<small> -
+                                                                        <i>${review.createdAt}</i></small>
+                                                                </h6>
+                                                                <div class='product__details__rating'
+                                                                    data-value="${review.rating}">
+                                                                </div>
+                                                                <p>
+                                                                    ${review.comment}
+                                                                </p>
+                                                            </div>
+                                                        </div>`
+                    $review_list.append($.parseHTML(html));
+                })
+            })
+        }
+
+
+        $(document).ready(function () {
+            $('#myButton').on('click', function () {
+                updateDOMWithRatings();
+                submitForm()
+            });
+
+            var lastActiveIndex = sessionStorage.getItem('lastActiveIndex');
+
+            if (lastActiveIndex !== null) {
+                $('#pagination li.page-item').eq(lastActiveIndex).addClass('active');
+            }
+
+            $('#pagination li.page-item:not(.disabled) a').on('click', function (event) {
+                $('#pagination li.page-item').removeClass('active');
+
+                $(this).parent().addClass('active');
+
+                var clickedIndex = $('#pagination li.page-item').index($(this).parent());
+                sessionStorage.setItem('lastActiveIndex', clickedIndex);
+            });
         });
+
+        async function addToCart() {
+            var quantity = document.getElementById('productQuantity').value;
+            var productId = document.getElementById('productIdInput').value;
+            var productName = document.getElementById('productName').textContent;
+            var productPrice = document.getElementById('productPrice').textContent.match(/\d+/) * 1;
+            var productUrl = document.getElementById('productUrl').src;
+
+
+            const accessToken = getCookie("accessToken")
+            const refreshToken = getCookie("refreshToken")
+
+            if (!accessToken && !refreshToken) {
+                let cartCookie = getArrayCookie('cartCookie')
+                if (!cartCookie) {
+                    const product = {
+                        productId: productId,
+                        quantity: quantity,
+                        product: {
+                            name: productName,
+                            price: productPrice,
+                            image: {
+                                url: [
+                                    productUrl]
+                            }
+                        }
+
+                    }
+                    cartCookie = []
+                    cartCookie.push(product)
+                    setArrayCookie('cartCookie', cartCookie)
+                } else {
+                    for (var i = 0; i < cartCookie.length; i++) {
+                        if (cartCookie[i].productId == productId) {
+                            Toast_danger();
+                            return;
+                        }
+                    }
+                    const product = {
+                        productId: productId,
+                        quantity: quantity,
+                        product: {
+                            name: productName,
+                            price: productPrice,
+                            image: {
+                                url: [
+                                    productUrl]
+                            }
+                        }
+
+
+                    }
+                    cartCookie.push(product)
+                    setArrayCookie('cartCookie', cartCookie)
+                }
+                Toast_success();
+                return
+            }
+
+            const url = `http://localhost:8080/api/cart/add-to-cart`
+            const headers = {
+                authorization: accessToken,
+                'refresh-token': refreshToken
+            }
+
+            const data = {
+                productId: productId,
+                quantity: quantity * 1
+            }
+
+            await axios
+                .post(url, data, { headers })
+                .then((response) => {
+                    Toast_success();
+                })
+                .catch((error) => {
+                    Toast_danger();
+                    console.error('Error:', error)
+                })
+        }
+
+        function setArrayCookie(name, value) {
+            const daysToExpire = 60;
+            var expires = "";
+            if (daysToExpire) {
+                var date = new Date();
+                date.setTime(date.getTime() + (daysToExpire * 24 * 60 * 60 * 1000));
+                expires = "; expires=" + date.toUTCString();
+            }
+
+            // Convert the array or object to a string using JSON.stringify
+            var serializedValue = JSON.stringify(value);
+
+            document.cookie = name + "=" + serializedValue + expires + "; path=/";
+        }
+
+        // Function to get a cookie and parse its value as an array or object
+        function getArrayCookie(name) {
+            var cookieName = name + "=";
+            var decodedCookie = decodeURIComponent(document.cookie);
+            var cookieArray = decodedCookie.split(';');
+
+            for (var i = 0; i < cookieArray.length; i++) {
+                var cookie = cookieArray[i].trim();
+                if (cookie.indexOf(cookieName) === 0) {
+                    // Extract and parse the stored value using JSON.parse
+                    return JSON.parse(cookie.substring(cookieName.length, cookie.length));
+                }
+            }
+
+            return null;
+        }
+
+        function Toast_success() {
+            ava({
+                icon: 'success',
+                text: 'Thêm vào giỏ hàng thành công!',
+                btnText: '',
+                progressBar: true,
+                toast: true,
+                position: 'top-right',
+                direction: 'ltr',
+                timer: 4000
+            });
+        }
+
+        function Toast_danger() {
+            ava({
+                icon: 'danger',
+                text: 'Sản phẩm đã có trong giỏ hàng!',
+                btnText: '',
+                progressBar: true,
+                toast: true,
+                position: 'top-right',
+                direction: 'ltr',
+                timer: 4000
+            });
+        }
+
+        function getCookie(name) {
+            const match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
+            if (match) {
+                return decodeURIComponent(match[2]);
+            }
+            return null;
+        }
+
 
         document.addEventListener('DOMContentLoaded', function () {
             const ratingContainers = document.querySelectorAll('.product__details__rating');
@@ -508,13 +1272,6 @@
             }
         }
 
-        $(document).ready(function () {
-            $('#myButton').on('click', function () {
-                updateDOMWithRatings();
-                submitForm()
-            });
-        });
-
         function updateDOMWithRatings() {
             var ratingsContainer = $("#ratingsContainer");
             ratingsContainer.empty(); // Clear existing content
@@ -560,14 +1317,6 @@
             });
         }
 
-        function addToCart() {
-            // Get the value from the "quantityProduct" input field
-            var quantityProductValue = document.getElementById('coupon').value;
-
-            // Set the value to the hidden input field "quantity"
-            document.getElementById('quantity').value = quantityProductValue;
-
-        }
     </script>
 </body>
 

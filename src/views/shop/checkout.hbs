@@ -374,15 +374,18 @@
             let productOrigin = []
             await axios.get(url, { headers }).then(response => {
                 products = response.data.data;
+
                 products.forEach((item, index) => {
                     const product = {
                         productName: item.product.name,
                         productImage: item.product.image.url[0],
                         quantity: item.quantity,
-                        price: item.price
+                        price: item.product.price
                     }
                     productOrigin.push(product)
                 })
+
+
 
             })
             document.body.appendChild(form);
@@ -394,7 +397,6 @@
 
             await axios.post(`http://localhost:8080/api/order/create-order`, data, { headers }).then(response => {
                 const order = response.data.data;
-                alert(order.id)
                 const amount = document.getElementById('sumCart1').textContent.match(/\d+/) * 1
                 let paymentUrl = '/payment/pay?amount=' + amount + '&order_Id=' + order.id
                 if (currentButtonId == 'vnpayButton') {

@@ -249,13 +249,119 @@
             await loadProduct();
         })
 
+        function getArrayCookie(name) {
+            var cookieName = name + "=";
+            var decodedCookie = decodeURIComponent(document.cookie);
+            var cookieArray = decodedCookie.split(';');
+
+            for (var i = 0; i < cookieArray.length; i++) {
+                var cookie = cookieArray[i].trim();
+                if (cookie.indexOf(cookieName) === 0) {
+                    // Extract and parse the stored value using JSON.parse
+                    return JSON.parse(cookie.substring(cookieName.length, cookie.length));
+                }
+            }
+
+            return null;
+        }
+
+        function setArrayCookie(name, value) {
+            const daysToExpire = 60;
+            var expires = "";
+            if (daysToExpire) {
+                var date = new Date();
+                date.setTime(date.getTime() + (daysToExpire * 24 * 60 * 60 * 1000));
+                expires = "; expires=" + date.toUTCString();
+            }
+
+            // Convert the array or object to a string using JSON.stringify
+            var serializedValue = JSON.stringify(value);
+
+            document.cookie = name + "=" + serializedValue + expires + "; path=/";
+        }
+
         async function loadProduct() {
             const url = `http://localhost:8080/api/cart/get-cart`
             const accessToken = getCookie("accessToken")
             const refreshToken = getCookie("refreshToken")
+
+            if (!accessToken && !refreshToken) {
+                let products = getArrayCookie("cartCookie");
+
+                let sumCartPro = 0
+                const $product_table = $(".cart-body");
+                $product_table.html("");
+                products.forEach((item, index) => {
+                    const sumProduct = item.product.price * item.quantity
+                    sumCartPro += sumProduct * 1
+                    const html = `<tr>
+                                    <td class='product-thumbnail'>
+                                        <img src=${item.product.image.url[0]} class='' alt='Image'
+                                            class='img-fluid' />
+                                    </td>
+                                    <td class='product-name'>
+                                        <h2 class='h5 text-black'>${item.product.name}</h2>
+                                    </td>
+                                    <td id="priceProduct">${item.product.price} VNĐ</td>
+                                    <td>
+                                        <div class='input-group mb-3 d-flex align-items-center quantity-container'
+                                            style='max-width: 120px'>
+                                            <div class='input-group-prepend'>
+                                                <button class='btn btn-outline-black decrease'
+                                                    type='button' onclick="decreaseQuantity('${item.productId}', '${item.product.price}')">&minus;   </button>
+                                            </div>
+                                            <input id='${item.productId}_quan' type='text'
+                                                class='form-control text-center quantity-amount' value=${item.quantity}
+                                                placeholder='' aria-label='Example text with button addon'
+                                                aria-describedby='button-addon1' onfocusout="changeQuantity('${item.productId}', '${item.product.price}')" />
+                                            <div class='input-group-append'>
+                                                <button class='btn btn-outline-black increase'
+                                                    type='button' onclick="increaseQuantity('${item.productId}', '${item.product.price}')">&plus;</button>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td id='${item.productId}_sum'> ${sumProduct} VNĐ</td >
+                <td><a href='#' class='btn btn-black btn-sm' onclick="deleteProductInCart('${item.productId}')">X</a></td>
+                                </tr > `
+                    $product_table.append($.parseHTML(html));
+                })
+                document.getElementById('sumCart').innerHTML = sumCartPro + " VNĐ"
+
+                return;
+            }
+
             const headers = {
                 authorization: accessToken,
                 'refresh-token': refreshToken
+            }
+
+            const cartCookie = getArrayCookie('cartCookie')
+            if (cartCookie) {
+                const url = `http://localhost:8080/api/cart/add-to-cart`
+
+                for (let i = 0; i < cartCookie.length; i++) {
+                    const data = {
+                        productId: cartCookie[i].productId,
+                        quantity: cartCookie[i].quantity * 1
+                    }
+
+                    await axios
+                        .post(url, data, { headers })
+                        .then((response) => {
+                            res.redirect('/cart')
+                        })
+                        .catch((error) => {
+                            console.error('Error:', error)
+                        })
+                }
+                setArrayCookie('cartCookie', null)
+
+                const $product_table = $(".cart-body");
+                $product_table.html("");
+
+                await loadProduct()
+                return;
+                return;
             }
 
             let sumCartPro = 0
@@ -318,6 +424,19 @@
             const url = `http://localhost:8080/api/cart/update-quantity`
             const accessToken = getCookie("accessToken")
             const refreshToken = getCookie("refreshToken")
+
+            if (!accessToken && !refreshToken) {
+                let cartCookie = getArrayCookie('cartCookie')
+                for (let i = 0; i < cartCookie.length; i++) {
+                    if (cartCookie[i].productId == productId) {
+                        cartCookie[i].quantity = quantity * 1;
+                    }
+                }
+
+                setArrayCookie('cartCookie', cartCookie)
+                return;
+            }
+
             const headers = {
                 authorization: accessToken,
                 'refresh-token': refreshToken
@@ -343,6 +462,18 @@
             const url = `http://localhost:8080/api/cart/update-quantity`
             const accessToken = getCookie("accessToken")
             const refreshToken = getCookie("refreshToken")
+
+            if (!accessToken && !refreshToken) {
+                let cartCookie = getArrayCookie('cartCookie')
+                for (let i = 0; i < cartCookie.length; i++) {
+                    if (cartCookie[i].productId == productId) {
+                        cartCookie[i].quantity = quantity * 1;
+                    }
+                }
+                setArrayCookie('cartCookie', cartCookie)
+                return;
+            }
+
             const headers = {
                 authorization: accessToken,
                 'refresh-token': refreshToken
@@ -382,6 +513,23 @@
             const url = `http://localhost:8080/api/cart/remove-product-from-cart`
             const accessToken = getCookie("accessToken")
             const refreshToken = getCookie("refreshToken")
+
+            if (!accessToken && !refreshToken) {
+                let cartCookie = getArrayCookie('cartCookie')
+                for (let i = 0; i < cartCookie.length; i++) {
+                    if (cartCookie[i].productId == productId) {
+                        cartCookie.splice(i, 1);
+                    }
+                }
+                setArrayCookie('cartCookie', cartCookie)
+
+                const $product_table = $(".cart-body");
+                $product_table.html("");
+
+                await loadProduct()
+                return;
+            }
+
             const headers = {
                 authorization: accessToken,
                 'refresh-token': refreshToken

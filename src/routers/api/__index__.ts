@@ -7,6 +7,8 @@ import categoryRouter from './category'
 import ratingRouter from './rating'
 import cateRouter from './cart'
 import orderRouter from './order'
+import userRouter from './user'
+import oauthRouter from './oauth'
 
 const router = express.Router()
 
@@ -25,5 +27,7 @@ router.use('/category', categoryRouter)
 router.use('/rating', ratingRouter)
 router.use('/cart', cateRouter)
 router.use('/order', orderRouter)
+router.use('/user', userRouter)
+router.use('/oauth', oauthRouter)
 
 export default router
