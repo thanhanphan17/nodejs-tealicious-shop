@@ -11,6 +11,7 @@ class OrderService {
                 shippingAddress: payload.shippingAddress,
                 OrderDetail: {
                     create: {
+                        total: payload.total,
                         productOrigin: payload.productOrigin
                     }
                 }
