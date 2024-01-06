@@ -2,6 +2,7 @@ import express from 'express'
 import productController from '~/controllers/web/product.controller'
 import categoryController from '~/controllers/web/category.controller'
 import { isAdminLoggedInSuccess } from '~/middlewares/loginSuccess'
+import orderController from '~/controllers/web/order.controller'
 
 const router = express.Router()
 
@@ -33,14 +34,47 @@ router.get('/product', isAdminLoggedInSuccess, async (req, res, next) => {
     res.render('admin/product.hbs', { productList, customerName })
 })
 
-router.get('/order', isAdminLoggedInSuccess, function (req, res, next) {
+router.get('/order', isAdminLoggedInSuccess, async (req, res, next) => {
     const customerName = req.cookies.adminName
-    res.render('admin/order.hbs', { customerName })
-})
+    let listOrder = null
+    listOrder = await orderController.getAllOrders(req, res, next)
+    if (listOrder) {
+        console.log(listOrder)
+        for (let i = 0; i < listOrder.length; i++) {
+            if (listOrder[i].payment.status === 'pending') {
+                listOrder[i].payment.status = 'Thanh toán khi nhận hàng'
+            }
 
-router.get('/order', isAdminLoggedInSuccess, function (req, res, next) {
-    const customerName = req.cookies.adminName
-    res.render('admin/order.hbs', { customerName })
+            if (listOrder[i].payment.status === 'failed') {
+                listOrder[i].payment.status = 'Thanh toán thất bại'
+            }
+
+            if (listOrder[i].payment.status === 'pending') {
+                listOrder[i].payment.status = 'Thanh toán thành công'
+            }
+
+            if (listOrder[i].status === 'pending') {
+                listOrder[i].status = 'Đang chuẩn bị hàng'
+            }
+
+            if (listOrder[i].status === 'processing') {
+                listOrder[i].status = 'Đang đóng gói đơn hàng'
+            }
+
+            if (listOrder[i].status === 'delivering') {
+                listOrder[i].status = 'Đang giao hàng'
+            }
+
+            if (listOrder[i].status === 'completed') {
+                listOrder[i].status = 'Giao hàng thành công'
+            }
+
+            if (listOrder[i].status === 'cancelled') {
+                listOrder[i].status = 'Đã bị hủy'
+            }
+        }
+        res.render('admin/order.hbs', { customerName, listOrder })
+    }
 })
 
 router.get('/', isAdminLoggedInSuccess, function (req, res, next) {

@@ -104,85 +104,34 @@
                                         <thead>
                                             <tr>
                                                 <th class='id-col'>Mã đơn hàng</th>
-                                                <th class='name-col'>Tên người dùng</th>
-                                                <th class='address-col'>Địa chỉ nhận hàng</th>
-                                                <th class='phone-col'>Điện thoại</th>
+                                                <th class='name-col'>Địa chỉ giao hàng</th>
+                                                <th class='phone-col'>Phương thức thanh toán</th>
+                                                <th class='price-col'>Trạng thái thanh toán</th>
+                                                <th class='phone-col'>Chi tiết</th>
                                                 <th class='price-col'>Tổng đơn</th>
-                                                <th class='action-col'></th>
+                                                <th class='address-col'>Tình trạng đơn hàng</th>
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            {{#each listOrder}}
                                             <tr class='odd gradeX'>
-                                                <td class='id-col'>21127014</td>
-                                                <td class='name-col'>Phạm Hồng Gia Bảo</td>
-                                                <td class='address-col'>Trường Lưu, Long Trường, HCMc</td>
-                                                <td class='phone-col'>094824175</td>
-                                                <td class='price-col'>30 000</td>
-                                                <td class='space-between-element'>
-                                                    <button type='button'
-                                                        class='btn btn-success btn-circle center-element'>
-                                                        <img style='width: 20px' src='/img/edit.png' alt='' />
-                                                    </button>
-                                                    <button type='button'
-                                                        class='btn btn-danger btn-circle center-element'>
-                                                        <img style='width: 20px' src='/img/remove.png' alt='' />
-                                                    </button>
-                                                </td>
-                                            </tr>
+                                                <td class='id-col'>{{this.id}}</td>
+                                                <td class='name-col'>{{this.shippingAddress}}</td>
+                                                <td class='phone-col'>{{this.payment.paymentMethod}}</td>
 
-                                            <tr class='odd gradeX'>
-                                                <td class='id-col'>2222222124</td>
-                                                <td class='name-col'>Nguyễn Văn Cơ</td>
-                                                <td class='address-col'>227 Nguyễn Văn Cừ, Q5, HCM</td>
-                                                <td class='phone-col'>094824175</td>
-                                                <td class='price-col'>399 000</td>
-                                                <td class='space-between-element'>
-                                                    <button type='button'
-                                                        class='btn btn-success btn-circle center-element'>
-                                                        <img style='width: 20px' src='/img/edit.png' alt='' />
-                                                    </button>
-                                                    <button type='button'
-                                                        class='btn btn-danger btn-circle center-element'>
-                                                        <img style='width: 20px' src='/img/remove.png' alt='' />
-                                                    </button>
+                                                <td class='phone-col'>{{this.payment.status}}</td>
+                                                <td class='phone-col'>{{#each this.OrderDetail.[0].productOrigin}}
+                                                    <h6> {{this.productName}} x {{this.quantity}}</h6>
+                                                    {{/each}}
+                                                </td>
+                                                <td class='price-col'>{{this.OrderDetail.[0].total}} VNĐ</td>
+                                                <td class='address-col'>
+                                                    <input class='text-secondary' style="border: none;
+                                    outline: none;" value='{{this.status}}' id="userName" disabled>
+                                                    </input>
                                                 </td>
                                             </tr>
-
-                                            <tr class='odd gradeX'>
-                                                <td class='id-col'>7485124522</td>
-                                                <td class='name-col'>Phan Thanh An</td>
-                                                <td class='address-col'>227 Nguyễn Thị Minh Khai HCM</td>
-                                                <td class='phone-col'>094824175</td>
-                                                <td class='price-col'>149 000</td>
-                                                <td class='space-between-element'>
-                                                    <button type='button'
-                                                        class='btn btn-success btn-circle center-element'>
-                                                        <img style='width: 20px' src='/img/edit.png' alt='' />
-                                                    </button>
-                                                    <button type='button'
-                                                        class='btn btn-danger btn-circle center-element'>
-                                                        <img style='width: 20px' src='/img/remove.png' alt='' />
-                                                    </button>
-                                                </td>
-                                            </tr>
-
-                                            <tr class='odd gradeX'>
-                                                <td class='id-col'>378495143</td>
-                                                <td class='name-col'>Bảo Nguyễn</td>
-                                                <td class='address-col'>227 NVC HCM</td>
-                                                <td class='phone-col'>094827845</td>
-                                                <td class='price-col'>99 000</td>
-                                                <td class='space-between-element'>
-                                                    <button type='button'
-                                                        class='btn btn-success btn-circle center-element'>
-                                                        <img style='width: 20px' src='/img/edit.png' alt='' />
-                                                    </button>
-                                                    <button type='button'
-                                                        class='btn btn-danger btn-circle center-element'>
-                                                        <img style='width: 20px' src='/img/remove.png' alt='' />
-                                                    </button>
-                                                </td>
-                                            </tr>
+                                            {{/each}}
                                         </tbody>
                                     </table>
                                 </div>
@@ -205,5 +154,7 @@
         $(document).ready(function () { $('#dataTables-example').DataTable({ responsive: true }) })
     </script>
 </body>
+
+
 
 </html>
