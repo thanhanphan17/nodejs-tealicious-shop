@@ -133,6 +133,7 @@ model Order {
 model OrderDetail {
   id            String    @id @default(uuid())
   orderId       String    @unique
+  total         Int       @default(0)
   productOrigin Json      @map("product_origin")
   deleted       Boolean   @default(false)
   createdAt     DateTime? @default(now())
