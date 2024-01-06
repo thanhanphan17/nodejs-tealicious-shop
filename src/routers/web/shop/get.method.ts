@@ -5,6 +5,7 @@ import userController from '~/controllers/web/user.controller'
 import ratingController from '~/controllers/web/rating.controller'
 import categoryController from '~/controllers/web/category.controller'
 import orderController from '~/controllers/web/order.controller'
+import { isUserLoggedInSuccess } from '~/middlewares/loginSuccess'
 
 const router = express.Router()
 
@@ -27,7 +28,7 @@ router.get('/cart', async (req, res, next) => {
     res.render('shop/cart.hbs', { customerName, isLoggedIn })
 })
 
-router.get('/checkout', function (req, res, next) {
+router.get('/checkout', isUserLoggedInSuccess, function (req, res, next) {
     const customerName = req.cookies.customerName
     const isLoggedIn = req.cookies.isUserLoggedIn
     res.render('shop/checkout.hbs', { customerName, isLoggedIn })
@@ -69,7 +70,9 @@ router.get('/detail-product', async (req, res, next) => {
 })
 
 router.get('/sign-up', function (req, res, next) {
-    res.render('shop/signup.hbs')
+    const oauthLink = process.env.GOOGLE_AUTHORIZED_REDIRECT_URI
+    const clientID = process.env.GOOGLE_CLIENT_ID
+    res.render('shop/signup.hbs', { oauthLink, clientID })
 })
 
 router.get('/about-us', function (req, res, next) {

@@ -105,8 +105,9 @@ class UserController {
         const result = await uploadController.uploadImageS3(req, res, next)
         if (result.code == 200) {
             res.cookie('avatar', result.data)
+            return
         }
-        res.redirect('/profile')
+        return
     })
 
     getProfile = catchAsync(async (req: any, res: Response, next: NextFunction) => {
@@ -137,6 +138,20 @@ class UserController {
             .catch((error) => {
                 return null
             })
+    })
+
+    getListAccount = catchAsync(async (req: any, res: Response, next: NextFunction) => {
+        const accessToken = req.body.accessToken
+        const refreshToken = req.body.refreshToken
+
+        const url = `${appConfig.apiURL}/api/user/list-account`
+        const headers = {
+            authorization: accessToken,
+            'refresh-token': refreshToken
+        }
+
+        const result = await axios.get(url, { headers })
+        return result.data.data
     })
 }
 

@@ -34,6 +34,10 @@ app.engine(
 
             multiply: function (num1: any, num2: any) {
                 return num1 * num2
+            },
+
+            eq: function (s1: any, s2: any) {
+                return s1 === s2
             }
         }
     }).engine

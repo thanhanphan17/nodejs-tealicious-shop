@@ -1,3 +1,4 @@
+import { filter } from 'lodash'
 import { CREATED, OK } from '~/core/success.response'
 import catchAsync from '~/helpers/catch.async'
 import OrderService from '~/services/order.service'
@@ -15,7 +16,8 @@ class OrderController {
     })
 
     listAllOrder = catchAsync(async (req: any, res, next) => {
-        OK(res, 'get list order successfully', await OrderService.listAllOrder())
+        const filter = req.query
+        OK(res, 'get list order successfully', await OrderService.listAllOrder(filter))
     })
 
     getOrderById = catchAsync(async (req: any, res, next) => {

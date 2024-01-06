@@ -81,18 +81,22 @@ class OrderService {
         return orders
     }
 
-    static async listAllOrder() {
+    static async listAllOrder(filter: any) {
         const orders = await Prisma.order.findMany({
             include: {
                 OrderDetail: true,
                 payment: true
             },
+            where: {
+                status: filter.status
+                    ? {
+                          equals: filter.status
+                      }
+                    : undefined
+            },
             orderBy: [
                 {
                     createdAt: 'desc'
-                },
-                {
-                    status: 'desc'
                 }
             ]
         })

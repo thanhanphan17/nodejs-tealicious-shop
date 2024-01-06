@@ -25,6 +25,28 @@ class UserService {
         }
     }
 
+    static async changeStatus(payload: any) {
+        const user = await Prisma.user.update({
+            where: {
+                id: payload.userId
+            },
+            data: {
+                status: payload.status
+            }
+        })
+
+        if (!user) {
+            throw new BusinessLogicError("can't change status")
+        }
+
+        return {
+            user: getInfoData({
+                fields: ['id', 'name', 'avatar', 'email'],
+                object: user
+            })
+        }
+    }
+
     static async changePassword(userId: string, payload: any) {
         const oldUser = await Prisma.user.findUnique({
             where: {
@@ -125,6 +147,13 @@ class UserService {
             .catch((error) => console.error('Error sending email:', error))
 
         return true
+    }
+
+    static async getListAccount() {
+        const users = await Prisma.user.findMany()
+        return {
+            users
+        }
     }
 }
 
