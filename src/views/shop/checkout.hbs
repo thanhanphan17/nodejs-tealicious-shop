@@ -393,6 +393,7 @@
             const data = {
                 shippingAddress: shippingInput.value,
                 productOrigin: productOrigin
+                
             }
 
             await axios.post(`http://localhost:8080/api/order/create-order`, data, { headers }).then(response => {

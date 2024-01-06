@@ -4,6 +4,7 @@ import productController from '~/controllers/web/product.controller'
 import userController from '~/controllers/web/user.controller'
 import ratingController from '~/controllers/web/rating.controller'
 import categoryController from '~/controllers/web/category.controller'
+import orderController from '~/controllers/web/order.controller'
 
 const router = express.Router()
 
@@ -95,6 +96,14 @@ router.get('/change-password', function (req, res, next) {
     const customerName = req.cookies.customerName
     const isLoggedIn = req.cookies.isUserLoggedIn
     res.render('shop/change-password.hbs', { customerName, isLoggedIn })
+})
+
+router.get('/order-detail', async (req, res, next) => {
+    const customerName = req.cookies.customerName
+    const isLoggedIn = req.cookies.isUserLoggedIn
+    const listOrder = await orderController.getOrder(req, res, next)
+    console.log(listOrder[0].OrderDetail[0].productOrigin[0].quantity)
+    res.render('shop/orderDetails.hbs', { customerName, isLoggedIn, listOrder })
 })
 
 export default router
