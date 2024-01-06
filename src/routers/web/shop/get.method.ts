@@ -53,6 +53,7 @@ router.get('/login', function (req, res, next) {
 router.get('/logout', userController.logout)
 
 router.get('/pages', async (req, res, next) => {
+    req.query.status = 'instock'
     const customerName = req.cookies.customerName
     const productList = await productController.listProduct(req, res, next)
     const categoryList = await categoryController.listCategories(req, res, next)

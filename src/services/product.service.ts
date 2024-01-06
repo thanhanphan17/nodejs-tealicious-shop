@@ -37,7 +37,12 @@ class ProductService {
                 price: {
                     ...(filter.minPrice !== undefined && { gte: filter.minPrice * 1 }),
                     ...(filter.maxPrice !== undefined && { lte: filter.maxPrice * 1 })
-                }
+                },
+                status: filter.status
+                    ? {
+                          equals: filter.status
+                      }
+                    : undefined
             },
             include: {
                 category: true

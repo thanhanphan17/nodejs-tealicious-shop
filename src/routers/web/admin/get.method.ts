@@ -44,6 +44,7 @@ router.get('/add-category', isAdminLoggedInSuccess, function (req, res, next) {
 })
 
 router.get('/product', isAdminLoggedInSuccess, async (req, res, next) => {
+    req.query.status = 'all'
     const productList = await productController.listProduct(req, res, next)
     const customerName = req.cookies.adminName
     res.render('admin/product.hbs', { productList, customerName })
