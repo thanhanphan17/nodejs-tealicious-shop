@@ -11,6 +11,9 @@ const router = express.Router()
 router.post('/login', userController.login)
 router.post('/sign-up', userController.register)
 router.post('/rating', isUserLoggedInSuccess, ratingController.createRating)
-router.post('/upload-avatar', uploadDisk.single('file'), userController.uploadAvatar)
+router.post('/upload-avatar', uploadDisk.single('file'), async (req, res, next) => {
+    await userController.uploadAvatar(req, res, next)
+    res.redirect('/profile')
+})
 
 export default router

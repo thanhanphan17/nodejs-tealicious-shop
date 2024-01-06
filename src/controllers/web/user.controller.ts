@@ -105,8 +105,9 @@ class UserController {
         const result = await uploadController.uploadImageS3(req, res, next)
         if (result.code == 200) {
             res.cookie('avatar', result.data)
+            return
         }
-        res.redirect('/profile')
+        return
     })
 
     getProfile = catchAsync(async (req: any, res: Response, next: NextFunction) => {

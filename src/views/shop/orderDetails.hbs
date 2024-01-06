@@ -142,12 +142,10 @@
                                     <td class='product-name'>{{this.shippingAddress}}</th>
                                     <td class='product-price'>{{this.status}}</th>
                                     <td class='product-price'>{{this.payment.paymentMethod}}</th>
-
                                     <td class='product-quantity'>{{#each this.OrderDetail.[0].productOrigin}}
                                         <h6> {{this.productName}} x {{this.quantity}}</h6>
                                         {{/each}}
                                         </th>
-
                                     <td class='product-total'>{{this.OrderDetail.[0].total}} VNĐ</th>
                                 </tr>
                                 {{/each}}

@@ -1,153 +1,148 @@
 <html lang='en'>
 
-    <head>
-        <meta charset='utf-8' />
-        <meta http-equiv='X-UA-Compatible' content='IE=edge' />
-        <meta name='viewport' content='width=device-width, initial-scale=1' />
-        <meta name='description' content='' />
-        <meta name='author' content='' />
+<head>
+    <meta charset='utf-8' />
+    <meta http-equiv='X-UA-Compatible' content='IE=edge' />
+    <meta name='viewport' content='width=device-width, initial-scale=1' />
+    <meta name='description' content='' />
+    <meta name='author' content='' />
 
-        <title>Sản phẩm | Yên Trà Quán</title>
+    <title>Sản phẩm | Yên Trà Quán</title>
 
-        <link href='/css/admin/bootstrap.min.css' rel='stylesheet' />
-        <link href='/css/admin/metisMenu.min.css' rel='stylesheet' />
-        <link href='/css/admin/startmin.css' rel='stylesheet' />
-        <link href='/css/admin/font-awesome.min.css' rel='stylesheet' type='text/css' />
-    </head>
+    <link href='/css/admin/bootstrap.min.css' rel='stylesheet' />
+    <link href='/css/admin/metisMenu.min.css' rel='stylesheet' />
+    <link href='/css/admin/startmin.css' rel='stylesheet' />
+    <link href='/css/admin/font-awesome.min.css' rel='stylesheet' type='text/css' />
+</head>
 
-    <body>
-        <div id='wrapper'>
-            <nav class='navbar navbar-inverse navbar-fixed-top' role='navigation'>
-                <ul class='nav navbar-nav navbar-left navbar-top-links'>
-                    <li>
-                        <a href='#'><img style='width: 20px' src='/img/internet.png' alt='' /> Website</a>
-                    </li>
-                </ul>
+<body>
+    <div id='wrapper'>
+        <nav class='navbar navbar-inverse navbar-fixed-top' role='navigation'>
+            <ul class='nav navbar-nav navbar-left navbar-top-links'>
+                <li>
+                    <a href='/admin/dashboard'><img style='width: 20px' src='/img/internet.png' alt='' /> Website</a>
+                </li>
+            </ul>
 
-                <ul class='nav navbar-right navbar-top-links'>
-                    <li class='dropdown'>
-                        <a class='dropdown-toggle' data-toggle='dropdown' href='#'>
-                            <img style='width: 20px' src='/img/profile-user.png' alt='' />
-                            baopham<b class='caret'></b>
-                        </a>
-                        <ul class='dropdown-menu dropdown-user'>
-                            <li>
-                                <a href='#'><img style='width: 20px' src='/img/user.png' alt='' /> Trang cá nhân</a>
-                            </li>
-                            <li>
-                                <a href='#'><img style='width: 20px' src='/img/setting.png' alt='' /> Cài đặt</a>
-                            </li>
-                            <li class='divider'></li>
-                            <li>
-                                <a href='/admin/login-admin'><img style='width: 20px' src='/img/logout.png' alt='' />
-                                    Đăng xuất</a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-            </nav>
-
-            <aside class='sidebar navbar-default' role='navigation'>
-                <div class='sidebar-nav navbar-collapse'>
-                    <ul class='nav' id='side-menu'>
-                        <li class='sidebar-search'>
-                            <div class='input-group custom-search-form'>
-                                <input type='text' class='form-control' placeholder='Tìm kiếm ...' />
-                                <span class='input-group-btn'>
-                                    <button class='btn btn-primary' type='button'>
-                                        <img style='width: 20px' src='/img/search.png' alt='' />
-                                    </button>
-                                </span>
-                            </div>
+            <ul class='nav navbar-right navbar-top-links'>
+                <li class='dropdown'>
+                    <a class='dropdown-toggle' data-toggle='dropdown' href='#'>
+                        <img style='width: 20px' src='/img/profile-user.png' alt='' />
+                        {{customerName}}<b class='caret'></b>
+                    </a>
+                    <ul class='dropdown-menu dropdown-user'>
+                        <li>
+                            <a href='/admin/profile-admin'><img style='width: 20px' src='/img/user.png' alt='' /> Trang
+                                cá
+                                nhân</a>
                         </li>
                         <li>
-                            <a href='/admin/dashboard'>Dashboard</a>
+                            <a href='#'><img style='width: 20px' src='/img/setting.png' alt='' /> Cài đặt</a>
                         </li>
+                        <li class='divider'></li>
                         <li>
-                            <a href='/admin/user'>Người dùng<span></span></a>
-                        </li>
-                        <li>
-                            <a href='/admin/product class' class='active'>Danh mục</a>
-                        </li>
-                        <li>
-                            <a href='/admin/product class' class='active'>Sản phẩm</a>
-                        </li>
-                        <li>
-                            <a href='/admin/order'>Đơn hàng</a>
+                            <a href='/admin//login-admin'><img style='width: 20px' src='/img/logout.png' alt='' />
+                                Đăng xuất</a>
                         </li>
                     </ul>
-                </div>
-            </aside>
+                </li>
+            </ul>
+        </nav>
 
-            <div id='page-wrapper'>
-                <div class='container-fluid'>
-                    <div class='row'>
-                        <div class='col-lg-12'>
-                            <h1 class='page-header'>Sản phẩm | Yên Trà Quán</h1>
+        <aside class='sidebar navbar-default' role='navigation'>
+            <div class='sidebar-nav navbar-collapse'>
+                <ul class='nav' id='side-menu'>
+                    <li class='sidebar-search'>
+                        <div class='input-group custom-search-form'>
+                            <input type='text' class='form-control' placeholder='Tìm kiếm ...' />
+                            <span class='input-group-btn'>
+                                <button class='btn btn-primary' type='button'>
+                                    <img style='width: 20px' src='/img/search.png' alt='' />
+                                </button>
+                            </span>
                         </div>
+                    </li>
+                    <li>
+                        <a href='/admin/dashboard'>Dashboard</a>
+                    </li>
+                    <li>
+                        <a href='/admin/user'>Người dùng<span></span></a>
+                    </li>
+                    <li>
+                        <a href='/admin/product class' class='active'>Danh mục</a>
+                    </li>
+                    <li>
+                        <a href='/admin/product class' class='active'>Sản phẩm</a>
+                    </li>
+                    <li>
+                        <a href='/admin/order'>Đơn hàng</a>
+                    </li>
+                </ul>
+            </div>
+        </aside>
+
+        <div id='page-wrapper'>
+            <div class='container-fluid'>
+                <div class='row'>
+                    <div class='col-lg-12'>
+                        <h1 class='page-header'>Sản phẩm | Yên Trà Quán</h1>
                     </div>
-                    <div class='row'>
-                        <div class='col-lg-12'>
-                            <div class='panel panel-default'>
-                                <div class='container'>
-                                    <form
-                                        id='form-img'
-                                        action='/admin/add-product'
-                                        method='post'
-                                        enctype='multipart/form-data'
-                                    >
-                                        <div class='form-group'>
-                                            <label>Tên sản phẩm</label>
-                                            <input class='form-control' name='name' />
+                </div>
+                <div class='row'>
+                    <div class='col-lg-12'>
+                        <div class='panel panel-default'>
+                            <div class='container'>
+                                <form id='form-img' action='/admin/add-product' method='post'
+                                    enctype='multipart/form-data'>
+                                    <div class='form-group'>
+                                        <label>Tên sản phẩm</label>
+                                        <input class='form-control' name='name' />
+                                    </div>
+                                    <div class='form-group'>
+                                        <label>Số lượng sản phẩm </label>
+                                        <input class='form-control' name='quantity' />
+                                    </div>
+                                    <div class='form-group'>
+                                        <label>Đơn giá</label>
+                                        <input class='form-control' name='price' />
+                                    </div>
+                                    <div class='form-group'>
+                                        <label>Loại sản phẩm</label>
+                                        <div style='margin-left: 5px' class='row'>
+                                            <select style='width: 20%, height: 40px, font-size 20px;' id='rating'
+                                                name='categoryId'>
+                                                {{#each category.catagories}}
+                                                <option value={{this.id}}>{{this.name}}</option>
+                                                {{/each}}
+                                            </select>
                                         </div>
-                                        <div class='form-group'>
-                                            <label>Số lượng sản phẩm </label>
-                                            <input class='form-control' name='quantity' />
-                                        </div>
-                                        <div class='form-group'>
-                                            <label>Đơn giá</label>
-                                            <input class='form-control' name='price' />
-                                        </div>
-                                        <div class='form-group'>
-                                            <label>Loại sản phẩm</label>
-                                            <div style='margin-left: 5px' class='row'>
-                                                <select
-                                                    style='width: 20%, height: 40px, font-size 20px;'
-                                                    id='rating'
-                                                    name='categoryId'
-                                                >
-                                                    {{#each category.catagories}}
-                                                        <option value={{this.id}}>{{this.name}}</option>
-                                                    {{/each}}
-                                                </select>
-                                            </div>
 
-                                        </div>
-                                        <div class='form-group'>
-                                            <label>Mô tả sản phẩm</label>
-                                            <textarea class='form-control' name='description' rows='3'></textarea>
-                                        </div>
-                                        <div class='input-group'>
-                                            <label for='files'>Select files</label>
-                                            <input id='file' type='file' name='files' multiple />
-                                        </div>
-                                        <button class='submit-btn' type='submit'>Upload</button>
-                                    </form>
-                                </div>
-
+                                    </div>
+                                    <div class='form-group'>
+                                        <label>Mô tả sản phẩm</label>
+                                        <textarea class='form-control' name='description' rows='3'></textarea>
+                                    </div>
+                                    <div class='input-group'>
+                                        <label for='files'>Select files</label>
+                                        <input id='file' type='file' name='files' multiple />
+                                    </div>
+                                    <button class='submit-btn' type='submit'>Upload</button>
+                                </form>
                             </div>
+
                         </div>
                     </div>
                 </div>
             </div>
-
         </div>
 
-        <script src='/js/admin/jquery.min.js'></script>
-        <script src='/js/admin/bootstrap.min.js'></script>
-        <script src='/js/admin/metisMenu.min.js'></script>
-        <script src='/js/admin/startmin.js'></script>
-        {{!
+    </div>
+
+    <script src='/js/admin/jquery.min.js'></script>
+    <script src='/js/admin/bootstrap.min.js'></script>
+    <script src='/js/admin/metisMenu.min.js'></script>
+    <script src='/js/admin/startmin.js'></script>
+    {{!
     <script>
         const form = document.getElementById("form-img");
         const inputFile = document.getElementById("file");
@@ -169,6 +164,6 @@
 
         form.addEventListener("submit", handleSubmit);
     </script> }}
-    </body>
+</body>
 
 </html>
