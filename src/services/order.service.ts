@@ -55,7 +55,7 @@ class OrderService {
         return order
     }
 
-    static async getOrdersByUserId(userId: string) {
+    static async listMyOrder(userId: string) {
         const orders = await Prisma.order.findMany({
             where: {
                 userId
@@ -68,7 +68,7 @@ class OrderService {
         return orders
     }
 
-    static async getOrders() {
+    static async listAllOrder() {
         const orders = await Prisma.order.findMany({
             include: {
                 OrderDetail: true
