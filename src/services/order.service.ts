@@ -23,6 +23,13 @@ class OrderService {
             throw new BusinessLogicError("can't create order")
         }
 
+        // clear cart
+        await Prisma.cart.deleteMany({
+            where: {
+                userId: payload.userId
+            }
+        })
+
         return order
     }
 
@@ -53,6 +60,10 @@ class OrderService {
             }
         })
 
+        if (!order) {
+            throw new BusinessLogicError("can't get order")
+        }
+
         return order
     }
 
@@ -62,7 +73,8 @@ class OrderService {
                 userId
             },
             include: {
-                OrderDetail: true
+                OrderDetail: true,
+                payment: true
             }
         })
 
@@ -72,7 +84,8 @@ class OrderService {
     static async listAllOrder() {
         const orders = await Prisma.order.findMany({
             include: {
-                OrderDetail: true
+                OrderDetail: true,
+                payment: true
             },
             orderBy: [
                 {

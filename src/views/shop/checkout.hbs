@@ -171,13 +171,13 @@
                                     </tbody>
 
                                     <tr>
-                                        <td class='text-black font-weight-bold' id>
+                                        <td class='text-black font-weight-bold'>
                                             <strong>Tạm tính</strong>
                                         </td>
                                         <td class='text-black' id="sumCart1">500.00</td>
                                     </tr>
                                     <tr>
-                                        <td class='text-black font-weight-bold' id>
+                                        <td class='text-black font-weight-bold'>
                                             <strong>Tổng đơn hàng</strong>
                                         </td>
                                         <td class='text-black'><strong id="sumCart2"> </strong></td>
@@ -354,13 +354,13 @@
         async function submitForm() {
             // Create a form element
             var form = document.createElement('form');
-
+            const totalCart = document.getElementById('sumCart1').textContent.match(/\d+/) * 1
 
             // Create input for username
             var shippingInput = document.createElement('input');
             shippingInput.type = 'text';
             shippingInput.name = 'shippingAddress';
-            shippingInput.value = document.getElementById('street').value + ',' + document.getElementById('ward').value + ',' + document.getElementById('district').value + ',' + document.getElementById('city').value;
+            shippingInput.value = document.getElementById('street').value + ', ' + document.getElementById('ward').value + ', ' + document.getElementById('district').value + ', ' + document.getElementById('city').value;
             form.appendChild(shippingInput);
 
             const url = `http://localhost:8080/api/cart/get-cart`
@@ -392,7 +392,9 @@
 
             const data = {
                 shippingAddress: shippingInput.value,
-                productOrigin: productOrigin
+                productOrigin: productOrigin,
+                total: totalCart
+
             }
 
             await axios.post(`http://localhost:8080/api/order/create-order`, data, { headers }).then(response => {
