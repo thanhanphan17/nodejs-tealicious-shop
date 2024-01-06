@@ -16,7 +16,6 @@ import { handle404Error, handleReturnError } from '~/middlewares/errorHandler'
 import '~/lib/passport'
 import '~/dbs/init.prisma'
 import '~/dbs/init.mongoose'
-import { SendMailOptions } from 'nodemailer'
 
 const app = express()
 

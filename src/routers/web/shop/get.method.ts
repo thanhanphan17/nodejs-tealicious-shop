@@ -97,4 +97,12 @@ router.get('/change-password', function (req, res, next) {
     res.render('shop/change-password.hbs', { customerName, isLoggedIn })
 })
 
+router.get('/login/google', async function (req, res, next) {
+    const accessToken = req.query.access_token
+    const refreshToken = req.query.refresh_token
+    req.body.accessToken = accessToken
+    req.body.refreshToken = refreshToken
+    await userController.getProfile(req, res, next)
+})
+
 export default router

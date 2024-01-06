@@ -108,5 +108,36 @@ class UserController {
         }
         res.redirect('/profile')
     })
+
+    getProfile = catchAsync(async (req: any, res: Response, next: NextFunction) => {
+        const accessToken = req.body.accessToken
+        const refreshToken = req.body.refreshToken
+
+        const url = `${appConfig.apiURL}/api/user/profile`
+        const headers = {
+            authorization: accessToken,
+            'refresh-token': refreshToken
+        }
+
+        await axios
+            .get(url, { headers })
+            .then((response) => {
+                const result = response.data.data
+                res.cookie('accessToken', req.body.accessToken)
+                res.cookie('refreshToken', req.body.refreshToken)
+                res.cookie('customerName', result.user.name)
+                res.cookie('customerEmail', result.user.email)
+                res.cookie('customerAddress', result.user.address)
+                res.cookie('customerID', result.user.id)
+                res.cookie('avatar', result.user.avatar)
+                res.cookie('isUserLoggedIn', true)
+
+                res.redirect('/')
+            })
+            .catch((error) => {
+                return null
+            })
+    })
 }
+
 export default new UserController()

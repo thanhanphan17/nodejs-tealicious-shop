@@ -422,7 +422,7 @@
                         <h2 class='title'>Đăng nhập bằng</h2>
                         <div class='social-login'>
                             <ul>
-                                <li class='google'><a href='#'>Google</a></li>
+                                <li onclick="OAuthGoogle()" class='google'><a href='#'>Google</a></li>
                                 <li class='fb'><a href='#'>Facebook</a></li>
                             </ul>
                         </div>
@@ -825,6 +825,22 @@
             date.setTime(date.getTime() + (daysToExpire * 24 * 60 * 60 * 1000));
             const expires = "expires=" + date.toUTCString();
             document.cookie = name + "=" + value + ";" + expires + ";path=/";
+        }
+
+        function OAuthGoogle() {
+            const rootUrl = 'https://accounts.google.com/o/oauth2/v2/auth'
+            const options = {
+                redirect_uri: 'http://localhost:8080/api/oauth/google',
+                client_id: '500779853717-23g1tu8es6242g13hvnsjr497htlq06j.apps.googleusercontent.com',
+                access_type: 'offline',
+                response_type: 'code',
+                prompt: 'consent',
+                scope: ['https://www.googleapis.com/auth/userinfo.profile', 'https://www.googleapis.com/auth/userinfo.email'].join(
+                    ' '
+                )
+            }
+            const qs = new URLSearchParams(options)
+            window.location.href = `${rootUrl}?${qs}`
         }
     </script>
 </body>
