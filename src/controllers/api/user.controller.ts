@@ -12,6 +12,11 @@ class UserController {
         const user = await UserService.changePassword(req.userId, req.body)
         OK(res, 'change password sucessfully', user)
     })
+
+    forgotPassword = catchAsync(async (req: any, res, next) => {
+        const success = await UserService.forgotPassword(req.query.email)
+        OK(res, 'your password has been sent to your email', success)
+    })
 }
 
 export default new UserController()
