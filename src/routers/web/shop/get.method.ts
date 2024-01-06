@@ -45,7 +45,8 @@ router.get('/forgot-password', function (req, res, next) {
 
 router.get('/login', function (req, res, next) {
     const oauthLink = process.env.GOOGLE_AUTHORIZED_REDIRECT_URI
-    res.render('shop/login.hbs', { oauthLink })
+    const clientID = process.env.GOOGLE_CLIENT_ID
+    res.render('shop/login.hbs', { oauthLink, clientID })
 })
 
 router.get('/logout', userController.logout)
