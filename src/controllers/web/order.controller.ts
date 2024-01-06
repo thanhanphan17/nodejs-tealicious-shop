@@ -19,7 +19,8 @@ class OrderController {
     })
 
     getAllOrders = catchAsync(async (req: any, res: Response, next: NextFunction) => {
-        const url = `http://localhost:8080/api/order/list-all-order`
+        const status = req.query.status || ''
+        const url = `http://localhost:8080/api/order/list-all-order?status=${status}`
 
         const accessToken = req.cookies.accessToken
         const refreshToken = req.cookies.refreshToken
@@ -27,7 +28,6 @@ class OrderController {
             authorization: accessToken,
             'refresh-token': refreshToken
         }
-
 
         const result = await axios.get(url, { headers })
         return result.data.data

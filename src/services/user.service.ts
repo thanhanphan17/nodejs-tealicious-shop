@@ -25,10 +25,10 @@ class UserService {
         }
     }
 
-    static async changeStatus(userId: string, payload: any) {
+    static async changeStatus(payload: any) {
         const user = await Prisma.user.update({
             where: {
-                id: userId
+                id: payload.userId
             },
             data: {
                 status: payload.status

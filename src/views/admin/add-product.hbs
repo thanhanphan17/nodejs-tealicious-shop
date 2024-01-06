@@ -122,11 +122,13 @@
                                         <label>Mô tả sản phẩm</label>
                                         <textarea class='form-control' name='description' rows='3'></textarea>
                                     </div>
-                                    <div class='input-group'>
-                                        <label for='files'>Select files</label>
-                                        <input id='file' type='file' name='files' multiple />
+                                    <div class='input-group' style="margin: 10px 0">
+                                        <label for='files'>Chọn hình ảnh</label>
+                                        <input id='file' type='file' name='files' multiple
+                                            onchange='showSelectedImage(event)' />
                                     </div>
-                                    <button class='submit-btn' type='submit'>Upload</button>
+                                    <div id='imageContainer'></div>
+                                    <button class='submit-btn' type='submit'>Thêm sản phẩm</button>
                                 </form>
                             </div>
 
@@ -164,6 +166,34 @@
 
         form.addEventListener("submit", handleSubmit);
     </script> }}
+
+    <script>
+        function showSelectedImage(event) {
+            const fileInput = event.target;
+            const imageContainer = document.getElementById('imageContainer');
+            imageContainer.innerHTML = ''; // Clear existing content
+
+            // Iterate through selected files
+            for (let i = 0; i < fileInput.files.length; i++) {
+                const file = fileInput.files[i];
+                const reader = new FileReader();
+
+                // Read file as data URL
+                reader.readAsDataURL(file);
+
+                // When file reading is complete
+                reader.onload = function (event) {
+                    const imageUrl = event.target.result;
+
+                    // Create and append image element
+                    const imageElement = document.createElement('img');
+                    imageElement.src = imageUrl;
+                    imageElement.style = 'width: 200px; margin: 5px';
+                    imageContainer.appendChild(imageElement);
+                };
+            }
+        }
+    </script>
 </body>
 
 </html>

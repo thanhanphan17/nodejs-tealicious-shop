@@ -29,7 +29,7 @@ class UserController {
     })
 
     changeStatus = catchAsync(async (req: any, res, next) => {
-        const user = await UserService.changeStatus(req.userId, req.body)
+        const user = await UserService.changeStatus(req.body)
         OK(res, 'change status successfully', user)
     })
 }

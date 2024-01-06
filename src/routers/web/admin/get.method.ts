@@ -3,6 +3,7 @@ import productController from '~/controllers/web/product.controller'
 import categoryController from '~/controllers/web/category.controller'
 import { isAdminLoggedInSuccess } from '~/middlewares/loginSuccess'
 import orderController from '~/controllers/web/order.controller'
+import userController from '~/controllers/web/user.controller'
 
 const router = express.Router()
 
@@ -11,9 +12,23 @@ router.get('/dashboard', isAdminLoggedInSuccess, (req, res, next) => {
     res.render('admin/index.hbs', { customerName })
 })
 
-router.get('/user', isAdminLoggedInSuccess, function (req, res, next) {
+router.get('/user', isAdminLoggedInSuccess, async (req, res, next) => {
     const customerName = req.cookies.adminName
-    res.render('admin/user.hbs', { customerName })
+    let listAccount = null
+    listAccount = await userController.getListAccount(req, res, next)
+    if (listAccount) {
+        for (let i = 0; i < listAccount.users.length; i++) {
+            if (!listAccount.users[i].address || listAccount.users[i].address === 'undefined') {
+                listAccount.users[i].address = ' '
+            }
+
+            const date = new Date(listAccount.users[i].createdAt)
+            const formattedDate = date.toLocaleDateString()
+            listAccount.users[i].createdAt = formattedDate
+        }
+        console.log(listAccount)
+        res.render('admin/user.hbs', { customerName, listAccount })
+    }
 })
 
 router.get('/category', isAdminLoggedInSuccess, async (req, res, next) => {
@@ -52,6 +67,10 @@ router.get('/order', isAdminLoggedInSuccess, async (req, res, next) => {
             if (listOrder[i].payment.status === 'pending') {
                 listOrder[i].payment.status = 'Thanh toán thành công'
             }
+
+            const date = new Date(listOrder[i].createdAt)
+            const formattedDate = date.toLocaleDateString()
+            listOrder[i].createdAt = formattedDate
         }
         res.render('admin/order.hbs', { customerName, listOrder })
     }

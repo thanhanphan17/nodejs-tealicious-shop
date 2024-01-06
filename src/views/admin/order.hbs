@@ -408,6 +408,17 @@
                         <div class='panel panel-default'>
                             <div class='panel-heading space-between-element'>
                                 <div>Danh sách đơn hàng</div>
+
+                                <div>
+                                    <select name="" id="filterOrder" onchange="getFilterOrder(this)">
+                                        <option value="">Lọc theo trạng thái đơn hàng</option>
+                                        <option value="pending">Đang chuẩn bị hàng</option>
+                                        <option value="processing">Đang đóng gói đơn hàng</option>
+                                        <option value="delivering">Đang giao hàng</option>
+                                        <option value="completed">Giao hàng thành công</option>
+                                        <option value="cancelled">Đã bị hủy</option>
+                                    </select>
+                                </div>
                             </div>
 
                             <div class='panel-body'>
@@ -422,6 +433,7 @@
                                                 <th class='price-col'>Trạng thái thanh toán</th>
                                                 <th class='phone-col'>Chi tiết</th>
                                                 <th class='price-col'>Tổng đơn</th>
+                                                <th class='price-col'>Thời gian tạo</th>
                                                 <th class='address-col'>Tình trạng đơn hàng</th>
                                             </tr>
                                         </thead>
@@ -439,6 +451,7 @@
                                                     {{/each}}
                                                 </td>
                                                 <td class='price-col'>{{this.OrderDetail.[0].total}} VNĐ</td>
+                                                <td class='price-col'>{{this.createdAt}}</td>
                                                 <td class='address-col'>
                                                     <input class='text-secondary' style="display: none"
                                                         value='{{this.status}}' id="hiddenOrderStatus">
@@ -720,6 +733,10 @@
             }
         }
 
+        function getFilterOrder(selected) {
+            window.location.href = `/admin/order?status=${selected.value}`;
+        }
+
         async function updateOrderStatus(selected) {
             let parts = selected.value.split("_");
             const status = parts[0];
@@ -749,7 +766,6 @@
             }
             return null;
         }
-
 
         function Toast_success() {
             ava({

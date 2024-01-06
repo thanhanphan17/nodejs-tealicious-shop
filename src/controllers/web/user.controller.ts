@@ -139,6 +139,20 @@ class UserController {
                 return null
             })
     })
+
+    getListAccount = catchAsync(async (req: any, res: Response, next: NextFunction) => {
+        const accessToken = req.body.accessToken
+        const refreshToken = req.body.refreshToken
+
+        const url = `${appConfig.apiURL}/api/user/list-account`
+        const headers = {
+            authorization: accessToken,
+            'refresh-token': refreshToken
+        }
+
+        const result = await axios.get(url, { headers })
+        return result.data.data
+    })
 }
 
 export default new UserController()
