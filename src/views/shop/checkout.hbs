@@ -401,11 +401,10 @@
                 await axios.post(`http://localhost:8080/api/order/create-order`, data, { headers }).then(response => {
                     const order = response.data.data;
                     const amount = document.getElementById('sumCart1').textContent.match(/\d+/) * 1
-                    let paymentUrl = '/payment/pay?amount=' + amount + '&order_Id=' + order.id
-                    if (currentButtonId == 'vnpayButton') {
-                        window.location.href = paymentUrl
-                    }
+                    let paymentUrl = '/api/payment//cod_payment?amount=' + amount + '&orderId=' + order.id
+                    window.location.href = paymentUrl
                 })
+                return
             }
 
             await axios.post(`http://localhost:8080/api/order/create-order`, data, { headers }).then(response => {
