@@ -69,7 +69,8 @@ class OrderService {
                 userId
             },
             include: {
-                OrderDetail: true
+                OrderDetail: true,
+                payment: true
             }
         })
 

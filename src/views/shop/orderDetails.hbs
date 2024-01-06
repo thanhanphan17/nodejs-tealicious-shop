@@ -130,6 +130,7 @@
                                     <th class='product-thumbnail'>ID Đơn hàng</th>
                                     <th class='product-name'>Địa chỉ giao hàng</th>
                                     <th class='product-price'>Tình trạng đơn hàng</th>
+                                    <th class='product-price'>Phương thức thanh toán</th>
                                     <th class='product-quantity'>Sản phẩm</th>
                                     <th class='product-total'>Thành tiền</th>
                                 </tr>
@@ -140,6 +141,7 @@
                                     <td class='product-thumbnail'>{{this.id}}</th>
                                     <td class='product-name'>{{this.shippingAddress}}</th>
                                     <td class='product-price'>{{this.status}}</th>
+                                    <td class='product-price'>{{this.payment.paymentMethod}}</th>
 
                                     <td class='product-quantity'>{{#each this.OrderDetail.[0].productOrigin}}
                                         <h6> {{this.productName}} x {{this.quantity}}</h6>

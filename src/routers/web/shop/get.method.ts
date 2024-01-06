@@ -111,7 +111,28 @@ router.get('/order-detail', async (req, res, next) => {
     const customerName = req.cookies.customerName
     const isLoggedIn = req.cookies.isUserLoggedIn
     const listOrder = await orderController.getOrder(req, res, next)
-    console.log(listOrder)
+    for (let i = 0; i < listOrder.length; i++) {
+        if (listOrder[i].status === 'pending') {
+            listOrder[i].status = 'Đang chuẩn bị hàng'
+        }
+
+        if (listOrder[i].status === 'processing') {
+            listOrder[i].status = 'Đang đóng gói đơn hàng'
+        }
+
+        if (listOrder[i].status === 'delivering') {
+            listOrder[i].status = 'Đang giao hàng'
+        }
+
+        if (listOrder[i].status === 'completed') {
+            listOrder[i].status = 'Giao hàng thành công'
+        }
+
+        if (listOrder[i].status === 'cancelled') {
+            listOrder[i].status = 'Đã bị hủy'
+        }
+    }
+
     res.render('shop/orderDetails.hbs', { customerName, isLoggedIn, listOrder })
 })
 
