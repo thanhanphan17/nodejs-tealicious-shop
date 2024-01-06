@@ -462,6 +462,8 @@
                             </div>
                             <div class='col-md-6'>
                                 <input type="hidden" name="quantity" id="quantity" value=>
+                                <input type="hidden" name="currentQuantity" id="currentQuantity"
+                                    value={{product.product.quantity}}>
                                 <input type="hidden" name="productId" id="productIdInput" value={{product.product.id}}>
                                 <button style='color:#333333, width=400' class='btn btn-primary px-3'
                                     onclick="addToCart()">
@@ -1078,12 +1080,17 @@
         });
 
         async function addToCart() {
-            var quantity = document.getElementById('productQuantity').value;
+            var quantity = document.getElementById('productQuantity').value * 1
+            var currentQuantity = document.getElementById('currentQuantity').value * 1
             var productId = document.getElementById('productIdInput').value;
             var productName = document.getElementById('productName').textContent;
             var productPrice = document.getElementById('productPrice').textContent.match(/\d+/) * 1;
             var productUrl = document.getElementById('productUrl').src;
 
+            if (quantity > currentQuantity) {
+                Toast_danger('Sản phẩm hết hàng!');
+                return;
+            }
 
             const accessToken = getCookie("accessToken")
             const refreshToken = getCookie("refreshToken")
@@ -1110,7 +1117,7 @@
                 } else {
                     for (var i = 0; i < cartCookie.length; i++) {
                         if (cartCookie[i].productId == productId) {
-                            Toast_danger();
+                            Toast_danger('Sản phẩm đã có trong giỏ hàng!');
                             return;
                         }
                     }
@@ -1152,7 +1159,7 @@
                     Toast_success();
                 })
                 .catch((error) => {
-                    Toast_danger();
+                    Toast_danger('Sản phẩm đã có trong giỏ hàng!');
                     console.error('Error:', error)
                 })
         }
@@ -1202,10 +1209,10 @@
             });
         }
 
-        function Toast_danger() {
+        function Toast_danger(message) {
             ava({
                 icon: 'danger',
-                text: 'Sản phẩm đã có trong giỏ hàng!',
+                text: message,
                 btnText: '',
                 progressBar: true,
                 toast: true,
