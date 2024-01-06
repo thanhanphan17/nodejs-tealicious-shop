@@ -126,9 +126,29 @@
                                                 </td>
                                                 <td class='price-col'>{{this.OrderDetail.[0].total}} VNĐ</td>
                                                 <td class='address-col'>
-                                                    <input class='text-secondary' style="border: none;
-                                    outline: none;" value='{{this.status}}' id="userName" disabled>
+                                                    <input class='text-secondary' style="display: none"
+                                                        value='{{this.status}}' id="hiddenOrderStatus">
                                                     </input>
+
+                                                    <select style='width: 20%, height: 40px, font-size 20px;'
+                                                        id='orderStatus' name='orderStatus'
+                                                        onchange='updateOrderStatus({{this.id}})'>
+                                                        <option id="pending" value='pending' {{#if (eq
+                                                            this.status 'pending' )}}selected{{/if}}>Đang chuẩn bị
+                                                            hàng</option>
+                                                        <option id="processing" value='processing' {{#if (eq
+                                                            this.status 'processing' )}}selected{{/if}}>Đang đóng
+                                                            gói đơn hàng</option>
+                                                        <option id="delivering" value='delivering' {{#if (eq
+                                                            this.status 'delivering' )}}selected{{/if}}>Đang giao
+                                                            hàng</option>
+                                                        <option id='completed' value='completed' {{#if (eq
+                                                            this.status 'completed' )}}selected{{/if}}>Giao hàng
+                                                            thành công</option>
+                                                        <option id="cancelled" value='cancelled' {{#if (eq
+                                                            this.status 'cancelled' )}}selected{{/if}}>Đã bị hủy
+                                                        </option>
+                                                    </select>
                                                 </td>
                                             </tr>
                                             {{/each}}
@@ -152,6 +172,21 @@
 
     <script>
         $(document).ready(function () { $('#dataTables-example').DataTable({ responsive: true }) })
+
+        var hiddenOrderStatus = document.getElementById("hiddenOrderStatus").value;
+        var selectElement = document.getElementById("orderStatus");
+        var options = selectElement.getElementsByTagName("option");
+        for (var i = 0; i < options.length; i++) {
+            if (options[i].value === hiddenOrderStatus) {
+                options[i].setAttribute("selected", "selected");
+                break;
+            }
+        }
+
+        function updateOrderStatus(orderId) {
+            alert(orderId)
+
+        }
     </script>
 </body>
 

@@ -52,26 +52,6 @@ router.get('/order', isAdminLoggedInSuccess, async (req, res, next) => {
             if (listOrder[i].payment.status === 'pending') {
                 listOrder[i].payment.status = 'Thanh toán thành công'
             }
-
-            if (listOrder[i].status === 'pending') {
-                listOrder[i].status = 'Đang chuẩn bị hàng'
-            }
-
-            if (listOrder[i].status === 'processing') {
-                listOrder[i].status = 'Đang đóng gói đơn hàng'
-            }
-
-            if (listOrder[i].status === 'delivering') {
-                listOrder[i].status = 'Đang giao hàng'
-            }
-
-            if (listOrder[i].status === 'completed') {
-                listOrder[i].status = 'Giao hàng thành công'
-            }
-
-            if (listOrder[i].status === 'cancelled') {
-                listOrder[i].status = 'Đã bị hủy'
-            }
         }
         res.render('admin/order.hbs', { customerName, listOrder })
     }
