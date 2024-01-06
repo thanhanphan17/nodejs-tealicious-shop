@@ -27,6 +27,16 @@ class CartService {
             throw new BusinessLogicError('product already in cart')
         }
 
+        const product = await Prisma.product.findUnique({
+            where: {
+                id: productId
+            }
+        })
+
+        if (product && product?.quantity < quantity) {
+            throw new BusinessLogicError("we don't have enough quantity")
+        }
+
         const cart = await Prisma.cart.create({
             data: {
                 userId,
@@ -38,6 +48,17 @@ class CartService {
         if (!cart) {
             throw new BusinessLogicError("can't add to cart")
         }
+
+        await Prisma.product.update({
+            where: {
+                id: productId
+            },
+            data: {
+                quantity: {
+                    decrement: quantity
+                }
+            }
+        })
 
         return cart
     }
