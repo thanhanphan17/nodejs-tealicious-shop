@@ -44,7 +44,8 @@ router.get('/forgot-password', function (req, res, next) {
 })
 
 router.get('/login', function (req, res, next) {
-    res.render('shop/login.hbs')
+    const oauthLink = process.env.GOOGLE_AUTHORIZED_REDIRECT_URI
+    res.render('shop/login.hbs', { oauthLink })
 })
 
 router.get('/logout', userController.logout)
@@ -96,6 +97,14 @@ router.get('/change-password', function (req, res, next) {
     const customerName = req.cookies.customerName
     const isLoggedIn = req.cookies.isUserLoggedIn
     res.render('shop/change-password.hbs', { customerName, isLoggedIn })
+})
+
+router.get('/login/google', async function (req, res, next) {
+    const accessToken = req.query.access_token
+    const refreshToken = req.query.refresh_token
+    req.body.accessToken = accessToken
+    req.body.refreshToken = refreshToken
+    await userController.getProfile(req, res, next)
 })
 
 router.get('/order-detail', async (req, res, next) => {
