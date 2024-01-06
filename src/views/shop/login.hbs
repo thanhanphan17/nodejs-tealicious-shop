@@ -803,6 +803,12 @@
 
                 if (response.data.status == 200) {
                     const result = response.data.data
+
+                    if (result.user.status == 'banned') {
+                        Toast_danger('Tài khoản của bạn đã bị khóa!')
+                        return
+                    }
+
                     setCookie('accessToken', result.tokens.accessToken)
                     setCookie('refreshToken', result.tokens.refreshToken)
                     setCookie('customerName', result.user.name)

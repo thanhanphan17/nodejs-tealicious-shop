@@ -124,6 +124,10 @@ class UserController {
             .get(url, { headers })
             .then((response) => {
                 const result = response.data.data
+                if (result.user.status == 'banned') {
+                    res.redirect('/login')
+                }
+
                 res.cookie('accessToken', req.body.accessToken)
                 res.cookie('refreshToken', req.body.refreshToken)
                 res.cookie('customerName', result.user.name)

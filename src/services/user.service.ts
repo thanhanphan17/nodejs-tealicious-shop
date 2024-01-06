@@ -19,7 +19,7 @@ class UserService {
 
         return {
             user: getInfoData({
-                fields: ['id', 'name', 'avatar', 'email'],
+                fields: ['id', 'name', 'status', 'avatar', 'email'],
                 object: user
             })
         }
