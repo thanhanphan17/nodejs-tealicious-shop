@@ -25,6 +25,28 @@ class UserService {
         }
     }
 
+    static async changeStatus(userId: string, payload: any) {
+        const user = await Prisma.user.update({
+            where: {
+                id: userId
+            },
+            data: {
+                status: payload.status
+            }
+        })
+
+        if (!user) {
+            throw new BusinessLogicError("can't change status")
+        }
+
+        return {
+            user: getInfoData({
+                fields: ['id', 'name', 'avatar', 'email'],
+                object: user
+            })
+        }
+    }
+
     static async changePassword(userId: string, payload: any) {
         const oldUser = await Prisma.user.findUnique({
             where: {
