@@ -23,6 +23,13 @@ class OrderService {
             throw new BusinessLogicError("can't create order")
         }
 
+        // clear cart
+        await Prisma.cart.deleteMany({
+            where: {
+                userId: payload.userId
+            }
+        })
+
         return order
     }
 

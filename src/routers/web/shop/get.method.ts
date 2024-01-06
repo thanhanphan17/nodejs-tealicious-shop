@@ -111,7 +111,7 @@ router.get('/order-detail', async (req, res, next) => {
     const customerName = req.cookies.customerName
     const isLoggedIn = req.cookies.isUserLoggedIn
     const listOrder = await orderController.getOrder(req, res, next)
-    console.log(listOrder[0].OrderDetail[0].productOrigin[0].quantity)
+    console.log(listOrder)
     res.render('shop/orderDetails.hbs', { customerName, isLoggedIn, listOrder })
 })
 
