@@ -326,7 +326,9 @@
                         <h2 class='title'>Đăng ký bằng</h2>
                         <div class='social-login'>
                             <ul>
-                                <li class='google'><a href='#'>Google</a></li>
+                                <input type="text" value="{{oauthLink}}" name="" id="oauthLink" style="display: none;">
+                                <input type="text" value="{{clientID}}" name="" id="clientID" style="display: none;">
+                                <li class='google' onclick="OAuthGoogle()"><a href='#'>Google</a></li>
                                 <li class='fb'><a href='#'>Facebook</a></li>
                             </ul>
                         </div>
@@ -776,6 +778,21 @@
             return false;
         }
 
+        function OAuthGoogle() {
+            const rootUrl = 'https://accounts.google.com/o/oauth2/v2/auth'
+            const options = {
+                redirect_uri: document.getElementById('oauthLink').value,
+                client_id: document.getElementById('clientID').value,
+                access_type: 'offline',
+                response_type: 'code',
+                prompt: 'consent',
+                scope: ['https://www.googleapis.com/auth/userinfo.profile', 'https://www.googleapis.com/auth/userinfo.email'].join(
+                    ' '
+                )
+            }
+            const qs = new URLSearchParams(options)
+            window.location.href = `${rootUrl}?${qs}`
+        }
 
     </script>
 </body>
