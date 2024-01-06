@@ -136,6 +136,33 @@ router.get('/vnpay_return', async function (req: any, res, next) {
     }
 })
 
+router.get('/cod_payment', async function (req, res, next) {
+    try {
+        const payment = await Prisma.payment.create({
+            data: {
+                paymentMethod: 'cod',
+                status: 'success',
+                orderId: req.query.orderId as string,
+                amount: Number(req.query.amount)
+            }
+        })
+
+        await Prisma.order.update({
+            where: {
+                id: req.query.orderId as string
+            },
+            data: {
+                paymentId: payment.id,
+                status: 'pending'
+            }
+        })
+
+        return res.redirect('/order-detail')
+    } catch (error) {
+        return res.redirect('/order-detail')
+    }
+})
+
 function sortObject(obj: any) {
     const sorted: { [key: string]: any } = {}
     const str = []
