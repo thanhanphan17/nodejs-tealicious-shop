@@ -60,6 +60,10 @@ class OrderService {
             }
         })
 
+        if (!order) {
+            throw new BusinessLogicError("can't get order")
+        }
+
         return order
     }
 
@@ -80,7 +84,8 @@ class OrderService {
     static async listAllOrder() {
         const orders = await Prisma.order.findMany({
             include: {
-                OrderDetail: true
+                OrderDetail: true,
+                payment: true
             },
             orderBy: [
                 {
