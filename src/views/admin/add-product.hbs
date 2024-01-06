@@ -107,6 +107,17 @@
                                         <input class='form-control' name='price' />
                                     </div>
                                     <div class='form-group'>
+                                        <label>Trạng thái</label>
+                                        <div style='margin-left: 5px' class='row'>
+                                            <select style='width: 20%, height: 40px, font-size 20px;' id='productStatus'
+                                                name='status'>
+                                                <option value="unreleased">Chưa mở bán</option>
+                                                <option value="instock">Còn hàng</option>
+                                                <option value="outofstock">Hết hàng</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class='form-group'>
                                         <label>Loại sản phẩm</label>
                                         <div style='margin-left: 5px' class='row'>
                                             <select style='width: 20%, height: 40px, font-size 20px;' id='rating'
@@ -116,7 +127,6 @@
                                                 {{/each}}
                                             </select>
                                         </div>
-
                                     </div>
                                     <div class='form-group'>
                                         <label>Mô tả sản phẩm</label>

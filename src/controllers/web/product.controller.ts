@@ -49,10 +49,15 @@ class ProductController {
         const priceOrder = req.query.priceOrder || 'asc'
         const createdAtOrder = req.query.createdAtOrder || 'desc'
         const categoryId = req.query.categoryId || ''
+        let status = req.query.status
+        if (status == 'all') {
+            status = ''
+        }
+
         const result = await axios.get(
             `${appConfig.apiURL}/api/product/list?page=${page}&name=${name}&maxPrice=${maxPrice}` +
                 `&minPrice=${minPrice}&createAtOrder=${createdAtOrder}&limit=${limit}&priceOrder=${priceOrder}` +
-                `&categoryId=${categoryId}`
+                `&categoryId=${categoryId}&status=${status}`
         )
         return result.data.data
     })

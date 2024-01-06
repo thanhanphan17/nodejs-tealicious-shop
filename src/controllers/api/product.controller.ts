@@ -16,7 +16,8 @@ class ProductController {
             minPrice: req.query.minPrice,
             maxPrice: req.query.maxPrice,
             priceOrder: req.query.priceOrder,
-            createdAtOrder: req.query.createdAtOrder
+            createdAtOrder: req.query.createdAtOrder,
+            status: req.query.status
         }
         const page = req.query.page as number
         const limit = req.query.limit as number
