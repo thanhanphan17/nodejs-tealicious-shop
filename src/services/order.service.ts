@@ -90,9 +90,6 @@ class OrderService {
             orderBy: [
                 {
                     createdAt: 'desc'
-                },
-                {
-                    status: 'desc'
                 }
             ]
         })
