@@ -418,7 +418,6 @@
     <!-- Header End -->
 
     <section class='product-section spad'>
-
         <div class='container'>
             <div class='main-body'>
                 <div class='row gutters-sm'>
@@ -438,6 +437,28 @@
                                         <h4>{{customerName}}</h4>
                                         <p style="display: none;" id="userId" class='text-muted font-size-sm'>
                                             {{customerID}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class=''>
+                                <hr />
+                                <div class='row'>
+                                    <div class='col-sm-12' style='padding-left: 120px'>
+                                        <a href='/change-password' style='border-left: 30px'>
+                                            <h6 class=''>Thay đổi mật khẩu</h6>
+                                        </a>
+                                    </div>
+                                </div>
+                                <hr />
+                                <div class='row'>
+                                    <div class='col-sm-12 text-secondary' style='padding-left: 120px'>
+                                        <a href='/change-password' style='border-left: 20px'>
+                                            <h6 style="margin-bottom: 16px" class=''>Đơn hàng của bạn</h6>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class='row'>
+                                    <div class='col-sm-12 text-secondary' style='padding-left: 60px'>
                                     </div>
                                 </div>
                             </div>
@@ -474,12 +495,14 @@
                                     </input>
                                 </div>
                             </div>
-
-
                         </div>
-                        <div class='row'>
-                            <button onclick="enableEditProfile()">Edit</button>
-                            <button onclick="updateProfile()">Update</button>
+
+
+                        <div class='row center-submit'>
+                            <button style="border: 10px" class='btn btn-primary-hover-outline' id="editbtn"
+                                onclick="enableEditProfile()">Edit</button>
+                            <button class='btn btn-primary-hover-outline' id="updatebtn" style="display: none;"
+                                onclick="updateProfile()">Update</button>
                         </div>
                     </div>
 
@@ -795,6 +818,8 @@
         }
 
         function enableEditProfile() {
+            editbtn.style.display = "none";
+            updatebtn.style.display = "block";
             const inputName = document.getElementById('userName');
             inputName.removeAttribute('disabled');
 
@@ -822,6 +847,8 @@
         }
 
         async function updateProfile() {
+            updatebtn.style.display = "none";
+            editbtn.style.display = "block";
             setCookie('customerName', document.getElementById('userName').value)
             setCookie('customerEmail', document.getElementById('userEmail').value)
             setCookie('customerAddress', document.getElementById('userAddress').value)
