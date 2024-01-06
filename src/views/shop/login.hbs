@@ -422,6 +422,7 @@
                         <h2 class='title'>Đăng nhập bằng</h2>
                         <div class='social-login'>
                             <ul>
+                                <input type="text" value="{{oauthLink}}" name="" id="oauthLink" style="display: none;">
                                 <li onclick="OAuthGoogle()" class='google'><a href='#'>Google</a></li>
                                 <li class='fb'><a href='#'>Facebook</a></li>
                             </ul>
@@ -830,7 +831,7 @@
         function OAuthGoogle() {
             const rootUrl = 'https://accounts.google.com/o/oauth2/v2/auth'
             const options = {
-                redirect_uri: 'http://localhost:8080/api/oauth/google',
+                redirect_uri: document.getElementById('oauthLink').value,
                 client_id: '500779853717-23g1tu8es6242g13hvnsjr497htlq06j.apps.googleusercontent.com',
                 access_type: 'offline',
                 response_type: 'code',
