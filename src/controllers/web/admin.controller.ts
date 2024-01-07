@@ -15,6 +15,7 @@ class AdminController {
         if (response.data.status == 200) {
             const result = response.data.data
             if (result.user.role == 'admin') {
+                res.cookie('customerID', result.user.id)
                 res.cookie('accessToken', result.tokens.accessToken)
                 res.cookie('refreshToken', result.tokens.refreshToken)
                 res.cookie('adminName', result.user.name)
