@@ -18,4 +18,6 @@ router.post('/upload-avatar', uploadDisk.single('file'), async (req, res, next) 
     res.redirect('/admin/profile-admin')
 })
 
+router.post('/update-product', uploadDisk.array('files', 4), productController.updateProduct)
+
 export default router

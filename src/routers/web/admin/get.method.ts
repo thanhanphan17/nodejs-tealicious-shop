@@ -105,8 +105,15 @@ router.get('/add-user', isAdminLoggedInSuccess, function (req, res, next) {
 router.get('/add-product', isAdminLoggedInSuccess, async (req, res, next) => {
     const customerName = req.cookies.adminName
     const category = await categoryController.listCategories(req, res, next)
-
     res.render('admin/add-product.hbs', { category, customerName })
+})
+
+router.get('/update-product', isAdminLoggedInSuccess, async (req, res, next) => {
+    const customerName = req.cookies.adminName
+    const category = await categoryController.listCategories(req, res, next)
+    const product = await productController.getProductById(req, res, next)
+    console.log(product)
+    res.render('admin/update-product.hbs', { customerName, product, category })
 })
 
 router.get('/add-order', isAdminLoggedInSuccess, function (req, res, next) {

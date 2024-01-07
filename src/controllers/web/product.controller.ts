@@ -8,7 +8,7 @@ class ProductController {
         const result = await uploadController.uploadImagesS3(req, res, next)
 
         if (result.code == 200) {
-            const { name, quantity, description, price, categoryId } = req.body
+            const { name, quantity, description, price, categoryId, status } = req.body
             const accessToken = req.cookies.accessToken
             const refreshToken = req.cookies.refreshToken
 
@@ -26,13 +26,54 @@ class ProductController {
                 categoryId,
                 image: {
                     url: result.data
-                }
+                },
+                status: status
             }
 
             axios
                 .post(url, data, { headers })
                 .then((response) => {
                     res.redirect('/admin/product')
+                })
+                .catch((error) => {
+                    console.error('Error:', error)
+                })
+        }
+    })
+
+    updateProduct = catchAsync(async (req: any, res: Response, next: NextFunction) => {
+        const result = await uploadController.uploadImagesS3(req, res, next)
+
+        if (result.code == 200) {
+            const { name, quantity, description, price, categoryId, status } = req.body
+            const oldImages = JSON.parse(req.body.oldImages)
+            const accessToken = req.cookies.accessToken
+            const refreshToken = req.cookies.refreshToken
+
+            const url = `${appConfig.apiURL}/api/product/update?id=${req.body.id}`
+            const headers = {
+                authorization: accessToken,
+                'refresh-token': refreshToken
+            }
+
+            const data = {
+                name: name,
+                quantity: quantity * 1,
+                description: description,
+                price: price * 1,
+                categoryId,
+                image: {
+                    url: result.data.concat(oldImages)
+                },
+                status: status
+            }
+
+            console.log(data)
+
+            axios
+                .patch(url, data, { headers })
+                .then((response) => {
+                    res.redirect(`/admin/update-product?id=${req.body.id}`)
                 })
                 .catch((error) => {
                     console.error('Error:', error)
