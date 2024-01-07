@@ -49,10 +49,10 @@ class ProductService {
             },
             orderBy: [
                 {
-                    price: filter.priceOrder || 'asc'
+                    createdAt: filter.createdAtOrder || 'desc'
                 },
                 {
-                    createdAt: filter.createdAtOrder || 'desc'
+                    price: filter.priceOrder || 'asc'
                 }
             ]
         })
