@@ -372,7 +372,7 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
         async function loadPage(page) {
-            const url = `http://localhost:8080/api/product/list?page=${page}&limit=20`
+            const url = `https://yentraquan.shop/api/product/list?page=${page}&limit=20`
             await axios.get(url).then(response => {
                 let productsApi = response.data.data
                 const productList = productsApi.products

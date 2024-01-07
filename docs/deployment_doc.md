@@ -11,7 +11,7 @@
 
 ### Deployment process with CI/CD
 
-![Alt text](deployment.png)
+![Alt text](img/deployment.png)
 
 -   Initially, developers push their code to the developer branch. Subsequently, we review the code and merge it into the staging branch. If everything functions as intended, we proceed to merge it into the master branch, initiating the deployment process.
 
@@ -67,8 +67,8 @@ Docker is utilized for deploying PostgreSQL in our system.
 ```
 
 -   We've the multibranch pipe as the result below
-    ![Alt text](image.png)
-    ![Alt text](image-1.png)
+    ![Alt text](img/image.png)
+    ![Alt text](img/image-1.png)
 
 ### III. Install Cloudflare for publishing your site to internet without NAT port
 
@@ -83,9 +83,9 @@ Docker is utilized for deploying PostgreSQL in our system.
 ```
 
 -   Our cloudflare tunel setup as the result below
-    ![Alt text](image-2.png)
+    ![Alt text](img/image-2.png)
 
 ### IV. The result you should have got
 
 -   The image below illustrates all Docker containers running in our system to publish `yentraquan.shop` on the internet.
-    ![Alt text](image-3.png)
+    ![Alt text](img/image-3.png)

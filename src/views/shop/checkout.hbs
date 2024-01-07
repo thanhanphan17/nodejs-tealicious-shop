@@ -318,7 +318,7 @@
         });
 
         async function loadProduct() {
-            const url = `http://localhost:8080/api/cart/get-cart`
+            const url = `https://yentraquan.shop/api/cart/get-cart`
             const accessToken = getCookie("accessToken")
             const refreshToken = getCookie("refreshToken")
             const headers = {
@@ -367,7 +367,7 @@
             shippingInput.value = document.getElementById('street').value + ', ' + document.getElementById('ward').value + ', ' + document.getElementById('district').value + ', ' + document.getElementById('city').value;
             form.appendChild(shippingInput);
 
-            const url = `http://localhost:8080/api/cart/get-cart`
+            const url = `https://yentraquan.shop/api/cart/get-cart`
             const accessToken = getCookie("accessToken")
             const refreshToken = getCookie("refreshToken")
             const headers = {
@@ -402,7 +402,7 @@
             }
 
             if (currentButtonId == 'codButton') {
-                await axios.post(`http://localhost:8080/api/order/create-order`, data, { headers }).then(response => {
+                await axios.post(`https://yentraquan.shop/api/order/create-order`, data, { headers }).then(response => {
                     const order = response.data.data;
                     const amount = document.getElementById('sumCart1').textContent.match(/\d+/) * 1
                     let paymentUrl = '/api/payment//cod_payment?amount=' + amount + '&orderId=' + order.id
@@ -411,7 +411,7 @@
                 return
             }
 
-            await axios.post(`http://localhost:8080/api/order/create-order`, data, { headers }).then(response => {
+            await axios.post(`https://yentraquan.shop/api/order/create-order`, data, { headers }).then(response => {
                 const order = response.data.data;
                 const amount = document.getElementById('sumCart1').textContent.match(/\d+/) * 1
                 let paymentUrl = '/payment/pay?amount=' + amount + '&order_Id=' + order.id

@@ -1032,7 +1032,7 @@
 
         async function loadReviewPaging(page) {
             const productId = document.getElementById('productIdInput').value
-            const url = `http://localhost:8080/api/rating/list?page=${page}&limit=3&productId=${productId}`
+            const url = `https://yentraquan.shop/api/rating/list?page=${page}&limit=3&productId=${productId}`
             await axios.get(url).then(response => {
                 let reviewsApi = response.data.data.ratings
                 const $review_list = $(".review-list");
@@ -1146,7 +1146,7 @@
                 return
             }
 
-            const url = `http://localhost:8080/api/cart/add-to-cart`
+            const url = `https://yentraquan.shop/api/cart/add-to-cart`
             const headers = {
                 authorization: accessToken,
                 'refresh-token': refreshToken

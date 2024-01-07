@@ -221,7 +221,7 @@
         })
 
         async function loadingStatistic() {
-            const statistic = await axios.get(`http://localhost:8080/api/statistic/info`)
+            const statistic = await axios.get(`https://yentraquan.shop/api/statistic/info`)
             const result = statistic.data.data
             document.getElementById('totalUser').innerHTML = result.totalUser
             document.getElementById('totalProduct').innerHTML = result.totalProduct
