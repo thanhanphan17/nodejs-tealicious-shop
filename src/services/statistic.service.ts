@@ -13,12 +13,28 @@ class StatisticService {
             revenue += orderDetail[i].total
         }
 
+        // count product in each category
+        const categories = await Prisma.category.findMany({
+            include: {
+                Product: true
+            }
+        })
+
+        const productByCate = []
+        for (let i = 0; i < categories.length; i++) {
+            productByCate.push({
+                label: categories[i].name,
+                value: categories[i].Product.length
+            })
+        }
+
         return {
             totalProduct,
             totalCategory,
             totalUser,
             totalOrder,
-            revenue
+            revenue,
+            productByCate
         }
     }
 }
