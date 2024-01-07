@@ -106,6 +106,30 @@ class ProductService {
             relatedProducts
         }
     }
+
+    static async updateProduct(id: string, payload: any) {
+        const product = await Prisma.product.update({
+            where: {
+                id
+            },
+            data: payload
+        })
+
+        console.log('product', payload)
+        console.log('product', product)
+        console.log('product', id)
+
+        if (!product) {
+            throw new BusinessLogicError("can't update product")
+        }
+
+        return {
+            product: getInfoData({
+                fields: ['id', 'name', 'quantity'],
+                object: product
+            })
+        }
+    }
 }
 
 export default ProductService

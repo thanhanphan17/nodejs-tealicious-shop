@@ -9,6 +9,7 @@ import cateRouter from './cart'
 import orderRouter from './order'
 import userRouter from './user'
 import oauthRouter from './oauth'
+import statisticRouter from './statistic'
 
 const router = express.Router()
 
@@ -29,5 +30,6 @@ router.use('/cart', cateRouter)
 router.use('/order', orderRouter)
 router.use('/user', userRouter)
 router.use('/oauth', oauthRouter)
+router.use('/statistic', statisticRouter)
 
 export default router

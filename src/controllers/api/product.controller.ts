@@ -27,6 +27,10 @@ class ProductController {
     getProductById = catchAsync(async (req: any, res: Response, next: NextFunction) => {
         OK(res, 'get product successfully', await productService.getProductById(req.params.id))
     })
+
+    updateProduct = catchAsync(async (req: any, res: Response, next: NextFunction) => {
+        OK(res, 'update product successfully', await productService.updateProduct(req.query.id, req.body))
+    })
 }
 
 export default new ProductController()
