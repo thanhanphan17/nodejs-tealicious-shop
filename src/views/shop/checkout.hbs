@@ -401,7 +401,7 @@
 
             }
 
-            if (currentButtonId = 'codButton') {
+            if (currentButtonId == 'codButton') {
                 await axios.post(`http://localhost:8080/api/order/create-order`, data, { headers }).then(response => {
                     const order = response.data.data;
                     const amount = document.getElementById('sumCart1').textContent.match(/\d+/) * 1
