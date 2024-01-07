@@ -94,7 +94,10 @@ router.get('/profile', function (req, res, next) {
     const isLoggedIn = req.cookies.isUserLoggedIn
     const customerEmail = req.cookies.customerEmail
     const customerID = req.cookies.customerID
-    const customerAddress = req.cookies.customerAddress
+    let customerAddress = req.cookies.customerAddress
+    if (customerAddress == 'null' || customerAddress == 'undefined') {
+        customerAddress = ' '
+    }
     res.render('shop/profile.hbs', { customerName, isLoggedIn, customerID, customerEmail, avatar, customerAddress })
 })
 

@@ -376,10 +376,14 @@
                                     <li>
                                         <a href='/pages?page=0'>Sản phẩm</a>
                                         <ul class='dropdown'>
-                                            <li><a href='/phong-vi-yen-tra'>Phong Vị Yên Trà</a></li>
-                                            <li><a href='/hoa-co-duong-tam'>Hoa Cỏ Dưỡng Tâm</a></li>
-                                            <li><a href='/thao-moc-nhiet-doi'>Thảo Mộc Nhiệt Đới</a></li>
-                                            <li><a href='/yen-an-ngu-tra'>Yên An Ngự Trà</a></li>
+                                            <li><a href='/pages?page=0&categoryId=f4c74a06-4cb7-477d-b204-ff40143e9b06'>Phong
+                                                    Vị Yên Trà</a></li>
+                                            <li><a href='/pages?page=0&categoryId=20ee69be-bde2-426c-9eeb-622736cad446'>Hoa
+                                                    Cỏ Dưỡng Tâm</a></li>
+                                            <li><a href='/pages?page=0&categoryId=52aaf74e-736a-4c08-826e-c7b6562f1d20'>Thảo
+                                                    Mộc Nhiệt Đới</a></li>
+                                            <li><a href='/pages?page=0&categoryId7e7dd67f-208b-4c64-b99f-d1e9c7b60274'>Yên
+                                                    An Ngự Trà</a></li>
                                         </ul>
                                     </li>
                                     <li><a href='/contact'>Liên hệ</a></li>
@@ -846,15 +850,30 @@
             return null;
         }
 
+        function isValidEmail(email) {
+            // Regular expression for a simple email validation
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+        }
+
         async function updateProfile() {
             updatebtn.style.display = "none";
             editbtn.style.display = "block";
-            setCookie('customerName', document.getElementById('userName').value)
-            setCookie('customerEmail', document.getElementById('userEmail').value)
-            setCookie('customerAddress', document.getElementById('userAddress').value)
 
             const accessToken = getCookie("accessToken")
             const refreshToken = getCookie("refreshToken")
+
+            if (document.getElementById('userName').value.trim() === '' ||
+                document.getElementById('userEmail').value.trim() === '') {
+                Toast_danger('Bạn cần điền đầy đủ thông tin!');
+                return;
+            }
+
+            if (!isValidEmail(document.getElementById('userEmail').value.trim())) {
+                Toast_danger('Vui lòng nhập một địa chỉ email hợp lệ!');
+                return;
+            }
+
 
             const url = `http://localhost:8080/api/user/update-profile`
             const headers = {
@@ -872,10 +891,14 @@
             await axios
                 .post(url, data, { headers })
                 .then((response) => {
+                    setCookie('customerName', document.getElementById('userName').value)
+                    setCookie('customerEmail', document.getElementById('userEmail').value)
+                    setCookie('customerAddress', document.getElementById('userAddress').value)
+
                     Toast_success()
                 })
                 .catch((error) => {
-                    Toast_danger()
+                    Toast_danger('Cập nhật thông tin thất bại, email đã được sử dụng!')
                 })
         }
 
@@ -893,10 +916,10 @@
             });
         }
 
-        function Toast_danger() {
+        function Toast_danger(message) {
             ava({
                 icon: 'danger',
-                text: 'Cập nhật thông tin thất bại!',
+                text: message,
                 btnText: '',
                 progressBar: true,
                 toast: true,
