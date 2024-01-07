@@ -7,5 +7,6 @@ const router = express.Router()
 router.post('/create', adminRequired, productController.createProduct)
 router.get('/list', productController.listProducts)
 router.get('/:id', productController.getProductById)
+router.patch('/update', adminRequired, productController.updateProduct)
 
 export default router
