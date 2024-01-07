@@ -27,7 +27,11 @@ The live demo version: https://yentraquan.shop/
     -   Install Chocolatey first (if it's not already installed)
 
     ```
-        Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
+        Set-ExecutionPolicy Bypass -Scope Process -Force;
+        [System.Net.ServicePointManager]::SecurityProtocol =
+        [System.Net.ServicePointManager]::SecurityProtocol -bor
+        3072; iex ((New-Object System.Net.WebClient).
+        DownloadString('https://community.chocolatey.org/install.ps1'))
     ```
 
     -   Install Make
@@ -83,8 +87,8 @@ S3_CLOUDFRONT_DOMAIN=
 
 GOOGLE_CLIENT_ID=
 GOOGLE_CLIENT_SECRET=
-GOOGLE_AUTHORIZED_REDIRECT_URI=http://localhost:8080/api/oauth/google
-GOOGLE_CLIENT_REDIRECT_URL=http://localhost:8080/login/google
+GOOGLE_AUTHORIZED_REDIRECT_URI=
+GOOGLE_CLIENT_REDIRECT_URL=
 ```
 
 #### Step 2: Run Docker Compose with only `one command`
@@ -192,8 +196,8 @@ PG_DB_NAME=tealicious_db
 PG_DB_USER=postgres
 PG_DB_PASSWORD=0000
 
-# PG_DATABASE_URL="postgresql://postgres:0000@localhost:5432/mydb?schema=public"
-PG_DATABASE_URL="postgresql://${PG_DB_USER}:${PG_DB_PASSWORD}@${PG_DB_HOST}:${PG_DB_PORT}/${PG_DB_NAME}?schema=public"
+PG_DATABASE_URL="postgresql://${PG_DB_USER}:${PG_DB_PASSWORD}\
+@${PG_DB_HOST}:${PG_DB_PORT}/${PG_DB_NAME}?schema=public"
 
 API_URL=http://localhost:8080
 
@@ -201,7 +205,7 @@ VNP_TMN_CODE=
 VNP_HASH_SECRET=
 VNP_URL=https://sandbox.vnpayment.vn/paymentv2/vpcpay.html
 VNP_API=https://sandbox.vnpayment.vn/merchant_webapi/api/transaction
-VNP_RETURN_URL=http://localhost:8080/api/payment/vnpay_return
+VNP_RETURN_URL=
 
 S3_ACCESS_KEY_ID=
 S3_SECRET_ACCESS_KEY=
@@ -211,8 +215,7 @@ S3_CLOUDFRONT_DOMAIN=
 
 GOOGLE_CLIENT_ID=
 GOOGLE_CLIENT_SECRET=
-GOOGLE_AUTHORIZED_REDIRECT_URI=http://localhost:8080/api/oauth/google
-GOOGLE_CLIENT_REDIRECT_URL=http://localhost:8080/login/google
+GOOGLE_AUTHORIZED_REDIRECT_URI=
 ```
 
 **<b style="color:red">I also have a file named `prod.env` containing the same structure, but it is connected to my server informaton, so I have already removed it already.</b>**

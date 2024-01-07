@@ -2,7 +2,7 @@
 CREATE TYPE "UserRole" AS ENUM ('user', 'admin');
 
 -- CreateEnum
-CREATE TYPE "ProductStatus" AS ENUM ('instock', 'outofstock');
+CREATE TYPE "ProductStatus" AS ENUM ('unreleased', 'instock', 'outofstock');
 
 -- CreateEnum
 CREATE TYPE "OrderStatus" AS ENUM ('pending', 'processing', 'delivering', 'completed', 'cancelled');
@@ -21,7 +21,7 @@ CREATE TABLE "users" (
     "password" TEXT NOT NULL,
     "role" "UserRole" NOT NULL DEFAULT 'user',
     "address" TEXT,
-    "avatar" JSONB,
+    "avatar" TEXT,
     "status" TEXT NOT NULL DEFAULT 'active',
     "deleted" BOOLEAN NOT NULL DEFAULT false,
     "createdAt" TIMESTAMP(3) DEFAULT CURRENT_TIMESTAMP,
@@ -103,6 +103,7 @@ CREATE TABLE "orders" (
 CREATE TABLE "order_details" (
     "id" TEXT NOT NULL,
     "orderId" TEXT NOT NULL,
+    "total" INTEGER NOT NULL DEFAULT 0,
     "product_origin" JSONB NOT NULL,
     "deleted" BOOLEAN NOT NULL DEFAULT false,
     "createdAt" TIMESTAMP(3) DEFAULT CURRENT_TIMESTAMP,
